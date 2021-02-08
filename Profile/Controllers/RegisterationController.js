@@ -32,12 +32,6 @@ module.exports = class RegistrationController {
 
     console.log("otp = ", otp);
 
-    if (parseInt(isOtpExist[0].otp) != parseInt(otp)) {
-      console.log(parseInt(isOtpExist[0].otp), parseInt(otp));
-      res.send({ message: "invalid otp" });
-      return;
-    }
-
     databaseService.deleteOtp(phoneNumber, email);
 
     var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
