@@ -68,20 +68,20 @@ module.exports = class RegistrationController {
   };
 
   login = async (req, res) => {
-    var { name, email, password } = req.body;
+    var { phoneNumber, email, password } = req.body;
 
-    if (!name || !email || !password) {
+    if (!phoneNumber || !email || !password) {
       res.send({ message: "failed" });
     }
 
     var isUserExist = await databaseService.getUserWithEmailOrPhoneNumber(
-      number,
+      phoneNumber,
       email
     );
 
     console.log("user = ", isUserExist);
 
-    if (!isUserExist) {
+    if (isUserExist.length == 0) {
       res.send({ message: "user not exist" });
       return;
     }
