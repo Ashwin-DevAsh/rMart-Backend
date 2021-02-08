@@ -1,0 +1,78 @@
+version: "3"
+
+services:
+  block:
+    build: Block
+    ports:
+      - 9000:9000
+    volumes:
+      - ./env:/env
+      - ./Database:/Database
+
+  console:
+    build: Console
+    ports:
+      - 3000:80
+
+  profile:
+    build: Profile
+    depends_on: [block]
+    ports:
+      - 8000:8000
+    volumes:
+      - ./env:/env
+      - ./Database:/Database
+      - ./profilePictures:/profilePictures
+
+  admin:
+    build: Admin
+    ports:
+      - 4500:4500
+    volumes:
+      - ./env:/env
+      - ./Database:/Database
+
+  mart:
+    build: Mart
+    depends_on: [block]
+    ports:
+      - 4600:4600
+    volumes:
+      - ./env:/env
+      - ./Database:/Database
+
+  sync:
+    build: Sync
+    ports:
+      - 7000:7000
+    volumes:
+      - ./env:/env
+      - ./Database:/Database
+
+  transaction:
+    build: Transaction
+    depends_on: [block]
+    ports:
+      - 9500:9500
+    volumes:
+      - ./env:/env
+      - ./Database:/Database
+
+  reverse-proxy:
+    build: nginx
+    depends_on: [profile, transaction, sync, mart, admin, console]
+    ports:
+      - 80:80
+      - 443:443
+
+    volumes:
+      - ./certbot/conf:/etc/nginx/ssl
+      - ./certbot/data:/var/www/certbot
+
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   command: certonly --webroot --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d sync.rajalakshmipay.com -d sync.rajalakshmipay.com
+  #   volumes:
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/logs:/var/log/letsencrypt
+  #     - ./certbot/data:/var/www/certbot
