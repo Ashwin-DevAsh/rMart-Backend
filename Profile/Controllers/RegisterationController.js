@@ -87,6 +87,15 @@ module.exports = class RegistrationController {
     }
 
     var { password, name, number, email, id, collegeID } = req.body;
+    var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
+    var hashedPassword = await bcrypt.hash(password, salt);
+    var isPasswordVerified = await bcrypt.compare(password, hashedPassword);
+
+    if (!isPasswordVerified) {
+      res.send({ message: "invalid password" });
+      return;
+    }
+
     var token = jwt.sign(
       {
         name: name,
