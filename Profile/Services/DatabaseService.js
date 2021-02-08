@@ -88,7 +88,8 @@ module.exports = class Database {
     var postgres = await this.pool.connect();
     try {
       await postgres.query(
-        "delete from table where (email = $1 or number = $"[(email, number)]
+        "delete from table where (email = $1 or number = $",
+        [email, number]
       );
       postgres.release();
       return true;
