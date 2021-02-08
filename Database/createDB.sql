@@ -5,6 +5,7 @@ create table users(
   password varchar,
   id varchar primary key,
   status varchar,
+  collegeID varchar unique,
   fcmToken varchar
 );
 
@@ -18,7 +19,7 @@ create table products(
    category varchar,
    imageUrl varchar,
    availableOn varchar[],
-   isAvaliable boolean,
+   isAvaliable boolean
 );
 
 create table orders(  

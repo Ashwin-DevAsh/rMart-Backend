@@ -1,5 +1,6 @@
 const databaseService = new (require("../Services/DatabaseService"))();
 const bcrypt = require("bcrypt");
+const jwt = require("jwt");
 
 module.exports = class RegistrationController {
   signup = async (req, res) => {
@@ -50,7 +51,17 @@ module.exports = class RegistrationController {
       return;
     }
 
-    res.send({ message: "done" });
+    var token = jwt.sign(
+      {
+        name: name,
+        number: number,
+        email: email,
+        id: userID,
+      },
+      process.env.PRIVATE_KEY
+    );
+
+    res.send({ message: "done", token });
   };
 
   login = async (req, res) => {
@@ -73,5 +84,16 @@ module.exports = class RegistrationController {
     }
 
     var { password, name, number, email, id } = req.body;
+    var token = jwt.sign(
+      {
+        name: name,
+        number: number,
+        email: email,
+        id: id,
+      },
+      process.env.PRIVATE_KEY
+    );
+
+    res.send({ message: "done", token });
   };
 };
