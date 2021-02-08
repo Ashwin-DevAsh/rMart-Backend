@@ -42,7 +42,7 @@ module.exports = class Database {
     try {
       var otpDatas = await postgres.query(
         "select * from otp where ( email = $1 or number = $2 ) and otp = $3",
-        [email, number, 1521]
+        [email, number, otp]
       );
       postgres.release();
       return otpDatas.rows;
