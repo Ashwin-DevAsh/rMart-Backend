@@ -23,7 +23,7 @@ module.exports = class OtpController {
 
     console.log(smsbody);
 
-    var isOptInserted = this.databaseService.insertOtp(
+    var isOptInserted = await this.databaseService.insertOtp(
       number,
       email,
       otpNumber
@@ -38,6 +38,6 @@ module.exports = class OtpController {
       `https://2factor.in/API/V1/${apiKey}/SMS/${number}/${otpNumber}`
     );
 
-    req.send({ message: "done" });
+    res.send({ message: "done" });
   };
 };
