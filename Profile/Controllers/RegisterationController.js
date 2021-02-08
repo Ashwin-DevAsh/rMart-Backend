@@ -91,6 +91,7 @@ module.exports = class RegistrationController {
     var hashedPassword = await bcrypt.hash(password, salt);
     var isPasswordVerified = await bcrypt.compare(password, hashedPassword);
 
+    console.log(isPasswordVerified);
     if (!isPasswordVerified) {
       res.send({ message: "invalid password" });
       return;
