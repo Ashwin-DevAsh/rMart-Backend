@@ -25,7 +25,7 @@ module.exports = class Database {
     try {
       var user = await postgres.query(
         "select * from users where (email = $1 or number = $2)",
-        [email, number, otp]
+        [email, number]
       );
       postgres.release();
       return user.rows;
