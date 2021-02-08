@@ -30,7 +30,7 @@ module.exports = class OtpController {
     );
 
     if (!isOptInserted) {
-      req.send({ message: "failed" });
+      res.send({ message: "failed" });
       return;
     }
 
