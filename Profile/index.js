@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 
 const regiseration = require("./Routes/registeration");
 
+const otp = require("./Routes/otp");
+
 const app = express();
 
 const cors = require("cors");
@@ -21,6 +23,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(regiseration);
+app.use(otp);
 
 app.listen(8000, () => {
   console.log("connecte at port 8000");
