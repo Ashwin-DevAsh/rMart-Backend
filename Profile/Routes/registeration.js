@@ -1,5 +1,7 @@
 const app = require("express").Router();
 
-app.post("/signup", () => {});
+const registrationController = new (require("../Controllers/RegisterationController"))();
+
+app.post("/signup", registrationController.signup);
 
 module.exports = app;

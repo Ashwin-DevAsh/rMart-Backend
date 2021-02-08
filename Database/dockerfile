@@ -1,8 +1,8 @@
 FROM postgres
 
 ENV POSTGRES_USER postgres
-ENV POSTGRES_PASSWORD 2017PASS
-ENV POSTGRES_DB Rec_Wallet
+ENV POSTGRES_PASSWORD rec@3214
+ENV POSTGRES_DB rMart
 
 ADD ./createDB.sql /docker-entrypoint-initdb.d/
 
