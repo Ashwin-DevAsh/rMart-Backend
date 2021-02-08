@@ -40,7 +40,7 @@ module.exports = class Database {
     var postgres = await this.pool.connect();
     try {
       var otpDatas = await postgres.query(
-        "select * from otp where (email = $1 or number = $2) and otp = $3",
+        "select * from otp where ( email = $1 or number = $2 ) and otp = $3",
         [email, number, otp]
       );
       postgres.release();
@@ -48,7 +48,7 @@ module.exports = class Database {
     } catch (e) {
       postgres.release();
       console.log(e);
-      return false;
+      return [];
     }
   };
 

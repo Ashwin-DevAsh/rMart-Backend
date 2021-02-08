@@ -25,12 +25,17 @@ module.exports = class RegistrationController {
     var isOtpExist = await databaseService.getOtp(phoneNumber, email, otp);
 
     console.log(isOtpExist);
-    if (!isOtpExist) {
+    if (isOtpExist.length == 0) {
       res.send({ message: "otp not verified" });
       return;
     }
 
     console.log("otp = ", otp);
+
+    if (isOtpExist[0].otp != otp) {
+      res.send({ message: "invalid otp" });
+      return;
+    }
 
     databaseService.deleteOtp(phoneNumber, email);
 
