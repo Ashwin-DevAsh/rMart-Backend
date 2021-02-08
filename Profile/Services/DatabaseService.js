@@ -4,12 +4,19 @@ const clientDetails = require("../Database/ClientDetails");
 module.exports = class Database {
   pool = new Pool(clientDetails);
 
-  insertUser = async (name, email, phoneNumber, id, hashedPassword) => {
+  insertUser = async (
+    name,
+    email,
+    phoneNumber,
+    id,
+    hashedPassword,
+    collegeID
+  ) => {
     var postgres = await this.pool.connect();
     try {
       await postgres.query(
-        "insert into users(name,email,number,id,password) values($1,$2,$3,$4,$5)",
-        [name, email, phoneNumber, id, hashedPassword]
+        "insert into users(name,email,number,id,password,collegID) values($1,$2,$3,$4,$5,$6)",
+        [name, email, phoneNumber, id, hashedPassword, collegeID]
       );
       postgres.release();
       return true;

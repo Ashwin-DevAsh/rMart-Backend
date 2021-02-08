@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 
 module.exports = class RegistrationController {
   signup = async (req, res) => {
-    var { name, email, password, phoneNumber, otp } = req.body;
-    if (!name || !email || !password || !phoneNumber || !otp) {
+    var { name, email, password, phoneNumber, otp, collegeID } = req.body;
+    if (!name || !email || !password || !phoneNumber || !otp || !collegeID) {
       res.send({ message: "invalid body" });
       return;
     }
@@ -44,7 +44,8 @@ module.exports = class RegistrationController {
       email,
       phoneNumber,
       userID,
-      hashedPassword
+      hashedPassword,
+      collegeID
     );
 
     if (!isUserInserted) {
@@ -58,6 +59,7 @@ module.exports = class RegistrationController {
         number: phoneNumber,
         email: email,
         id: userID,
+        collegeID,
       },
       process.env.PRIVATE_KEY
     );
@@ -84,13 +86,14 @@ module.exports = class RegistrationController {
       return;
     }
 
-    var { password, name, number, email, id } = req.body;
+    var { password, name, number, email, id, collegeID } = req.body;
     var token = jwt.sign(
       {
         name: name,
         number: number,
         email: email,
         id: id,
+        collegeID,
       },
       process.env.PRIVATE_KEY
     );
