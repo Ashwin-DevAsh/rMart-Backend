@@ -88,10 +88,10 @@ module.exports = class Database {
   deleteOtp = async (number, email) => {
     var postgres = await this.pool.connect();
     try {
-      await postgres.query("delete from otp where (email = $1 or number = $", [
-        email,
-        number,
-      ]);
+      await postgres.query(
+        "delete from otp where (email = $1 or number = $2)",
+        [email, number]
+      );
       postgres.release();
       return true;
     } catch (e) {
