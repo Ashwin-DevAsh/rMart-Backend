@@ -89,7 +89,7 @@ module.exports = class RegistrationController {
       return;
     }
 
-    var { password, name, number, email, id, collegeID } = req.body;
+    var { password, name, number, email, id, collegeID } = isUserExist[0];
 
     console.log(password, userEnteredPassword);
 
