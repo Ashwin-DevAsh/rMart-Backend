@@ -32,7 +32,7 @@ module.exports = class Database {
     } catch (e) {
       postgres.release();
       console.log(e);
-      return false;
+      return [];
     }
   };
 

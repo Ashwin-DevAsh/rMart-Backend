@@ -17,7 +17,7 @@ module.exports = class RegistrationController {
 
     console.log("existing User = ", isUserExist);
 
-    if (isUserExist) {
+    if (isUserExist.length != 0) {
       res.send({ message: "user already exist" });
       return;
     }
