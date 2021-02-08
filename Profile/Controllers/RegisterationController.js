@@ -34,6 +34,7 @@ module.exports = class RegistrationController {
 
     databaseService.deleteOtp(phoneNumber, email);
 
+    console.log(password);
     var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
     var hashedPassword = await bcrypt.hash(password, salt);
 
@@ -90,10 +91,7 @@ module.exports = class RegistrationController {
 
     var { password, name, number, email, id, collegeID } = req.body;
 
-    var isPasswordVerified = await bcrypt.compare(
-      userEnteredPassword,
-      password
-    );
+    var isPasswordVerified = bcrypt.compareSync(userEnteredPassword, password);
 
     console.log(isPasswordVerified);
     if (!isPasswordVerified) {
