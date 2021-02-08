@@ -1,6 +1,6 @@
 const databaseService = new (require("../Services/DatabaseService"))();
 const bcrypt = require("bcrypt");
-const jwt = require("jwt");
+const jwt = require("jsonwebtoken");
 
 module.exports = class RegistrationController {
   signup = async (req, res) => {
