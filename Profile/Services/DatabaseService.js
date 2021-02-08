@@ -37,6 +37,7 @@ module.exports = class Database {
   };
 
   getOtp = async (number, email, otp) => {
+    console.log(number, email, otp);
     var postgres = await this.pool.connect();
     try {
       var otpDatas = await postgres.query(
