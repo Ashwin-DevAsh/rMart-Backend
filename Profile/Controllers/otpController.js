@@ -1,11 +1,10 @@
-const DatabaseService = require('../Services/DatabaseService')
+const DatabaseService = require("../Services/DatabaseService");
 
 module.exports = class OtpController {
+  databaseService = new DatabaseService();
 
-  databaseService = new DatabaseService()
-
-  getOtp = (req, res) => {
-    var { email , number } = req.body;
+  getOtp = async (req, res) => {
+    var { email, number } = req.body;
     if (!email && !password) {
       res.send({ message: "invalid body" });
     }
@@ -19,17 +18,21 @@ module.exports = class OtpController {
 
     console.log(smsbody);
 
-    var isOptInserted = this.databaseService.insertOtp(number,email,otpNumber)
+    var isOptInserted = this.databaseService.insertOtp(
+      number,
+      email,
+      otpNumber
+    );
 
-    if(!isOptInserted){
-        req.send({message:"failed"})
-        return;
+    if (!isOptInserted) {
+      req.send({ message: "failed" });
+      return;
     }
 
     await axios.post(
-        `https://2factor.in/API/V1/${apiKey}/SMS/${number}/${otpNumber}`
-    )
+      `https://2factor.in/API/V1/${apiKey}/SMS/${number}/${otpNumber}`
+    );
 
-    req.send({message:"done"})
+    req.send({ message: "done" });
   };
-}
+};
