@@ -1,4 +1,5 @@
 const DatabaseService = require("../Services/DatabaseService");
+const axios = require("axios");
 
 module.exports = class OtpController {
   databaseService = new DatabaseService();
