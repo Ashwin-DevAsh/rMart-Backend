@@ -55,7 +55,7 @@ module.exports = class RegistrationController {
     var token = jwt.sign(
       {
         name: name,
-        number: number,
+        number: phoneNumber,
         email: email,
         id: userID,
       },
