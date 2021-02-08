@@ -91,6 +91,8 @@ module.exports = class RegistrationController {
 
     var { password, name, number, email, id, collegeID } = req.body;
 
+    console.log(password, userEnteredPassword);
+
     var isPasswordVerified = bcrypt.compareSync(userEnteredPassword, password);
 
     console.log(isPasswordVerified);
