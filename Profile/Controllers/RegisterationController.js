@@ -32,7 +32,8 @@ module.exports = class RegistrationController {
 
     console.log("otp = ", otp);
 
-    if (isOtpExist[0].otp != otp) {
+    if (parseInt(isOtpExist[0].otp) != parseInt(otp)) {
+      console.log(arseInt(isOtpExist[0].otp), parseInt(otp));
       res.send({ message: "invalid otp" });
       return;
     }
