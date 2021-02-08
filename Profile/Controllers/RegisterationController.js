@@ -40,7 +40,7 @@ module.exports = class RegistrationController {
 
     databaseService.deleteOtp(phoneNumber, email);
 
-    var salt = await bcrypt.genSalt(process.env.SALTROUNDS);
+    var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
     var hashedPassword = await bcrypt.hash(password, salt);
 
     var userID = process.env.USERID;
