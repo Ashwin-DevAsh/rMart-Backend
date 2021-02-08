@@ -37,7 +37,7 @@ module.exports = class RegistrationController {
     var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
     var hashedPassword = await bcrypt.hash(password, salt);
 
-    var userID = process.env.USERID;
+    var userID = process.env.USERID + phoneNumber;
 
     var isUserInserted = await databaseService.insertUser(
       name,
