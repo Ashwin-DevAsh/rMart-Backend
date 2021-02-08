@@ -70,6 +70,8 @@ module.exports = class RegistrationController {
   login = async (req, res) => {
     var { phoneNumber, email, password } = req.body;
 
+    var userEnteredPassword = password;
+
     if (!phoneNumber || !email || !password) {
       res.send({ message: "failed" });
     }
@@ -87,9 +89,11 @@ module.exports = class RegistrationController {
     }
 
     var { password, name, number, email, id, collegeID } = req.body;
-    var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
-    var hashedPassword = await bcrypt.hash(password, salt);
-    var isPasswordVerified = await bcrypt.compare(password, hashedPassword);
+
+    var isPasswordVerified = await bcrypt.compare(
+      userEnteredPassword,
+      password
+    );
 
     console.log(isPasswordVerified);
     if (!isPasswordVerified) {
