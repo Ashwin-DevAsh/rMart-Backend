@@ -10,7 +10,7 @@ module.exports = class RegistrationController {
       return;
     }
 
-    console.log(req.body);
+    console.log("body = ", req.body);
 
     var isUserExist = await databaseService.getUserWithEmailOrPhoneNumber(
       email,
@@ -75,8 +75,8 @@ module.exports = class RegistrationController {
 
     var userEnteredPassword = password;
 
-    if (!phoneNumber || !email || !password) {
-      res.send({ message: "failed" });
+    if (!phoneNumber || (!email && !password)) {
+      res.send({ message: "invalid credientials" });
     }
 
     var isUserExist = await databaseService.getUserWithEmailOrPhoneNumber(
@@ -114,6 +114,6 @@ module.exports = class RegistrationController {
       process.env.PRIVATE_KEY
     );
 
-    res.send({ message: "done", token });
+    res.send({ message: "done", token, user: isUserExist[0] });
   };
 };
