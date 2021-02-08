@@ -22,6 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(regiseration);
 
-app.listen(4600, () => {
-  console.log("connecte at port 4600");
+app.listen(8000, () => {
+  console.log("connecte at port 8000");
 });
