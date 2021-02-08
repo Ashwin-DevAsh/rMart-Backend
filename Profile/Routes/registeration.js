@@ -4,4 +4,6 @@ const registrationController = new (require("../Controllers/RegisterationControl
 
 app.post("/signup", registrationController.signup);
 
+app.post("/login", registrationController.login);
+
 module.exports = app;
