@@ -10,6 +10,8 @@ module.exports = class RegistrationController {
       return;
     }
 
+    console.log(req.body);
+
     var isUserExist = await databaseService.getUserWithEmailOrPhoneNumber(
       email,
       phoneNumber
