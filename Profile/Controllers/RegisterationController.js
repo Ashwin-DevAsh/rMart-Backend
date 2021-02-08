@@ -90,10 +90,10 @@ module.exports = class RegistrationController {
 
     var { password, name, number, email, id, collegeID } = req.body;
 
-    var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
-    var hashedPassword = await bcrypt.hash(userEnteredPassword, salt);
-
-    var isPasswordVerified = await bcrypt.compare(password, hashedPassword);
+    var isPasswordVerified = await bcrypt.compare(
+      userEnteredPassword,
+      password
+    );
 
     console.log(isPasswordVerified);
     if (!isPasswordVerified) {
