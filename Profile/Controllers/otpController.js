@@ -6,9 +6,13 @@ module.exports = class OtpController {
 
   getOtp = async (req, res) => {
     var { email, number } = req.body;
-    if (!email && !password) {
+    console.log(req.body);
+    if (!email || !number) {
       res.send({ message: "invalid body" });
+      return;
     }
+
+    await this.databaseService.deleteOtp(number, email);
 
     var otpNumber = Math.floor(1000 + Math.random() * 9000);
     var apiKey = process.env.SMSKEY;
