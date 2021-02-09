@@ -89,7 +89,7 @@ module.exports = class OrderService {
       if (isVerified) {
         var data = await postgres.query(
           `update orders set paymentMetadata = $1 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
-          [paymentDetails]
+          [id]
         );
         return isVerified && data.rows.length > 0;
       } else {
