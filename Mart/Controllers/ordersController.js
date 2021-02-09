@@ -28,7 +28,7 @@ module.exports = class OrdersController {
       products,
       orderBy,
       amount,
-      paymentMetadata
+      orderID
     );
 
     console.log("isProductPlaced ", isOrderPlaced);
