@@ -6,6 +6,12 @@ var ordersController = new OrdersController();
 
 app.post("/makeOrder", new Auth().isTransAuth, ordersController.makeOrder);
 
+app.post(
+  "/verifyPayment",
+  new Auth().isTransAuth,
+  ordersController.verifyPayment
+);
+
 app.get("/getMyOrders/:id", ordersController.getMyOrders);
 
 app.get("/getAllOrders", ordersController.getAllOrders);

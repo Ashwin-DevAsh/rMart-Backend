@@ -46,6 +46,22 @@ module.exports = class OrderService {
     }
   };
 
+  isOrderExist = async (orderID) => {
+    var postgres = await this.pool.connect();
+    try {
+      var order = (
+        await postgres.query(
+          `select * from order  where cast(paymentmetadata->>'id' as varchar) = $1`,
+          [orderID]
+        )
+      ).rows;
+      return order;
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
+  };
+
   getOrderID = async (amount) => {
     var options = {
       amount: amount * 100, // amount in the smallest currency unit
@@ -55,9 +71,9 @@ module.exports = class OrderService {
     return orderID;
   };
 
-  verifyGateway = async (id, amount) => {
+  verifyRazorpayPayment = async (id, amount) => {
     try {
-      var paymentDetails = await instance.payments.fetch(id);
+      var paymentDetails = await this.instance.payments.fetch(id);
       console.log("Payment Details = ", paymentDetails);
       console.log(
         id,
@@ -65,12 +81,30 @@ module.exports = class OrderService {
         amount / 1 + 0.02 * amount,
         id
       );
+      console.log(paymentDetails);
       return (
-        paymentDetails.status == "authorized" &&
-        paymentDetails.amount / 100 == amount / 1 + 0.02 * amount
+        (paymentDetails.status == "authorized" ||
+          paymentDetails.status == "captured") &&
+        paymentDetails.amount / 100 == amount / 1
       );
     } catch (error) {
       return false;
+    }
+  };
+
+  makeOrderValid = async (orderID) => {
+    var postgres = await this.pool.connect();
+    try {
+      var order = (
+        await postgres.query(
+          `update order set isPaymentSuccessful = true where cast(paymentmetadata->>'id' as varchar) = $1`,
+          [orderID]
+        )
+      ).rows;
+      return order;
+    } catch (e) {
+      console.log(e);
+      return [];
     }
   };
 
