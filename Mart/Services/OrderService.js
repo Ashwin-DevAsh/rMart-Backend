@@ -1,8 +1,6 @@
 const dateFormat = require("dateformat");
-const axios = require("axios");
 const { Pool } = require("pg");
 const clientDetails = require("../Database/ClientDetails");
-const sendNotification = require("./NotificationServices");
 
 module.exports = class OrderService {
   pool = new Pool(clientDetails);
