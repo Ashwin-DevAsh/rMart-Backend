@@ -8,7 +8,7 @@ app.post("/makeOrder", new Auth().isTransAuth, ordersController.makeOrder);
 
 app.post(
   "/verifyPayment",
-  new Auth().isTransAuth,
+  new Auth().isAuthenticated,
   ordersController.verifyPayment
 );
 
