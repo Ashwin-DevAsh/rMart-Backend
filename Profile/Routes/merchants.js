@@ -4,7 +4,7 @@ app.get("/getMerchants", (req, res) => {
   res.send([
     {
       id: "rbusiness@919840573702",
-      name: "rec cafe",
+      accountname: "rec cafe",
     },
   ]);
 });
