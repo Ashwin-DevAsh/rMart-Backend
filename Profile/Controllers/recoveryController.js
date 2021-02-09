@@ -1,8 +1,7 @@
 const databaseService = new (require("../Services/DatabaseService"))();
 
 module.exports = class RecoveryController {
-  getRecoveryOtp = (req, res) => {
-   
+  getRecoveryOtp = async (req, res) => {
     var { email, number } = req.body;
     console.log(req.body);
     if (!email || !number) {
@@ -41,6 +40,5 @@ module.exports = class RecoveryController {
     );
 
     res.send({ message: "done" });
-
   };
 };

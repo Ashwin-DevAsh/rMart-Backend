@@ -1,5 +1,3 @@
-const RecoveryController = require("../Controllers/recoveryController");
-
 const app = require("express").Router();
 const recoveryController = new (require("../Controllers/recoveryController"))();
 
