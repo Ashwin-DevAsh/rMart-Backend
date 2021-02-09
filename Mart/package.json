@@ -23,6 +23,7 @@
     "pg": "^8.2.1",
     "fcm-node": "^1.5.2",
     "cors": "^2.8.5",
-    "dateformat": "^3.0.3"
+    "dateformat": "^3.0.3",
+    "razorpay": "^2.0.6"
   }
 }
