@@ -82,6 +82,7 @@ module.exports = class OrdersController {
     }
 
     res.send({ message: "success" });
+    console.log("finished ver");
   };
 
   getMyOrders = async (req, res) => {
