@@ -42,4 +42,42 @@ module.exports = class RecoveryController {
 
     res.send({ message: "done" });
   };
+
+  verifyRecoveryOtp = async (req, res) => {
+    var { email, number, otp } = req.body;
+    console.log(req.body);
+    if (!email || !number || !otp) {
+      res.send({ message: "invalid body" });
+      return;
+    }
+
+    var isOtpExist = await databaseService.getRecoveryOtp(
+      phoneNumber,
+      email,
+      otp
+    );
+
+    console.log(isOtpExist);
+    if (isOtpExist.length == 0) {
+      res.send({ message: "otp not verified" });
+      return;
+    }
+
+    if (otp != isOtpExist[0].otp) {
+      res.send({ message: "invalid otp" });
+    }
+
+    var isUpdated = await databaseService.updateRecoveryOtp(
+      number,
+      email,
+      true
+    );
+
+    if (!isUpdated) {
+      res.send({ message: "failed" });
+      return;
+    }
+
+    res.send({ message: "done" });
+  };
 };

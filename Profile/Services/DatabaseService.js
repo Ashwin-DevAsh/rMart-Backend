@@ -60,6 +60,23 @@ module.exports = class Database {
     }
   };
 
+  getRecoveryOtp = async (number, email, otp) => {
+    console.log(number, email, otp);
+    var postgres = await this.pool.connect();
+    try {
+      var otpDatas = await postgres.query(
+        "select * from recoveryOtp where ( email = $1 or number = $2 ) and otp = $3",
+        [email, number, otp]
+      );
+      postgres.release();
+      return otpDatas.rows;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  };
+
   insertOtp = async (number, email, otp) => {
     var postgres = await this.pool.connect();
     try {
@@ -92,11 +109,11 @@ module.exports = class Database {
     }
   };
 
-  updateOtp = async (number, email, isVerified) => {
+  updateRecoveryOtp = async (number, email, isVerified) => {
     var postgres = await this.pool.connect();
     try {
       await postgres.query(
-        "update otp set isverified=$3 where (email=$1 or number = $2)",
+        "update recoveryOtp set isverified=$3 where (email=$1 or number = $2)",
         [email, number, isVerified]
       );
       postgres.release();
