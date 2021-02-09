@@ -31,7 +31,7 @@ module.exports = class Database {
     var postgres = await this.pool.connect();
     try {
       var user = await postgres.query(
-        "update users set password = $3 where email = $1 and number = $2 returning *",
+        "update users set password = $3 where (email = $1 or number = $2) returning *",
         [email, phoneNumber, hashedPassword]
       );
       postgres.release();

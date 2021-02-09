@@ -22,9 +22,19 @@ module.exports = class RecoveryController {
 
     console.log(smsbody);
 
-    var isOptInserted = await databaseService.insertRecoveryOtp(
+    var isUserExist = await databaseService.getUserWithEmailOrPhoneNumber(
       number,
-      email,
+      email
+    );
+
+    if (isUserExist.length == 0) {
+      res.send({ message: "user not exist" });
+      return;
+    }
+
+    var isOptInserted = await databaseService.insertRecoveryOtp(
+      isUserExist[0].number,
+      isUserExist[0].email,
       otpNumber
     );
 
@@ -34,7 +44,7 @@ module.exports = class RecoveryController {
     }
 
     await axios.post(
-      `https://2factor.in/API/V1/${apiKey}/SMS/${number}/${otpNumber}`
+      `https://2factor.in/API/V1/${apiKey}/SMS/${isUserExist[0].number}/${otpNumber}`
     );
 
     res.send({ message: "done" });
