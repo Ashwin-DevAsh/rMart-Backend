@@ -16,10 +16,19 @@ module.exports = class OrdersController {
       return;
     }
 
+    var orderID = await this.orderservice.getOrderID(parseInt(amount));
+
+    if (!orderID) {
+      console.log("unable to place order");
+      res.send({ message: "failed" });
+      return;
+    }
+
     var isOrderPlaced = await this.orderservice.placeOrder(
       products,
       orderBy,
-      amount
+      amount,
+      paymentMetadata
     );
 
     console.log("isProductPlaced ", isOrderPlaced);
@@ -29,8 +38,6 @@ module.exports = class OrdersController {
       res.send({ message: "failed" });
       return;
     }
-
-    var orderID = await this.orderservice.getOrderID(parseInt(amount));
 
     console.log(("order id ", orderID));
 

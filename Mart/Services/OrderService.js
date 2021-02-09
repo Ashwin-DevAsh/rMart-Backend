@@ -11,7 +11,7 @@ module.exports = class OrderService {
     key_secret: process.env.key_secret,
   });
 
-  placeOrder = async (products, orderdBy, amount) => {
+  placeOrder = async (products, orderdBy, amount, paymentMetadata) => {
     var postgres = await this.pool.connect();
     var transactionTime = dateFormat(new Date(), "mm-dd-yyyy hh:MM:ss");
     try {
@@ -26,7 +26,15 @@ module.exports = class OrderService {
                         paymentMetadata,
                         isPaymentSuccessful)
                         values($1,$2,$3,$4,$5,$6,$7) returning *`,
-          ["pending", amount, orderdBy, transactionTime, products, {}, false]
+          [
+            "pending",
+            amount,
+            orderdBy,
+            transactionTime,
+            products,
+            paymentMetadata,
+            false,
+          ]
         )
       ).rows;
       postgres.release();
