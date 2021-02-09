@@ -105,6 +105,8 @@ module.exports = class RecoveryController {
       return;
     }
 
+    databaseService.deleteRecoveryOtp(number, email);
+
     var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
     var hashedPassword = await bcrypt.hash(password, salt);
 
