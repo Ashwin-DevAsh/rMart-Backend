@@ -51,11 +51,7 @@ module.exports = class RecoveryController {
       return;
     }
 
-    var isOtpExist = await databaseService.getRecoveryOtp(
-      phoneNumber,
-      email,
-      otp
-    );
+    var isOtpExist = await databaseService.getRecoveryOtp(number, email, otp);
 
     console.log(isOtpExist);
     if (isOtpExist.length == 0) {
