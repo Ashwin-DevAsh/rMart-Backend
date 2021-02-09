@@ -8,6 +8,8 @@ const regiseration = require("./Routes/registeration");
 
 const otp = require("./Routes/otp");
 
+const recovery = require("./Routes/recovery");
+
 const app = express();
 
 const cors = require("cors");
@@ -24,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(regiseration);
 app.use(otp);
+app.use(recovery);
 
 app.listen(8000, () => {
   console.log("connecte at port 8000");

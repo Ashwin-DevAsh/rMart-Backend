@@ -73,7 +73,7 @@ module.exports = class RegistrationController {
   login = async (req, res) => {
     var { phoneNumber, email, password } = req.body;
 
-    var userEnteredPassword = password;
+    var userEnteredPassword = password; 
 
     if (!phoneNumber || (!email && !password)) {
       res.send({ message: "invalid credientials" });

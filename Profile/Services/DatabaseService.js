@@ -76,6 +76,22 @@ module.exports = class Database {
     }
   };
 
+  insertRecoveryOtp = async (number, email, otp) => {
+    var postgres = await this.pool.connect();
+    try {
+      await postgres.query(
+        "insert into recoveryOtp(email,number,otp,isVerified) values($1,$2,$3,$4)",
+        [email, number, otp, false]
+      );
+      postgres.release();
+      return true;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return false;
+    }
+  };
+
   updateOtp = async (number, email, isVerified) => {
     var postgres = await this.pool.connect();
     try {
