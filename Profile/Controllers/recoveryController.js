@@ -1,4 +1,5 @@
 const databaseService = new (require("../Services/DatabaseService"))();
+const axios = require("axios");
 
 module.exports = class RecoveryController {
   getRecoveryOtp = async (req, res) => {
