@@ -130,7 +130,7 @@ module.exports = class Database {
     try {
       var orders = (
         await postgres.query(
-          `select * from orders  where cast(orderdby->>'id' as varchar) = $1`,
+          `select * from orders  where cast(orderdby->>'id' as varchar) = $1 and isPaymentSuccessful=true`,
           [id]
         )
       ).rows;
