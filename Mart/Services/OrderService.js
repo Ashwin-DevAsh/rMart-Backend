@@ -82,11 +82,19 @@ module.exports = class OrderService {
         id
       );
       console.log(paymentDetails);
-      return (
+      var isVerified =
         (paymentDetails.status == "authorized" ||
           paymentDetails.status == "captured") &&
-        paymentDetails.amount / 100 == amount / 1
-      );
+        paymentDetails.amount / 100 == amount / 1;
+      if (isVerified) {
+        var data = await postgres.query(
+          `update orders set paymentMetadata = $1 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
+          [paymentDetails]
+        );
+        return isVerified && data.rows.length > 0;
+      } else {
+        return false;
+      }
     } catch (error) {
       return false;
     }
