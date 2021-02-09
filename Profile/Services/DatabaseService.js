@@ -123,4 +123,20 @@ module.exports = class Database {
       return false;
     }
   };
+
+  deleteRecoveryOtp = async (number, email) => {
+    var postgres = await this.pool.connect();
+    try {
+      await postgres.query(
+        "delete from recoveryOtp where (email = $1 or number = $2)",
+        [email, number]
+      );
+      postgres.release();
+      return true;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return false;
+    }
+  };
 };
