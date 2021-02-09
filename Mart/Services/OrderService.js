@@ -23,8 +23,10 @@ module.exports = class OrderService {
           ["pending", amount, orderdBy, transactionTime, products, {}, false]
         )
       ).rows;
+      postgres.release();
       return orderData;
     } catch (e) {
+      postgres.release();
       console.log(e);
       return [];
     }
