@@ -43,7 +43,7 @@ module.exports = class OrderService {
       amount: amount * 100, // amount in the smallest currency unit
       currency: "INR",
     };
-    var orderID = await instance.orders.create(options);
+    var orderID = await this.instance.orders.create(options);
     return orderID;
   };
 
