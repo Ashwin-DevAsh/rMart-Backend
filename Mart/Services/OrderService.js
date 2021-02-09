@@ -121,6 +121,7 @@ module.exports = class OrderService {
           [orderID]
         )
       ).rows;
+      console.log(order);
       postgres.release();
 
       return order;
