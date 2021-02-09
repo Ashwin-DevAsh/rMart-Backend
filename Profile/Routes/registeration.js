@@ -6,4 +6,5 @@ app.post("/signup", registrationController.signup);
 
 app.post("/login", registrationController.login);
 
+app.post("/canLogin", registrationController.canLogin);
 module.exports = app;

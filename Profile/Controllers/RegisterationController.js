@@ -3,6 +3,26 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 module.exports = class RegistrationController {
+  canLogin = (res, res) => {
+    var { phoneNumber, email } = req.body;
+
+    if (!phoneNumber || !email) {
+      res.send({ message: "invalid credientials" });
+    }
+
+    var isUserExist = await databaseService.getUserWithEmailOrPhoneNumber(
+      email,
+      phoneNumber
+    );
+
+    if (isUserExist.length == 0) {
+      res.send({ message: "user not exist" });
+      return;
+    }
+
+    res.send({ message: "done" });
+  };
+
   signup = async (req, res) => {
     var { name, email, password, phoneNumber, otp, collegeID } = req.body;
     if (!name || !email || !password || !phoneNumber || !otp || !collegeID) {
@@ -73,9 +93,9 @@ module.exports = class RegistrationController {
   login = async (req, res) => {
     var { phoneNumber, email, password } = req.body;
 
-    var userEnteredPassword = password; 
+    var userEnteredPassword = password;
 
-    if (!phoneNumber || (!email && !password)) {
+    if ((!phoneNumber && !email) || !password) {
       res.send({ message: "invalid credientials" });
     }
 
