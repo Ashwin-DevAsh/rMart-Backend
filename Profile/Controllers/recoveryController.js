@@ -10,7 +10,7 @@ module.exports = class RecoveryController {
       return;
     }
 
-    await databaseService.deleteOtp(number, email);
+    await databaseService.deleteRecoveryOtp(number, email);
 
     var otpNumber = Math.floor(1000 + Math.random() * 9000);
     var apiKey = process.env.SMSKEY;
