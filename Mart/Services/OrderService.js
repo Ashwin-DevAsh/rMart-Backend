@@ -26,7 +26,7 @@ module.exports = class OrderService {
             orderdBy,
             transactionTime,
             products,
-            { amount },
+            { amount, paymentStatus: "pending" },
             false,
           ]
         )
