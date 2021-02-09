@@ -91,6 +91,7 @@ module.exports = class OrderService {
           `update orders set paymentMetadata = $1 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
           [orderID]
         );
+        console.log("data", data);
         return isVerified && data.rows.length > 0;
       } else {
         return false;
