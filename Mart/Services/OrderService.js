@@ -71,7 +71,7 @@ module.exports = class OrderService {
     return orderID;
   };
 
-  verifyRazorpayPayment = async (id, amount) => {
+  verifyRazorpayPayment = async (orderID, id, amount) => {
     try {
       var paymentDetails = await this.instance.payments.fetch(id);
       console.log("Payment Details = ", paymentDetails);
@@ -89,7 +89,7 @@ module.exports = class OrderService {
       if (isVerified) {
         var data = await postgres.query(
           `update orders set paymentMetadata = $1 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
-          [id]
+          [orderID]
         );
         return isVerified && data.rows.length > 0;
       } else {

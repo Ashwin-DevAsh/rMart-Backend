@@ -64,6 +64,7 @@ module.exports = class OrdersController {
 
     var { amount } = isOrderExist[0];
     var isverifyRazorpayPayment = await this.orderservice.verifyRazorpayPayment(
+      orderID,
       paymentID,
       amount
     );
