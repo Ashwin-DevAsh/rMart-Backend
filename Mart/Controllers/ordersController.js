@@ -1,30 +1,29 @@
 const { Pool } = require("pg");
 const clientDetails = require("../Database/ClientDetails");
-const TransactionsService = require("../Services/TransactionService");
+const OrderService = require("../Services/OrderService");
 const DatabaseService = require("../Services/Database");
-const jwt = require("jsonwebtoken");
 
 module.exports = class OrdersController {
-  transactionsService = new TransactionsService();
+  orderservice = new OrderService();
   databaseService = new DatabaseService();
   pool = new Pool(clientDetails);
   makeOrder = async (req, res) => {
-    var { products, transactionData, amount } = req.body;
+    var { products, orderBy, amount } = req.body;
 
-    if (!products || !transactionData || !amount) {
+    if (!products || !orderBy || !amount) {
       console.log("Invalid body");
       res.send({ message: "failed" });
       return;
     }
 
-    var isOrderPlaced = await this.transactionsService.makeOrder(
-      transactionData,
+    var isOrderPlaced = await this.orderservice.placeOrder(
+      orderBy,
       products,
       amount
     );
 
-    if (!isOrderPlaced) {
-      console.log("payment failed");
+    if (isOrderPlaced.length == 0) {
+      console.log("failed");
       res.send({ message: "failed" });
       return;
     }
