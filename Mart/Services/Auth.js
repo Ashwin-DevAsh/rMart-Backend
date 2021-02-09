@@ -16,11 +16,11 @@ module.exports = class Auth {
     try {
       console.log("TransAuth");
       var decoded = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY);
-      // if (decoded.number != req.body.orderBy.number) {
-      //   console.log(decoded.number, req.body.orderBy.number);
-      //   res.send({ message: "failed" });
-      //   return;
-      // }
+      if (decoded.number != req.body.orderBy.number) {
+        console.log(decoded.number, req.body.orderBy.number);
+        res.send({ message: "failed" });
+        return;
+      }
     } catch (e) {
       console.log(e);
       res.send({ message: "failed" });

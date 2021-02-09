@@ -24,6 +24,7 @@ module.exports = class OrderService {
       ).rows;
       return orderData;
     } catch (e) {
+      console.log(e);
       return [];
     }
   };

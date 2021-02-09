@@ -12,7 +12,7 @@ module.exports = class OrdersController {
 
     if (!products || !orderBy || !amount) {
       console.log("Invalid body");
-      res.send({ message: "failed" });
+      res.send({ message: "invalid body" });
       return;
     }
 
@@ -23,7 +23,7 @@ module.exports = class OrdersController {
     );
 
     if (isOrderPlaced.length == 0) {
-      console.log("failed");
+      console.log("Not Placed");
       res.send({ message: "failed" });
       return;
     }
