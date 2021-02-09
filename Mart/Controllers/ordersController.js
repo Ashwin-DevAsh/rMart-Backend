@@ -42,6 +42,7 @@ module.exports = class OrdersController {
     console.log(("order id ", orderID));
 
     res.send({ message: "done", order: isOrderPlaced, orderID: orderID.id });
+    console.log("finished");
     return;
   };
 
