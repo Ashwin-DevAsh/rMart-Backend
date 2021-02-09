@@ -97,7 +97,7 @@ module.exports = class OrderService {
     try {
       var order = (
         await postgres.query(
-          `update orders set isPaymentSuccessful = true where cast(paymentmetadata->>'id' as varchar) = $1`,
+          `update orders set isPaymentSuccessful = true where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
           [orderID]
         )
       ).rows;
