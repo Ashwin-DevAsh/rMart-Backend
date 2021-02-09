@@ -93,8 +93,8 @@ module.exports = class OrderService {
         paymentDetails.amount / 100 == amount / 1;
       if (isVerified) {
         var data = await postgres.query(
-          `update orders set paymentMetadata = $1 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
-          [orderID]
+          `update orders set paymentMetadata = $2 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
+          [orderID, paymentDetails]
         );
         console.log("data", data);
         postgres.release();
