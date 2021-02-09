@@ -55,8 +55,12 @@ module.exports = class OrderService {
           [orderID]
         )
       ).rows;
+      postgres.release();
+
       return order;
     } catch (e) {
+      postgres.release();
+
       console.log(e);
       return [];
     }
@@ -72,6 +76,7 @@ module.exports = class OrderService {
   };
 
   verifyRazorpayPayment = async (orderID, id, amount) => {
+    var postgres = await this.pool.connect();
     try {
       var paymentDetails = await this.instance.payments.fetch(id);
       console.log("Payment Details = ", paymentDetails);
@@ -92,11 +97,16 @@ module.exports = class OrderService {
           [orderID]
         );
         console.log("data", data);
+        postgres.release();
         return isVerified && data.rows.length > 0;
       } else {
+        postgres.release();
+
         return false;
       }
     } catch (error) {
+      postgres.release();
+
       console.log(error);
       return false;
     }
@@ -111,8 +121,12 @@ module.exports = class OrderService {
           [orderID]
         )
       ).rows;
+      postgres.release();
+
       return order;
     } catch (e) {
+      postgres.release();
+
       console.log(e);
       return [];
     }
