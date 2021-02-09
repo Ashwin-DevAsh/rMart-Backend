@@ -20,15 +20,7 @@ module.exports = class OrderService {
                         paymentMetadata,
                         isPaymentSuccessful)
                         values($1,$2,$3,$4,$5,$6,$7) returning *`,
-          [
-            "pending",
-            amount,
-            orderdBy,
-            transactionTime,
-            products,
-            { amount, paymentStatus: "pending" },
-            false,
-          ]
+          ["pending", amount, orderdBy, transactionTime, products, {}, false]
         )
       ).rows;
       return orderData;

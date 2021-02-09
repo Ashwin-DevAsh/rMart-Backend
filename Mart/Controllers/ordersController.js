@@ -17,8 +17,8 @@ module.exports = class OrdersController {
     }
 
     var isOrderPlaced = await this.orderservice.placeOrder(
-      orderBy,
       products,
+      orderBy,
       amount
     );
 
