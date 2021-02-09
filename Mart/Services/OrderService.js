@@ -96,7 +96,6 @@ module.exports = class OrderService {
           `update orders set paymentMetadata = $2 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
           [orderID, paymentDetails]
         );
-        console.log("data", data);
         postgres.release();
         return isVerified && data.rows.length > 0;
       } else {
@@ -121,9 +120,7 @@ module.exports = class OrderService {
           [orderID]
         )
       ).rows;
-      console.log(order);
       postgres.release();
-
       return order;
     } catch (e) {
       postgres.release();
