@@ -32,7 +32,7 @@ module.exports = class OrdersController {
 
     var orderID = await this.orderservice.getOrderID(parseInt(amount));
 
-    console.log(("order id " = orderID));
+    console.log(("order id ", orderID));
 
     res.send({ message: "done", order: isOrderPlaced });
     return;
