@@ -97,6 +97,7 @@ module.exports = class OrderService {
         return false;
       }
     } catch (error) {
+      console.log(error);
       return false;
     }
   };
