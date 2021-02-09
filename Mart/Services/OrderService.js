@@ -51,7 +51,7 @@ module.exports = class OrderService {
     try {
       var order = (
         await postgres.query(
-          `select * from order  where cast(paymentmetadata->>'id' as varchar) = $1`,
+          `select * from orders where cast(paymentmetadata->>'id' as varchar) = $1`,
           [orderID]
         )
       ).rows;
