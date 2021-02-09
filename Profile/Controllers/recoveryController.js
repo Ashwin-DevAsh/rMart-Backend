@@ -1,5 +1,7 @@
 const databaseService = new (require("../Services/DatabaseService"))();
 const axios = require("axios");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports = class RecoveryController {
   getRecoveryOtp = async (req, res) => {
@@ -14,11 +16,6 @@ module.exports = class RecoveryController {
 
     var otpNumber = Math.floor(1000 + Math.random() * 9000);
     var apiKey = process.env.SMSKEY;
-
-    // var smsbody = `<#>rMart never calls you asking for otp. Sharing it with
-    //                  anyone gives them full access to your rMart account.
-    //                  Your Login OTP is ${otpNumber} . ID: ${appId}`;
-
     var smsbody = `rMart never calls you asking for otp. Sharing it with
                      anyone gives them full access to your rMart account.
                      Your Login OTP is ${otpNumber}.`;
@@ -55,7 +52,7 @@ module.exports = class RecoveryController {
 
     console.log(isOtpExist);
     if (isOtpExist.length == 0) {
-      res.send({ message: "otp not verified" });
+      res.send({ message: "invalid otp" });
       return;
     }
 
@@ -70,6 +67,54 @@ module.exports = class RecoveryController {
     );
 
     if (!isUpdated) {
+      res.send({ message: "failed" });
+      return;
+    }
+
+    res.send({ message: "done" });
+  };
+
+  changePassword = async (req, res) => {
+    var { email, number, password } = req.body;
+    console.log(req.body);
+    if (!email || !number || !password) {
+      res.send({ message: "invalid body" });
+      return;
+    }
+
+    var isOtpExist = await databaseService.getVerifiedRecoveryOtp(
+      number,
+      email
+    );
+
+    console.log(isOtpExist);
+    if (isOtpExist.length == 0) {
+      console.log("otp not exist");
+      res.send({ message: "Failed" });
+      return;
+    }
+
+    var isUserExist = await databaseService.getUserWithEmailOrPhoneNumber(
+      number,
+      email
+    );
+
+    if (isUserExist.length == 0) {
+      console.log("user not exist ", isUserExist);
+      res.send({ message: "failed" });
+      return;
+    }
+
+    var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
+    var hashedPassword = await bcrypt.hash(password, salt);
+
+    var isPasswordUpdated = await databaseService.changePasswordForUser(
+      email,
+      number,
+      hashedPassword
+    );
+
+    if (isPasswordUpdated.length == 0) {
       res.send({ message: "failed" });
       return;
     }

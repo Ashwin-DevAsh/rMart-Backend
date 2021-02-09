@@ -27,6 +27,22 @@ module.exports = class Database {
     }
   };
 
+  changePasswordForUser = async (email, phoneNumber, hashedPassword) => {
+    var postgres = await this.pool.connect();
+    try {
+      var user = await postgres.query(
+        "update users set password = $3 where email = $1 and number = $2 returning *",
+        [email, phoneNumber, hashedPassword]
+      );
+      postgres.release();
+      return user.rows;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  };
+
   getUserWithEmailOrPhoneNumber = async (number, email) => {
     var postgres = await this.pool.connect();
     try {
@@ -67,6 +83,23 @@ module.exports = class Database {
       var otpDatas = await postgres.query(
         "select * from recoveryOtp where ( email = $1 or number = $2 ) and otp = $3",
         [email, number, otp]
+      );
+      postgres.release();
+      return otpDatas.rows;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  };
+
+  getVerifiedRecoveryOtp = async (number, email) => {
+    console.log(number, email);
+    var postgres = await this.pool.connect();
+    try {
+      var otpDatas = await postgres.query(
+        "select * from recoveryOtp where ( email = $1 or number = $2 ) and isVerified = true",
+        [email, number]
       );
       postgres.release();
       return otpDatas.rows;
