@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 module.exports = class RegistrationController {
-  canLogin = (res, res) => {
+  canLogin = (req, res) => {
     var { phoneNumber, email } = req.body;
 
     if (!phoneNumber || !email) {
