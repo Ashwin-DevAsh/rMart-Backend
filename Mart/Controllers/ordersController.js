@@ -22,6 +22,8 @@ module.exports = class OrdersController {
       amount
     );
 
+    console.log("isProductPlaced ", isOrderPlaced);
+
     if (isOrderPlaced.length == 0) {
       console.log("Not Placed");
       res.send({ message: "failed" });
