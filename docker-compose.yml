@@ -26,6 +26,14 @@ services:
       - ./env:/env
       - ./Database:/Database
 
+  sync:
+    build: Sync
+    ports:
+      - 7000:7000
+    volumes:
+      - ./env:/env
+      - ./Database:/Database
+
   reverse-proxy:
     build: nginx
     depends_on: []

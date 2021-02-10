@@ -41,6 +41,11 @@ create table otp(
     isVerified Boolean
 );
 
+create table sync(
+    networdID  varchar,
+    martID varchar
+);
+
 create table recoveryOtp(
     email varchar  unique key,
      number varchar primary key,
