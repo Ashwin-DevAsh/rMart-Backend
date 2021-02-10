@@ -156,8 +156,8 @@ module.exports = class OrderService {
 
     databaseProduscts.forEach((dbProduct) => {
       var amount = dbProduct.price;
-      console.log(amount, idCountMap[dbProduct.productID.toString()]);
-      amountFromDB += amount * idCountMap[dbProduct.productID.toString()];
+      console.log(amount, idCountMap[dbProduct.productid]);
+      amountFromDB += amount * idCountMap[dbProduct.productid];
     });
 
     console.log(`actual amount = ${amount} amount from db = ${amountFromDB}`);
