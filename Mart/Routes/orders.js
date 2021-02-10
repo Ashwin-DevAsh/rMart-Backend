@@ -7,13 +7,13 @@ var ordersController = new OrdersController();
 app.post(
   "/makeOrder",
   new Auth().isTransAuth,
-  new Auth().isMartOpen,
+  // new Auth().isMartOpen,
   ordersController.makeOrder
 );
 
 app.post(
   "/verifyPayment",
-  // new Auth().isAuthenticated,
+  new Auth().isAuthenticated,
   ordersController.verifyPayment
 );
 
