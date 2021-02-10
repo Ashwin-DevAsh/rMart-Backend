@@ -47,7 +47,7 @@ module.exports = class Auth {
 
   isMartOpen = async (req, res, next) => {
     var currentHour = new Date().getHours();
-    if (currentHour >= 12 && currentHour < 22) {
+    if (currentHour >= 12 && currentHour < 24) {
       next();
     } else {
       res.send({ message: "closed" });
