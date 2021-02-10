@@ -36,7 +36,7 @@ services:
 
   reverse-proxy:
     build: nginx
-    depends_on: []
+    depends_on: [profile, mart, sync]
     ports:
       - 80:80
       - 443:443
