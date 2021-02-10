@@ -170,8 +170,7 @@ module.exports = class OrderService {
     try {
       var products = (
         await postgres.query(
-          `select * from products where productID in (${idsString}) and isAvaliable = true`,
-          [ids]
+          `select * from products where productID in (${idsString}) and isAvaliable = true`
         )
       ).rows;
       postgres.release();
