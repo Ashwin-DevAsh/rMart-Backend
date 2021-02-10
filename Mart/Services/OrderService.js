@@ -144,6 +144,8 @@ module.exports = class OrderService {
 
     var databaseProduscts = await this.getProductsWithIDS(productIDS);
 
+    console.log("db products = ", dbProduct);
+
     var isValidProduct = databaseProduscts.length == productIDS.length;
     if (!isValidProduct) {
       return "invalid product";
@@ -156,7 +158,7 @@ module.exports = class OrderService {
 
     console.log(`actual amount = ${amount} amount from db = ${amountFromDB}`);
 
-    isValidAmount = amount == amountFromDB;
+    var isValidAmount = amount == amountFromDB;
     if (!isValidAmount) {
       return "invalid product";
     }
