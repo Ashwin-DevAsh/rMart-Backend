@@ -135,6 +135,7 @@ module.exports = class OrderService {
     var amountFromDB = 0;
     var productIDS = [];
     var idCountMap = {};
+    console.log(products);
     products.forEach((product) => {
       productIDS.push(product.product.productID);
       idCountMap[product.product.productID] = product.count;
