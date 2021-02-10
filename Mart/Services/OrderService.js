@@ -151,6 +151,8 @@ module.exports = class OrderService {
       return "invalid product";
     }
 
+    console.log(idCountMap);
+
     databaseProduscts.forEach((dbProduct) => {
       var amount = dbProduct.price;
       amountFromDB += amount * idCountMap[dbProduct.productID];

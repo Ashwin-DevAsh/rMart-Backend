@@ -17,7 +17,10 @@ module.exports = class OrdersController {
       return;
     }
 
-    var isValidProduct = await this.orderservice.verifyProducts(products);
+    var isValidProduct = await this.orderservice.verifyProducts(
+      products,
+      amount
+    );
     if (isValidProduct != "veified") {
       res.send({ message: isValidProduct });
       return;
