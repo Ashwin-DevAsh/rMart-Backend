@@ -136,8 +136,8 @@ module.exports = class OrderService {
     var productIDS = [];
     var idCountMap = {};
     products.forEach((product) => {
-      productIDS.push(product.productID);
-      idCountMap[product.productID] = product.count;
+      productIDS.push(product.product.productID);
+      idCountMap[product.product.productID] = product.count;
     });
 
     console.log("product ids = ", productIDS);
