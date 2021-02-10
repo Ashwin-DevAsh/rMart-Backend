@@ -16,10 +16,6 @@ app.get("/getMyOrders/:id", ordersController.getMyOrders);
 
 app.get("/getAllOrders", ordersController.getAllOrders);
 
-app.post(
-  "/makeDelivery",
-  new Auth().isAuthenticated,
-  ordersController.makeDelivery
-);
+app.post("/makeDelivery", new Auth().isKeyAuth, ordersController.makeDelivery);
 
 module.exports = app;
