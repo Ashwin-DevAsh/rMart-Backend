@@ -144,7 +144,7 @@ module.exports = class OrderService {
 
     var databaseProduscts = await this.getProductsWithIDS(productIDS);
 
-    console.log("db products = ", dbProduct);
+    console.log("db products = ", databaseProduscts);
 
     var isValidProduct = databaseProduscts.length == productIDS.length;
     if (!isValidProduct) {
