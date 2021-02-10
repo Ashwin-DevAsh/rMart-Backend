@@ -166,11 +166,11 @@ module.exports = class OrderService {
 
   getProductsWithIDS = async (ids) => {
     var postgres = await this.pool.connect();
-    var idsString = ids.toString().replace("[", "(").replace(")", "]");
+    var idsString = ids.toString().replace("[", "(").replace("]", ")");
     try {
       var products = (
         await postgres.query(
-          `select * from products where productID in ${idsString} and isAvaliable = true`,
+          `select * from products where productID in (${idsString}) and isAvaliable = true`,
           [ids]
         )
       ).rows;
