@@ -12,6 +12,7 @@ var pool = new Pool(clientDetails);
 process.env.TZ = "Asia/Kolkata";
 
 io.on("connection", (client) => {
+  console.log(`Connected with ${client.id}`);
   client.on("getInformation", (data) => {
     try {
       var id = data["id"];
