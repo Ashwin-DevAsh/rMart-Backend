@@ -143,6 +143,25 @@ module.exports = class Database {
     }
   };
 
+  getOrdersWithOrderID = async (id) => {
+    var postgres = await this.pool.connect();
+
+    try {
+      var orders = (
+        await postgres.query(
+          `select * from orders  where  = $1 and isPaymentSuccessful=true`,
+          [id]
+        )
+      ).rows;
+      postgres.release();
+      return orders;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  };
+
   getAllOrders = async (id) => {
     var postgres = await this.pool.connect();
 
