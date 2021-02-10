@@ -13,7 +13,7 @@ app.post(
 
 app.post(
   "/verifyPayment",
-  new Auth().isAuthenticated,
+  // new Auth().isAuthenticated,
   ordersController.verifyPayment
 );
 
