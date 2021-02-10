@@ -140,6 +140,8 @@ module.exports = class OrderService {
       idCountMap[product.productID] = product.count;
     });
 
+    console.log("product ids = ", productIDS);
+
     var databaseProduscts = await this.getProductsWithIDS(productIDS);
 
     var isValidProduct = databaseProduscts.length == productIDS.length;
