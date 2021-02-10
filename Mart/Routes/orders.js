@@ -4,7 +4,12 @@ const OrdersController = require("../Controllers/ordersController");
 
 var ordersController = new OrdersController();
 
-app.post("/makeOrder", new Auth().isTransAuth, ordersController.makeOrder);
+app.post(
+  "/makeOrder",
+  new Auth().isTransAuth,
+  new Auth().isMartOpen,
+  ordersController.makeOrder
+);
 
 app.post(
   "/verifyPayment",

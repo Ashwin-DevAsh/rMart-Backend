@@ -44,4 +44,13 @@ module.exports = class Auth {
       return;
     }
   };
+
+  isMartOpen = async (req, res, next) => {
+    var currentHour = new Date().getHours();
+    if (currentHour >= 12 && currentHour < 19) {
+      next();
+    } else {
+      res.send({ message: "closed" });
+    }
+  };
 };
