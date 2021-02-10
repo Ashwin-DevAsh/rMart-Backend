@@ -152,7 +152,7 @@ module.exports = class OrderService {
     }
 
     databaseProduscts.forEach((dbProduct) => {
-      var amount = dbProduct.amount;
+      var amount = dbProduct.price;
       amountFromDB += amount * idCountMap[dbProduct.productID];
     });
 
