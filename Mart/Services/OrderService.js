@@ -131,5 +131,53 @@ module.exports = class OrderService {
     }
   };
 
-  verifyProducts = (products, amount) => {};
+  verifyProducts = async (products, amount) => {
+    var amountFromDB = 0;
+    var productIDS = [];
+    var idCountMap = {};
+    products.forEach((product) => {
+      productIDS.push(product.productID);
+      idCountMap[product.productID] = product.count;
+    });
+
+    var databaseProduscts = await this.getProductsWithIDS(productIDS);
+
+    var isValidProduct = databaseProduscts.length == productIDS.length;
+    if (!isValidProduct) {
+      return "invalid product";
+    }
+
+    databaseProduscts.forEach((dbProduct) => {
+      var amount = dbProduct.amount;
+      amountFromDB += amount * idCountMap[dbProduct.productID];
+    });
+
+    console.log(`actual amount = ${amount} amount from db = ${amountFromDB}`);
+
+    isValidAmount = amount == amountFromDB;
+    if (!isValidAmount) {
+      return "invalid product";
+    }
+
+    return "veified";
+  };
+
+  getProductsWithIDS = async (ids) => {
+    var postgres = await this.pool.connect();
+
+    try {
+      var products = (
+        await postgres.query(
+          `select * from products where productID in $1 and isAvaliable = true`,
+          [ids]
+        )
+      ).rows;
+      postgres.release();
+      return products;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  };
 };

@@ -19,7 +19,7 @@ create table products(
    category varchar,
    imageUrl varchar,
    availableOn varchar[],
-   isAvaliable boolean
+   isAvaliable boolean;
 );
 
 create table orders(  
@@ -30,7 +30,7 @@ create table orders(
   timestamp varchar,
   products json[],
   paymentMetadata json,
-  isPaymentSuccessful boolean
+  isPaymentSuccessful boolean default true;
 );
 
 
