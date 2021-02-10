@@ -43,6 +43,5 @@ module.exports = class Auth {
       res.send({ message: "failed" });
       return;
     }
-    next();
   };
 };
