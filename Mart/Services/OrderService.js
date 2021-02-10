@@ -66,10 +66,11 @@ module.exports = class OrderService {
     }
   };
 
-  getOrderID = async (amount) => {
+  getOrderID = async (amount, recpID) => {
     var options = {
       amount: amount * 100, // amount in the smallest currency unit
       currency: "INR",
+      receipt: recpID,
     };
     var orderID = await this.instance.orders.create(options);
     return orderID;
