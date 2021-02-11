@@ -7,7 +7,9 @@ module.exports = class Database {
   getAllProducts = async () => {
     var postgres = await this.pool.connect();
     try {
-      var products = await postgres.query("select * from products");
+      var products = await postgres.query(
+        "select * from products where isavaliable is true"
+      );
       postgres.release();
       return products.rows;
     } catch (e) {
