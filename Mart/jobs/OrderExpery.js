@@ -1,12 +1,7 @@
-var CronJob=require('cron').CronJob;
-var orderExpery = new CronJob({
-
-    cronTime: '00 */3 * * * * ',
-    onTick: function () {
-      console.log('cron job')
-    },
-    start: true,
-    runOnInit: false
+var cron = require('node-cron');
+ 
+cron.schedule('*/2 * * * *', () => {
+  console.log('running a task every two minutes');
 });
 
-module.exports = orderExpery
+module.exports = cron;

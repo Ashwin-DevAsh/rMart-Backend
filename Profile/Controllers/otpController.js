@@ -38,9 +38,11 @@ module.exports = class OtpController {
       return;
     }
 
-    await axios.post(
-      `https://2factor.in/API/V1/${apiKey}/SMS/${number}/${otpNumber}`
-    );
+    try {
+      await axios.post(
+        `https://2factor.in/API/V1/${apiKey}/SMS/${number}/${otpNumber}`
+      );
+    } catch (e) {}
 
     res.send({ message: "done" });
   };
