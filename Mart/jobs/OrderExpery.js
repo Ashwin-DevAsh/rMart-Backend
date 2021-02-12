@@ -1,7 +1,8 @@
 var cron = require('node-cron');
  
-cron.schedule('*/2 * * * *', () => {
+var task = cron.schedule('*/2 * * * *', () => {
   console.log('running a task every two minutes');
-});
+},{ scheduled: true,
+    timezone: "Asia/Kolkata"});
 
-module.exports = cron;
+module.exports = task;
