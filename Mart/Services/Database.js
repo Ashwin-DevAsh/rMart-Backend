@@ -132,7 +132,7 @@ module.exports = class Database {
     try {
       var orders = (
         await postgres.query(
-          `select * from orders where cast(orderdby->>'id' as varchar) = $1 and isPaymentSuccessful=true orderby orederId desc`,
+          `select * from orders where cast(orderdby->>'id' as varchar) = $1 and isPaymentSuccessful=true order by orederId desc`,
           [id]
         )
       ).rows;
@@ -168,7 +168,7 @@ module.exports = class Database {
     var postgres = await this.pool.connect();
 
     try {
-      var orders = (await postgres.query(`select * from orders orderby orederId desc`)).rows;
+      var orders = (await postgres.query(`select * from orders order by orederId desc`)).rows;
       postgres.release();
       return orders;
     } catch (e) {
