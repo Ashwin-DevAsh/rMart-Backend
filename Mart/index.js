@@ -21,11 +21,6 @@ var corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-try{
-  OrderExpery.start()
-}catch(e){
-  console.log(e)
-}
 
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
