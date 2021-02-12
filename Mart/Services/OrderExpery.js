@@ -9,7 +9,7 @@ module.exports = class OrderExpery{
         try{
              await postgres.query(`set timezone TO 'Asia/Kolkata'`);
              var products = await postgres.query(
-                `update orders set status = 'expaired' WHERE to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') <= TIMESTAMP 'now' and status = 'pending' returning *`
+                `update orders set status = 'expired' WHERE to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') <= TIMESTAMP 'today' and status = 'pending' returning *`
              );
              console.log(products)
             postgres.release();
