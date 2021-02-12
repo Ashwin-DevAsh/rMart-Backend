@@ -16,6 +16,5 @@ module.exports = class OrderExpery{
             postgres.release();
             console.log(error)
         }
-     
     }
 }
