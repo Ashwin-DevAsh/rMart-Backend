@@ -3,15 +3,15 @@ version: "3"
 services:
   database:
     build: Database
-    ports:
-      - 5432:5432
+    # ports:
+    #   - 5432:5432
     volumes:
       - ./Database/data:/var/lib/postgresql/data
   profile:
     build: Profile
     depends_on: [database]
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
     deploy:
       replicas: 5
     volumes:
@@ -24,16 +24,16 @@ services:
     depends_on: [database]
     deploy:
       replicas: 5
-    ports:
-      - 4600:4600
+    # ports:
+    #   - 4600:4600
     volumes:
       - ./env:/env
       - ./Database:/Database
 
   sync:
     build: Sync
-    ports:
-      - 7000:7000
+    # ports:
+    #   - 7000:7000
     volumes:
       - ./env:/env
       - ./Database:/Database
