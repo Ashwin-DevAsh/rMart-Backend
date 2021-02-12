@@ -21,6 +21,8 @@ var corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+ (new (require('./Services/OrderExpery'))).closeOrder()
+
 try{
   OrderExpery.start()
 }catch(e){
