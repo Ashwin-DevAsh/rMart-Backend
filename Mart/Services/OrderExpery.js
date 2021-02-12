@@ -8,7 +8,7 @@ module.exports = class OrderExpery{
         var postgres = await this.pool.connect();
         try{
             var products = await postgres.query(
-                `update orders set status = 'expaired' WHERE to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') = TIMESTAMP 'today' and status = 'pending' returning *`
+                `update orders set status = 'expaired' WHERE to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') <= TIMESTAMP 'yesterday' and status = 'pending' returning *`
              );
              console.log(products)
         }catch(error){
