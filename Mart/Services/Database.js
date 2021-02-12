@@ -182,7 +182,7 @@ module.exports = class Database {
   getOrderByID = async (orderID)=>{
     var postgres = await this.pool.connect();
     try {
-      var orders = (await postgres.query(`select * from orders where orderID = $1`,[orderID])).rows;
+      var orders = (await postgres.query(`select * from orders where orederID = $1`,[orderID])).rows;
       postgres.release();
       return orders;
     } catch (e) {
