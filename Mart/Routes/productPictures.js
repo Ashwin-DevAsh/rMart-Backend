@@ -5,9 +5,6 @@ const ProductsPictureController = require("../Controllers/productPictureControll
 
 var productsPictureController = new ProductsPictureController();
 
-// app.post("/addProductPictures/:id", async (req, res) => {
-//   await addProfilePicture(req, res);
-// });
 
 app.get(
   "/getProductPictures/:imageName",
