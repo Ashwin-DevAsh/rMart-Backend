@@ -14,7 +14,7 @@ const cors = require("cors");
 
 const OrderExpery = require('./jobs/OrderExpery')
 
-process.env.TZ = "Asia/Kolkata";
+// process.env.TZ = "Asia/Kolkata";
 
 var corsOptions = {
   origin: "*",

@@ -52,26 +52,13 @@ module.exports = class Auth {
   isMartOpen = async (req, res, next) => {
 
     var currentTime = new Date();
-
     var currentOffset = currentTime.getTimezoneOffset();
-
-    var ISTOffset = 330;   // IST offset UTC +5:30 
-
+    var ISTOffset = 330; 
     var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+    console.log("Mart time = ",ISTTime.getHours()," ",ISTTime.getMinutes())
 
-    // ISTTime now represents the time in IST coordinates
 
-    var hoursIST = ISTTime.getHours()
-    var minutesIST = ISTTime.getMinutes()
-
-    console.log(hoursIST," ",minutesIST)
-
-    process.env.TZ = "Asia/Kolkata";
-
-    var m = moment.tz('Asia/Kolkata').format("mm-dd-yyyy hh:MM:ss");
-    console.log(m)
-
-    var currentHour =  parseInt(moment.tz('Asia/Kolkata').format("HH")) //new Date().getHours();
+    var currentHour = ISTTime.getHours() //new Date().getHours();
     if (currentHour >= 12 && currentHour < 21) {
       next();
     } else {
