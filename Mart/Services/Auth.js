@@ -1,5 +1,10 @@
 const jwt = require("jsonwebtoken");
 const dateFormat = require("dateformat");
+const moment = require("moment");
+const { database } = require("pg/lib/defaults");
+
+var m = moment.unix(utc).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+console.log(m);
 
 module.exports = class Auth {
   isAuthenticated = async (req, res, next) => {
@@ -49,6 +54,9 @@ module.exports = class Auth {
   isMartOpen = async (req, res, next) => {
     var transactionTime = dateFormat(new Date(), "mm-dd-yyyy hh:MM:ss");
     console.log(transactionTime)
+    var utc = new date();
+    var m = moment.unix(utc).tz('Asia/Kolkata').format("mm-dd-yyyy hh:MM:ss");
+    console.log(m);
     var currentHour = new Date().getHours();
     console.log("time = "+" "+transactionTime +currentHour+" "+new Date().getTime())
     if (currentHour >= 12 && currentHour < 21) {
