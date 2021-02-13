@@ -42,8 +42,8 @@ create table otp(
 );
 
 create table recoveryOtp(
-    email varchar  unique key,
-     number varchar primary key,
+    email varchar  unique,
+    number varchar primary key,
     otp varchar,
     isVerified Boolean
 );
