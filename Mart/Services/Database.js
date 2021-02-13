@@ -213,7 +213,7 @@ module.exports = class Database {
         return "success";
       } else {
         postgres.release();
-        return "already expeired";
+        return orders.status;
       }
     } catch (e) {
       postgres.release();
