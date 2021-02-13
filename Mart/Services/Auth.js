@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const dateFormat = require("dateformat");
 
 module.exports = class Auth {
   isAuthenticated = async (req, res, next) => {
@@ -46,9 +47,9 @@ module.exports = class Auth {
   };
 
   isMartOpen = async (req, res, next) => {
-    
+    var transactionTime = parseInt(dateFormat(new Date(), "MM"));
     var currentHour = new Date().getHours();
-    console.log("time = "+currentHour+" "+new Date().getTime())
+    console.log("time = "+" "+transactionTime +currentHour+" "+new Date().getTime())
     if (currentHour > 11 && currentHour < 21) {
       next();
     } else {
