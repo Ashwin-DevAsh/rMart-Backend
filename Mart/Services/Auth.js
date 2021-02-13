@@ -51,7 +51,7 @@ module.exports = class Auth {
     console.log(transactionTime)
     var currentHour = new Date().getHours();
     console.log("time = "+" "+transactionTime +currentHour+" "+new Date().getTime())
-    if (currentHour > 11 && currentHour < 21) {
+    if (currentHour >= 12 && currentHour < 21) {
       next();
     } else {
       res.send({ message: "closed" });
