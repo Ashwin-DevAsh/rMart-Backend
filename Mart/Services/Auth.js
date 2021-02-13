@@ -52,7 +52,7 @@ module.exports = class Auth {
   isMartOpen = async (req, res, next) => {
     var m = moment.tz('Asia/Kolkata').format("mm-dd-yyyy hh:MM:ss");
     
-    var currentHour =  parseInt(moment.tz('Asia/Kolkata').format("hh")) //new Date().getHours();
+    var currentHour =  parseInt(moment.tz('Asia/Kolkata').format("HH")) //new Date().getHours();
     if (currentHour >= 12 && currentHour < 21) {
       next();
     } else {
