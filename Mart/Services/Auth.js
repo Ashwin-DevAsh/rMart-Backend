@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const dateFormat = require("dateformat");
-const moment = require("moment");
+const moment = require("moment-timezone");
 
 
 
@@ -53,7 +53,7 @@ module.exports = class Auth {
     var transactionTime = dateFormat(new Date(), "mm-dd-yyyy hh:MM:ss");
     console.log(transactionTime)
     var utc = new Date();
-    var m = moment.unix(utc).tz('Asia/Kolkata').format("mm-dd-yyyy hh:MM:ss");
+    var m = moment.tz('Asia/Kolkata').format("mm-dd-yyyy hh:MM:ss");
     console.log(m);
     var currentHour = new Date().getHours();
     console.log("time = "+" "+transactionTime +currentHour+" "+new Date().getTime())
