@@ -8,7 +8,7 @@ app.post(
   "/makeOrder",
   new Auth().isKeyAuth,
   new Auth().isTransAuth,
-  new Auth().isMartOpen,
+  // new Auth().isMartOpen,
   ordersController.makeOrder
 );
 
