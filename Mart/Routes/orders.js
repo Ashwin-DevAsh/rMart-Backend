@@ -7,7 +7,7 @@ var ordersController = new OrdersController();
 app.post(
   "/makeOrder",
   new Auth().isTransAuth,
-  // new Auth().isMartOpen,
+  new Auth().isMartOpen,
   ordersController.makeOrder
 );
 
