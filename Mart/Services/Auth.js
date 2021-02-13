@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
-const dateFormat = require("dateformat");
-const moment = require("moment-timezone");
+
 
 
 
@@ -55,9 +54,8 @@ module.exports = class Auth {
     var currentOffset = currentTime.getTimezoneOffset();
     var ISTOffset = 330; 
     var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+
     console.log("Mart time = ",ISTTime.getHours()," ",ISTTime.getMinutes())
-
-
     var currentHour = ISTTime.getHours() //new Date().getHours();
     if (currentHour >= 12 && currentHour < 21) {
       next();
