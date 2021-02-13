@@ -52,7 +52,7 @@ module.exports = class Auth {
   isMartOpen = async (req, res, next) => {
     var transactionTime = dateFormat(new Date(), "mm-dd-yyyy hh:MM:ss");
     console.log(transactionTime)
-    var utc = new date();
+    var utc = new Date();
     var m = moment.unix(utc).tz('Asia/Kolkata').format("mm-dd-yyyy hh:MM:ss");
     console.log(m);
     var currentHour = new Date().getHours();
