@@ -57,7 +57,7 @@ module.exports = class Auth {
 
     console.log("Mart time = ",ISTTime.getHours()," ",ISTTime.getMinutes())
     var currentHour = ISTTime.getHours()
-    if (currentHour >= 12 && currentHour < 15) {
+    if (currentHour >= 12 && currentHour < 21) {
       next();
     } else {
       res.send({ message: "closed" });
