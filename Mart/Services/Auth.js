@@ -47,7 +47,8 @@ module.exports = class Auth {
   };
 
   isMartOpen = async (req, res, next) => {
-    var transactionTime = parseInt(dateFormat(new Date(), "hh"));
+    var transactionTime = dateFormat(new Date(), "mm-dd-yyyy hh:MM:ss");
+    console.log(transactionTime)
     var currentHour = new Date().getHours();
     console.log("time = "+" "+transactionTime +currentHour+" "+new Date().getTime())
     if (currentHour > 11 && currentHour < 21) {
