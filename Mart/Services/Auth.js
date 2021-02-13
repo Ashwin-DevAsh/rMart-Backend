@@ -1,8 +1,5 @@
 const jwt = require("jsonwebtoken");
 
-
-
-
 module.exports = class Auth {
   isAuthenticated = async (req, res, next) => {
     try {
