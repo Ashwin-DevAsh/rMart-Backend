@@ -3,12 +3,12 @@ const ProductsController = require("../Controllers/productsController");
 
 var productsController = new ProductsController();
 
-app.post("/updateProduct", productsController.updateProduct);
+app.post("/updateProduct",new Auth().isKeyAuth ,productsController.updateProduct);
 
-app.post("/addProducts", productsController.addProducts);
+app.post("/addProducts",new Auth().isKeyAuth,productsController.addProducts);
 
-app.post("/deleteProduct", productsController.deleteProduct);
+app.post("/deleteProduct",new Auth().isKeyAuth,productsController.deleteProduct);
 
-app.get("/getAllProducts", productsController.getAllProducts);
+app.get("/getAllProducts",new Auth().isKeyAuth,productsController.getAllProducts);
 
 module.exports = app;

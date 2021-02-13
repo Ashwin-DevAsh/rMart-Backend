@@ -1,6 +1,7 @@
 const app = require("express").Router();
+const Auth = require("../Services/Auth");
 
-app.get("/getMerchants", (req, res) => {
+app.get("/getMerchants", new Auth().isKeyAuth ,(req, res) => {
   res.send([
     {
       ownername: "Admin",
