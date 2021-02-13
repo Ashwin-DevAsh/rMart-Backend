@@ -30,17 +30,10 @@ services:
       - ./env:/env
       - ./Database:/Database
 
-  sync:
-    build: Sync
-    # ports:
-    #   - 7000:7000
-    volumes:
-      - ./env:/env
-      - ./Database:/Database
 
   reverse-proxy:
     build: nginx
-    depends_on: [profile, mart, sync]
+    depends_on: [profile, mart]
     ports:
       - 80:80
       - 443:443

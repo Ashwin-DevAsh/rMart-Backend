@@ -19,7 +19,7 @@ create table products(
    category varchar,
    imageUrl varchar,
    availableOn varchar[],
-   isAvaliable boolean;
+   isAvaliable boolean
 );
 
 create table orders(  
@@ -30,7 +30,7 @@ create table orders(
   timestamp varchar,
   products json[],
   paymentMetadata json,
-  isPaymentSuccessful boolean default true;
+  isPaymentSuccessful boolean default true
 );
 
 
@@ -39,11 +39,6 @@ create table otp(
     number varchar primary key,
     otp varchar,
     isVerified Boolean
-);
-
-create table sync(
-    networdID  varchar,
-    martID varchar
 );
 
 create table recoveryOtp(
