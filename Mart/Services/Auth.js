@@ -1,10 +1,8 @@
 const jwt = require("jsonwebtoken");
 const dateFormat = require("dateformat");
 const moment = require("moment");
-const { database } = require("pg/lib/defaults");
 
-var m = moment.unix(utc).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
-console.log(m);
+
 
 module.exports = class Auth {
   isAuthenticated = async (req, res, next) => {
