@@ -3,6 +3,7 @@ var geoip = require('geoip-lite');
 
 module.exports = class IPLookUp{
     ipValidator = async(req,res,next)=>{
+        console.log(req);
         try{
             var ip_info = get_ip(req);
             console.log("Client ip = "+ip_info.clientIp);
