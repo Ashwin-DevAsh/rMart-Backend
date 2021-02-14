@@ -151,8 +151,8 @@ module.exports = class OrdersController {
     for(var i in ordersMap){
       orders.push(ordersMap[i])
     }
-    const name = {
-      customer_name: { // <- the key should match the actual data key
+    const specification = {
+      name: { // <- the key should match the actual data key
         displayName: 'Name', // <- Here you specify the column header
         width: 120 // <- width in pixels
       },
