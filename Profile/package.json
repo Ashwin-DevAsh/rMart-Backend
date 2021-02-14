@@ -16,6 +16,7 @@
     "dateformat": "^4.5.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.2.5",
     "fcm-node": "^1.5.2",
     "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
