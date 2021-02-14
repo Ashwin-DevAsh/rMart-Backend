@@ -17,6 +17,8 @@ const OrderExpery = require('./jobs/OrderExpery')
 
 var helmet = require('helmet')
 
+var ipLookUp = new (require('./Services/iplookup'))();
+
 const app = express();
 
 var limiter = new RateLimit({
@@ -29,6 +31,8 @@ var limiter = new RateLimit({
 app.enable('trust proxy');
 
 app.use(limiter)
+
+app.use(ipLookUp.ipValidator)
 
 // process.env.TZ = "Asia/Kolkata";
 
