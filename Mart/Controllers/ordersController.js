@@ -152,7 +152,7 @@ module.exports = class OrdersController {
     for(var i in ordersMap){
       orders.push(ordersMap[i])
     }
-
+    fs.writeFileSync('data.xlsx', xls, 'binary');
     res.xls('orders.xlsx', orders);
   };
 };
