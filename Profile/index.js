@@ -12,7 +12,13 @@ const recovery = require("./Routes/recovery");
 
 const merchants = require("./Routes/merchants");
 
+
+var helmet = require('helmet')
+
 const app = express();
+
+app.use(helmet())
+
 
 const cors = require("cors");
 
