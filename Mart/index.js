@@ -14,6 +14,9 @@ const cors = require("cors");
 
 const OrderExpery = require('./jobs/OrderExpery')
 
+var helmet = require('helmet')
+
+
 // process.env.TZ = "Asia/Kolkata";
 
 var corsOptions = {
@@ -28,6 +31,7 @@ try{
   console.log(e)
 }
 
+app.use(helmet())
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
