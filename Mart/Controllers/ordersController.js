@@ -150,6 +150,15 @@ module.exports = class OrdersController {
     for(var i in ordersMap){
       orders.push(ordersMap[i])
     }
-    res.send({ message: "success",orders });
+    const report = excel.buildExport(
+      [ // <- Notice that this is an array. Pass multiple sheets to create multi sheet report
+        {
+          name: 'Orders', // <- Specify sheet name (optional)
+          heading: ["Name","Count","Total Price"], // <- Raw heading array (optional)
+          data: orders // <-- Report data
+        }
+      ]
+    );
+    res.send({ message: "success",report });
   };
 };
