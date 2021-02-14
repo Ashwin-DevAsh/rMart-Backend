@@ -2,7 +2,8 @@ const { Pool } = require("pg");
 const clientDetails = require("../Database/ClientDetails");
 const OrderService = require("../Services/OrderService");
 const DatabaseService = require("../Services/Database");
-const excel = require('node-excel-export');
+var json2xls = require('json2xls');
+
 
 module.exports = class OrdersController {
   orderservice = new OrderService();
@@ -151,30 +152,7 @@ module.exports = class OrdersController {
     for(var i in ordersMap){
       orders.push(ordersMap[i])
     }
-    const specification = {
-      name: { // <- the key should match the actual data key
-        displayName: 'Name', // <- Here you specify the column header
-        width: 120 // <- width in pixels
-      },
-      count: {
-        displayName: 'Count',
-        width: '10' // <- width in chars (when the number is passed as string)
-      },
-      price: {
-        displayName: 'Total Price',
-        width: 220 // <- width in pixels
-      }
-    }
-    const report = excel.buildExport(
-      [ // <- Notice that this is an array. Pass multiple sheets to create multi sheet report
-        {
-          name: 'Orders', // <- Specify sheet name (optional)
-          specification: specification, 
-          heading: ["Name","Count","Total Price"], // <- Raw heading array (optional)
-          data: orders // <-- Report data
-        }
-      ]
-    );
-    res.download(report);
+
+    res.xls('orders.xlsx', orders);
   };
 };

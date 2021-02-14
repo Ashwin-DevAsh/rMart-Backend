@@ -1,6 +1,7 @@
 const app = require("express").Router();
 const Auth = require("../Services/Auth");
 const OrdersController = require("../Controllers/ordersController");
+var json2xls = require('json2xls');
 
 var ordersController = new OrdersController();
 
@@ -27,6 +28,6 @@ app.get("/getOrderByID/:id", new Auth().isKeyAuth, ordersController.getOrderByID
 
 app.post("/makeDelivery", new Auth().isKeyAuth, ordersController.makeDelivery);
 
-app.get("/downloadAllPendingOrders", new Auth().isKeyAuth, ordersController.downloadAllPendingOrders);
+app.get("/downloadAllPendingOrders", new Auth().isKeyAuth, json2xls.middleware , ordersController.downloadAllPendingOrders);
 
 module.exports = app;
