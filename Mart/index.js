@@ -8,13 +8,29 @@ const orders = require("./Routes/orders");
 const bodyParser = require("body-parser");
 const uploadPictures = require("./Routes/productPictures");
 
-const app = express();
+
+var RateLimit = require('express-rate-limit');
 
 const cors = require("cors");
 
 const OrderExpery = require('./jobs/OrderExpery')
 
 var helmet = require('helmet')
+
+const app = express();
+
+var limiter = new RateLimit({
+  windowMs: 15*60*1000, // 15 minutes 
+  max: 120, // limit each IP to 100 requests per windowMs 
+  delayMs: 0 // disable delaying - full speed until the max limit is reached 
+});
+
+ 
+app.enable('trust proxy');
+
+app.use(limiter)
+
+
 
 
 // process.env.TZ = "Asia/Kolkata";
