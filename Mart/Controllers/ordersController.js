@@ -175,6 +175,6 @@ module.exports = class OrdersController {
         }
       ]
     );
-    res.send({ message: "success",report });
+    res.dounload(report);
   };
 };
