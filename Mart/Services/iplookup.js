@@ -1,4 +1,5 @@
 var get_ip = require('ipware')().get_ip;
+var geoip = require('geoip-lite');
 
 module.exports = class IPLookUp{
     ipValidator = async(req,res,next)=>{
