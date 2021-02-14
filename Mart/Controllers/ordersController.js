@@ -151,10 +151,25 @@ module.exports = class OrdersController {
     for(var i in ordersMap){
       orders.push(ordersMap[i])
     }
+    const name = {
+      customer_name: { // <- the key should match the actual data key
+        displayName: 'Name', // <- Here you specify the column header
+        width: 120 // <- width in pixels
+      },
+      count: {
+        displayName: 'Count',
+        width: '10' // <- width in chars (when the number is passed as string)
+      },
+      price: {
+        displayName: 'Total Price',
+        width: 220 // <- width in pixels
+      }
+    }
     const report = excel.buildExport(
       [ // <- Notice that this is an array. Pass multiple sheets to create multi sheet report
         {
           name: 'Orders', // <- Specify sheet name (optional)
+          specification: specification, 
           heading: ["Name","Count","Total Price"], // <- Raw heading array (optional)
           data: orders // <-- Report data
         }
