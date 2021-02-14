@@ -28,6 +28,6 @@ app.get("/getOrderByID/:id", new Auth().isKeyAuth, ordersController.getOrderByID
 
 app.post("/makeDelivery", new Auth().isKeyAuth, ordersController.makeDelivery);
 
-app.get("/downloadAllPendingOrders",  json2xls.middleware , ordersController.downloadAllPendingOrders);
+app.get("/downloadAllPendingOrders", new Auth().isKeyAuth, json2xls.middleware , ordersController.downloadAllPendingOrders);
 
 module.exports = app;
