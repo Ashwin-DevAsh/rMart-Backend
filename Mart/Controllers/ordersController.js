@@ -175,6 +175,6 @@ module.exports = class OrdersController {
         }
       ]
     );
-    res.dounload(report);
+    res.download(report);
   };
 };
