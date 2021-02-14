@@ -12,14 +12,27 @@ const recovery = require("./Routes/recovery");
 
 const merchants = require("./Routes/merchants");
 
+var RateLimit = require('express-rate-limit');
+
+
 
 var helmet = require('helmet')
 
 const app = express();
 
+
+var limiter = new RateLimit({
+  windowMs: 15*60*1000, // 15 minutes 
+  max: 120, // limit each IP to 100 requests per windowMs 
+  delayMs: 0 // disable delaying - full speed until the max limit is reached 
+});
+ 
 app.enable('trust proxy');
 
+app.use(limiter)
+
 app.use(helmet())
+
 
 
 const cors = require("cors");
