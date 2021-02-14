@@ -135,11 +135,12 @@ module.exports = class OrdersController {
       products.forEach(({product,totalPrice,count})=>{
         var productID = product.productID;
         try{
+          ordersMap[productID].productName=product.productName;
           ordersMap[productID].count+=count
           ordersMap[productID].totalPrice+=totalPrice
         }catch(e){
           ordersMap[productID] = {
-            name : product.name,
+            productName : product.productName,
             count : count,
             totalPrice:totalPrice
           }
