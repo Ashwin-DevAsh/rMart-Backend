@@ -126,4 +126,29 @@ module.exports = class OrdersController {
     var result = await this.databaseService.updateStatus(id);
     res.send({ message: result });
   };
+
+  downloadAllPendingOrders = async (req, res) => {
+    var result = await this.databaseService.getAllPendingOrders();
+    var  ordersMap = {}
+    var  orders = [] 
+    result.forEach(({products})=>{
+      products.forEach(({product,totalPrice,count})=>{
+        var productID = product.productID;
+        try{
+          ordersMap[productID].count+=count
+          ordersMap[productID].totalPrice+=totalPrice
+        }catch(e){
+          ordersMap[productID] = {
+            name : product.name,
+            count : count,
+            totalPrice:totalPrice
+          }
+        }
+      })
+    })
+    for(var i in ordersMap){
+      orders.push(i)
+    }
+    res.send({ message: "success",orders });
+  };
 };

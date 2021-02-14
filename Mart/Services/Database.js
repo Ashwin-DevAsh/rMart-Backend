@@ -192,6 +192,19 @@ module.exports = class Database {
     }
   }
 
+  getAllPendingOrders = async()=>{
+    var postgres = await this.pool.connect();
+    try {
+      var orders = (await postgres.query(`select * from orders where status = 'pending' and isPaymentSuccessful = TRUE`)).rows;
+      postgres.release();
+      return orders;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  }
+
   updateStatus = async (id) => {
     var postgres = await this.pool.connect();
 
