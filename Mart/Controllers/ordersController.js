@@ -147,7 +147,7 @@ module.exports = class OrdersController {
       })
     })
     for(var i in ordersMap){
-      orders.push(i)
+      orders.push(ordersMap[i])
     }
     res.send({ message: "success",orders });
   };
