@@ -14,7 +14,7 @@ const merchants = require("./Routes/merchants");
 
 var RateLimit = require('express-rate-limit');
 
-
+var ipLookUp = new (require('./Services/iplookup'))();
 
 var helmet = require('helmet')
 
@@ -32,6 +32,8 @@ app.enable('trust proxy');
 app.use(limiter)
 
 app.use(helmet())
+
+app.use(ipLookUp.ipValidator)
 
 
 
