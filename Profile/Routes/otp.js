@@ -3,7 +3,7 @@ const otpControler = new (require("../Controllers/otpController"))();
 const Auth = require("../Services/Auth");
 var RateLimit = require('express-rate-limit');
 
-app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
+ // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
  
 var limiter = new RateLimit({
   windowMs: 1*60*1000, // 15 minutes 

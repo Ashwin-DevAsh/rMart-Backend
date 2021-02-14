@@ -17,6 +17,8 @@ var helmet = require('helmet')
 
 const app = express();
 
+app.enable('trust proxy');
+
 app.use(helmet())
 
 
