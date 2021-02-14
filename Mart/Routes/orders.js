@@ -27,6 +27,6 @@ app.get("/getOrderByID/:id", new Auth().isKeyAuth, ordersController.getOrderByID
 
 app.post("/makeDelivery", new Auth().isKeyAuth, ordersController.makeDelivery);
 
-app.post("/downloadAllPendingOrders", new Auth().isKeyAuth, ordersController.downloadAllPendingOrders);
+app.get("/downloadAllPendingOrders", new Auth().isKeyAuth, ordersController.downloadAllPendingOrders);
 
 module.exports = app;
