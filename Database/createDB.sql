@@ -30,6 +30,7 @@ create table orders(
   timestamp varchar,
   products json[],
   paymentMetadata json,
+  qrToken varchar unique default gen_random_uuid(),
   isPaymentSuccessful boolean default false
 );
 

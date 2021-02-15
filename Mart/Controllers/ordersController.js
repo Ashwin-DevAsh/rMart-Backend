@@ -117,9 +117,9 @@ module.exports = class OrdersController {
     res.send({ message: "success", orders });
   };
 
-  getOrderByID = async(req,res)=>{
+  getOrderByQr = async(req,res)=>{
     var { id } = req.params;
-    var order = await this.databaseService.getOrderByID(id)
+    var order = await this.databaseService.getOrderByQr(id)
     res.send({ message: "success", order });
   }
 

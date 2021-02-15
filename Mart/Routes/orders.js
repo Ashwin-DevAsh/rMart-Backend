@@ -24,7 +24,7 @@ app.get("/getMyOrders/:id",new Auth().isKeyAuth ,ordersController.getMyOrders);
 
 app.get("/getAllOrders", new Auth().isKeyAuth,ordersController.getAllOrders);
 
-app.get("/getOrderByID/:id", new Auth().isKeyAuth, ordersController.getOrderByID);
+app.get("/getQrToken/:id", new Auth().isKeyAuth, ordersController.getOrderByQr);
 
 app.post("/makeDelivery", new Auth().isKeyAuth, ordersController.makeDelivery);
 
