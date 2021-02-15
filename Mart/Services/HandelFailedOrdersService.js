@@ -40,7 +40,7 @@ module.exports = class HandelFailedOrderService{
   
 
     verifyRazorpayPayment = async (orderID, amount) => {
-        console.log(orderID)
+        console.log(orderID,amount)
         var postgres = await this.pool.connect();
         try {
           var ordersDetails = (await this.instance.orders.fetchPayments(orderID)).items;
@@ -60,6 +60,7 @@ module.exports = class HandelFailedOrderService{
             postgres.release();
             return isVerified && data.rows.length > 0;
           } else {
+            console.log("Updated = Not verified")
             postgres.release();
             return false;
           }
