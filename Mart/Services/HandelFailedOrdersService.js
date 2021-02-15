@@ -51,6 +51,9 @@ module.exports = class HandelFailedOrderService{
             (ordersDetails.status == "authorized" ||
             ordersDetails.status == "captured") &&
             ordersDetails.amount / 100 == amount / 100;
+          console.log((ordersDetails.status ,"authorized",
+          ordersDetails.status , "captured") &&
+          ordersDetails.amount / 100 , amount / 100)   
           if (isVerified) {
             var data = await postgres.query(
               `update orders set paymentMetadata = $2, isPaymentSuccessful=true where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
