@@ -9,16 +9,16 @@ app.post(
   "/makeOrder",
   new Auth().isKeyAuth,
   new Auth().isTransAuth,
-  // new Auth().isMartOpen,
+  new Auth().isMartOpen,
   ordersController.makeOrder
 );
 
-// app.post(
-//   "/verifyPayment",
-//   new Auth().isKeyAuth,
-//   new Auth().isAuthenticated,
-//   ordersController.verifyPayment
-// );
+app.post(
+  "/verifyPayment",
+  new Auth().isKeyAuth,
+  new Auth().isAuthenticated,
+  ordersController.verifyPayment
+);
 
 app.get("/getMyOrders/:id",new Auth().isKeyAuth ,ordersController.getMyOrders);
 
