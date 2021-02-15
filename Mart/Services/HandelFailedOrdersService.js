@@ -60,7 +60,7 @@ module.exports = class HandelFailedOrderService{
               `update orders set paymentMetadata = $2, isPaymentSuccessful=true where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
               [orderID, ordersDetails]
             );
-            console.log("Updated = ",data.length)
+            console.log("Updated = ",data.rows)
             postgres.release();
             return isVerified && data.rows.length > 0;
           } else {
