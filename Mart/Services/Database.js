@@ -183,6 +183,7 @@ module.exports = class Database {
     var postgres = await this.pool.connect();
     try {
       var orders = (await postgres.query(`select * from orders where cast(paymentmetadata->'order_id' as varchar) = $1`,[orderID])).rows;
+      console.log("Orders =", orders)
       postgres.release();
       return orders;
     } catch (e) {
