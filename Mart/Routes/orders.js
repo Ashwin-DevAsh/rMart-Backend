@@ -13,12 +13,12 @@ app.post(
   ordersController.makeOrder
 );
 
-app.post(
-  "/verifyPayment",
-  new Auth().isKeyAuth,
-  new Auth().isAuthenticated,
-  ordersController.verifyPayment
-);
+// app.post(
+//   "/verifyPayment",
+//   new Auth().isKeyAuth,
+//   new Auth().isAuthenticated,
+//   ordersController.verifyPayment
+// );
 
 app.get("/getMyOrders/:id",new Auth().isKeyAuth ,ordersController.getMyOrders);
 
