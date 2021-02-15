@@ -26,8 +26,7 @@ module.exports = class HandelFailedOrderService{
         try {
         var orders = (
             await postgres.query(
-            `select * from orders where status = 'pending' and isPaymentSuccessful=false`,
-            [id]
+            `select * from orders where status = 'pending' and isPaymentSuccessful=false`
             )
         ).rows;
         postgres.release();
