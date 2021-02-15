@@ -15,6 +15,9 @@ const cors = require("cors");
 
 const OrderExpery = require('./jobs/OrderExpery')
 const HandelFailed = require('./jobs/HandelFailedOrders')
+const HandelFailedAtClose = require('./jobs/HandelFailedAtClose')
+
+
 
 var helmet = require('helmet')
 
@@ -42,6 +45,11 @@ var corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+try {
+  HandelFailedAtClose.start()  
+}catch(e){
+  console.log(e);
+}
 
 try{
   OrderExpery.start()
