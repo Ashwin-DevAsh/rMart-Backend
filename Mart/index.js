@@ -14,6 +14,7 @@ var RateLimit = require('express-rate-limit');
 const cors = require("cors");
 
 const OrderExpery = require('./jobs/OrderExpery')
+const HandelFailed = require('./jobs/HandelFailedOrders')
 
 var helmet = require('helmet')
 
