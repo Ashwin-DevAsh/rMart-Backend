@@ -211,7 +211,7 @@ module.exports = class Database {
 
     try {
       var orders = (
-        await postgres.query(`select * from orders  where orederid = $1`, [id])
+        await postgres.query(`select * from orders  where qrtoken = $1`, [id])
       ).rows[0];
       console.log(id, orders);
       if (!orders) {
@@ -220,7 +220,7 @@ module.exports = class Database {
       }
       if (orders.status == "pending") {
         await postgres.query(
-          `update orders set status = 'delivered' where orederid = $1`,
+          `update orders set status = 'delivered' where qrtoken = $1`,
           [id]
         );
         postgres.release();
