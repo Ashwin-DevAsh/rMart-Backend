@@ -43,7 +43,7 @@ module.exports = class HandelFailedOrderService{
         console.log("Order ID =",orderID,"Amount = ",amount)
         var postgres = await this.pool.connect();
         try {
-          var ordersDetails = (await this.instance.orders.fetchPayments(orderID)).items;
+          var ordersDetails = (await this.instance.orders.fetchPayments(orderID)).items[0];
           console.log("Payment Details = ", ordersDetails);
     
           console.log(ordersDetails);
