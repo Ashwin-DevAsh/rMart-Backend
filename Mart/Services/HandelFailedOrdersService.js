@@ -40,7 +40,7 @@ module.exports = class HandelFailedOrderService{
   
 
     verifyRazorpayPayment = async (orderID, amount) => {
-        console.log("Order ID =",orderID,"Amount"=amount)
+        console.log("Order ID =",orderID,"Amount = ",amount)
         var postgres = await this.pool.connect();
         try {
           var ordersDetails = (await this.instance.orders.fetchPayments(orderID)).items;
