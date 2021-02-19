@@ -9,7 +9,6 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use(helmet())
 
 const cors = require("cors");
 
