@@ -8,21 +8,21 @@ module.exports = class EmailService{
      transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: myEmail,
-          pass: myPassword,
+          user: this.myEmail,
+          pass: this.myPassword,
         },
       });
 
       async sendMail(subject, text, toEmail) {
         var mailOptions = {
-          from: myEmail,
-          to: toEmail,
+          from: this.myEmail,
+          to:   toEmail,
           subject: subject,
           html: text,
         };
       
         try {
-          var result = await transporter.sendMail(mailOptions);
+          var result = await this.transporter.sendMail(mailOptions);
           console.log(result);
           return true;
         } catch (e) {
