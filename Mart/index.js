@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "./env/.env" });
 const Auth = require("./Services/Auth");
+const axios = require("axios")
 
 const express = require("express");
 const products = require("./Routes/products");
@@ -37,6 +38,14 @@ app.enable('trust proxy');
 app.use(limiter)
 
 app.use(ipLookUp.ipValidator)
+
+try{
+  axios.post('http://email/sendMail',{
+    subject:"Demo",body:"Demo",to:"2017ashwin@gmail.com"
+  })
+}catch(e){
+  console.log(e)
+}
 
 // process.env.TZ = "Asia/Kolkata";
 
