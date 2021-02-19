@@ -1,6 +1,4 @@
 require("dotenv").config({ path: "./env/.env" });
-const Auth = require("./Services/Auth");
-const axios = require("axios")
 
 const express = require("express");
 const products = require("./Routes/products");
@@ -13,10 +11,6 @@ const uploadPictures = require("./Routes/productPictures");
 var RateLimit = require('express-rate-limit');
 
 const cors = require("cors");
-
-const OrderExpery = require('./jobs/OrderExpery')
-const HandelFailed = require('./jobs/HandelFailedOrders')
-const HandelFailedAtClose = require('./jobs/HandelFailedAtClose')
 
 
 
@@ -45,18 +39,6 @@ var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
 };
-
-try {
-  HandelFailedAtClose.start()  
-}catch(e){
-  console.log(e);
-}
-
-try{
-  OrderExpery.start()
-}catch(e){
-  console.log(e)
-}
 
 app.use(helmet())
 app.use(cors(corsOptions));
