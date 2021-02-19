@@ -1,7 +1,7 @@
 require("dotenv").config({ path: "./env/.env" });
 const OrderExpery = require('./jobHandlers/OrderExpery')
 require('./jobHandlers/HandelFailedOrders')
-require('./jobHandlers/MailHandler')
+const MailHandler = require('./jobHandlers/MailHandler')
 const HandelFailedAtClose = require('./jobHandlers/HandelFailedAtClose')
 
 process.env.TZ = "Asia/Kolkata";
