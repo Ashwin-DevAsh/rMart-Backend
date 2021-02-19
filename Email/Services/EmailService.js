@@ -15,7 +15,7 @@ module.exports = class EmailService{
 
       async sendMail(subject, text, toEmail) {
         var mailOptions = {
-          from: this.myEmail,
+          from: `rMart <${this.myEmail}>`,
           to:   toEmail,
           subject: subject,
           html: text,

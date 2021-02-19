@@ -6,13 +6,13 @@ var task = cron.schedule('*/1 * * * *', () => {
        axios.post('http://email:8000/sendMail',{
          subject:"Hurry up! The sale for tomorrow's meal closing in an hour!",
          body:`<p>Hey!
-               The order requests for tomorrow's meal is closing in an hour! Don't miss tomorrow's special recipes from the restaurants at our campus! Grab your phone and order now from our rMart app right away!</br>
+               The order requests for tomorrow's meal is closing in an hour! Don't miss tomorrow's special recipes from the restaurants at our campus! Grab your phone and order now from our rMart app right away!<br>
 
-               The sale will be open till 9:00 PM. Hurry up!</br>
+               The sale will be open till 9:00 PM. Hurry up!<br>
                 
-               Feel free to drop your suggestions/queries /bug reports at rmart.support@rajalakshmi.edu.in</br>
+               Feel free to drop your suggestions/queries /bug reports at rmart.support@rajalakshmi.edu.in<br><br>
                 
-               Regards,</br>
+               Regards,<br>
                rMart Team</p>`,
         to:'2017ashwin@gmail.com'
        })
