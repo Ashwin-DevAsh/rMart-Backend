@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 
 app.post('/sendMail',(req, res)=>{
    var {subject,body,to} = req.body
+   console.log(subject,body,to)
    emailService.sendMail(subject,body,to)
    res.send({message:'success'})
 })
