@@ -39,14 +39,6 @@ app.use(limiter)
 
 app.use(ipLookUp.ipValidator)
 
-try{
-  axios.post('http://email:8000/sendMail',{
-    subject:"Demo",body:"Demo",to:"2017ashwin@gmail.com"
-  })
-}catch(e){
-  console.log(e)
-}
-
 process.env.TZ = "Asia/Kolkata";
 
 var corsOptions = {

@@ -5,12 +5,21 @@ services:
     build: Database
     volumes:
       - ./Database/data:/var/lib/postgresql/data
+
   email:
     build: Email
     deploy:
       replicas: 1
     volumes:
       - ./env:/env
+
+  jobs:
+    build: jobs
+    deploy:
+      replicas: 1
+    volumes:
+      - ./env:/env
+
   profile:
     build: Profile
     depends_on: [database,email]
