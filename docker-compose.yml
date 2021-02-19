@@ -15,6 +15,7 @@ services:
 
   jobs:
     build: jobs
+    depends_on: [database,email]
     deploy:
       replicas: 1
     volumes:
