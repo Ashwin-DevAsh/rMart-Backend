@@ -19,6 +19,7 @@ services:
       replicas: 1
     volumes:
       - ./env:/env
+      - ./Database:/Database
 
   profile:
     build: Profile
