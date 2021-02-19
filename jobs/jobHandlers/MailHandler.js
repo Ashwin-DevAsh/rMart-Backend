@@ -1,7 +1,7 @@
 var cron = require('node-cron');
 var axios = require('axios');
 
-var task = cron.schedule('0/1 * * * *', () => {
+var task = cron.schedule('*/1 * * * *', () => {
     try{
        axios('http://email:8000/sendEmail',{
          subject:"Hurry up! The sale for tomorrow's meal closing in an hour!",
@@ -16,6 +16,7 @@ var task = cron.schedule('0/1 * * * *', () => {
                rMart Team</p>`,
         to:'2017ashwin@gmail.com'
        })
+       console.log("sended email")
     }catch(e){
       console.log(e)
     }
