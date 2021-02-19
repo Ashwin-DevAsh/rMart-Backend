@@ -18,6 +18,13 @@ try{
   console.log(e)
 }
 
+try{
+  MailHandler.start()
+}catch(e){
+  console.log(e)
+}
+
+
 console.log("Jobs started...")
 
 

@@ -1,7 +1,7 @@
 var cron = require('node-cron');
 var axios = require('axios');
 
-var task = cron.schedule('*/1 * * * *', () => {
+var task = cron.schedule('00 20 * * *', () => {
     try{
        axios.post('http://email:8000/sendMail',{
          subject:"Hurry up! The sale for tomorrow's meal closing in an hour!",
@@ -14,15 +14,16 @@ var task = cron.schedule('*/1 * * * *', () => {
                 
                Regards,<br>
                rMart Team</p>`,
-        to:'2017ashwin@gmail.com'
+        to:'recfaculty@rajalakshmi.edu.in'
        })
        console.log("sended email")
     }catch(e){
       console.log(e)
     }
 },
-// { 
-//   scheduled: true,
-//   timezone: "Asia/Kolkata"}
-  );
+{ 
+  scheduled: true,
+  timezone: "Asia/Kolkata"
+}
+);
 module.exports = task;
