@@ -6,7 +6,6 @@ const emailService = new (require('./Services/EmailService'))();
 
 const bodyParser = require("body-parser");
 
-var helmet = require('helmet')
 
 const app = express();
 
