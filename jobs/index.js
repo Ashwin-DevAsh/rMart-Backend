@@ -19,7 +19,9 @@ try{
 }
 
 try{
-  MailHandler.start()
+  for (var i in MailHandler){
+    MailHandler[i].start()
+  }
 }catch(e){
   console.log(e)
 }
