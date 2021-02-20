@@ -33,7 +33,7 @@ module.exports = class Auth {
     try {
       console.log("key ver");
       var isVerified = process.env.PRIVATE_KEY == req.get("key") || process.env.MART_SERVER_KEY==req.get("key");
-      console.log( process.env.PRIVATE_KEY ," ", req.get("key"))
+      console.log( process.env.PRIVATE_KEY ," ", req.get("key")," ",process.env.MART_SERVER_KEY)
       if (isVerified) {
         next();
       } else {
