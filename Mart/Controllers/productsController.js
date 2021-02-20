@@ -7,6 +7,7 @@ class ProductsController {
     console.log("getProducts");
     var allProducts = await this.databaseService.getAllProducts();
     if (allProducts) {
+      console.log('allProducts')
       res.send({ message: "success", allProducts });
     } else {
     console.log("failed");
