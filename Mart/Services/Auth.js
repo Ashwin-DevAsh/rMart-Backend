@@ -31,11 +31,8 @@ module.exports = class Auth {
 
   isKeyAuth = async (req, res, next) => {
     try {
-      console.log("key ver");
       var isVerified = process.env.PRIVATE_KEY == req.get("key") || process.env.MART_SERVER_KEY==req.get("key");
-      console.log( process.env.PRIVATE_KEY ," ", req.get("key")," ",process.env.MART_SERVER_KEY)
       if (isVerified) {
-        console.log("Verified")
         next();
       } else {
         console.log("failed")
