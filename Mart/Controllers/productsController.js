@@ -9,6 +9,7 @@ class ProductsController {
     if (allProducts) {
       res.send({ message: "success", allProducts });
     } else {
+    console.log("failed");
       res.send({ message: "failed" });
     }
   };
