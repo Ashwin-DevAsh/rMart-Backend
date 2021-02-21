@@ -24,9 +24,9 @@ app.get("/getMyOrders/:id",new Auth().isKeyAuth ,ordersController.getMyOrders);
 
 app.get("/getAllOrders", new Auth().isKeyAuth,ordersController.getAllOrders);
 
-app.get("/getQrToken/:id", new Auth().isKeyAuth, ordersController.getOrderByQr);
+app.get("/getQrToken/:id", new Auth().isMerchantKeyAuth, ordersController.getOrderByQr);
 
-app.post("/makeDelivery", new Auth().isKeyAuth, ordersController.makeDelivery);
+app.post("/makeDelivery", new Auth().isMerchantKeyAuth, ordersController.makeDelivery);
 
 app.get("/downloadAllPendingOrders", new Auth().isKeyAuth, json2xls.middleware , ordersController.downloadAllPendingOrders);
 

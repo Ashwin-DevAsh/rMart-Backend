@@ -45,6 +45,22 @@ module.exports = class Auth {
     }
   };
 
+  isMerchantKeyAuth = async (req, res, next) => {
+    try {
+      var isVerified = process.env.PRIVATE_KEY == req.get("key") || process.env.MERCHANT_SERVER_KEY==req.get("key");
+      if (isVerified) {
+        next();
+      } else {
+        console.log("failed")
+        res.send({ message: "failed" });
+      }
+    } catch (e) {
+      console.log(e);
+      res.send({ message: "failed" });
+      return;
+    }
+  };
+
   isMartOpen = async (req, res, next) => {
 
     var currentTime = new Date();
