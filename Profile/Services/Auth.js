@@ -7,6 +7,7 @@ module.exports = class Auth {
       console.log("key ver");
       var isVerified = process.env.PRIVATE_KEY == req.get("key") || process.env.MART_SERVER_KEY==req.get("key");
       if (isVerified) {
+        console.log("Verified...")
         next();
       } else {
         console.log("failed")
