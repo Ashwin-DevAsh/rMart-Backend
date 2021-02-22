@@ -4,11 +4,11 @@ const Auth = require("../Services/Auth");
 
 var productsController = new ProductsController();
 
-app.post("/updateProduct",new Auth().isKeyAuth ,productsController.updateProduct);
+app.post("/updateProduct",new Auth().isMerchantKeyAuth ,productsController.updateProduct);
 
-app.post("/addProducts",new Auth().isKeyAuth,productsController.addProducts);
+app.post("/addProducts",new Auth().isMerchantKeyAuth,productsController.addProducts);
 
-app.post("/deleteProduct",new Auth().isKeyAuth,productsController.deleteProduct);
+app.post("/deleteProduct",new Auth().isMerchantKeyAuth,productsController.deleteProduct);
 
 app.get("/getAllProducts",new Auth().isKeyAuth,productsController.getAllProducts);
 
