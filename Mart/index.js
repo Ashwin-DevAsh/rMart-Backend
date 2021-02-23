@@ -7,6 +7,8 @@ const orders = require("./Routes/orders");
 const bodyParser = require("body-parser");
 const uploadPictures = require("./Routes/productPictures");
 
+const compression = require('compression')
+
 
 var RateLimit = require('express-rate-limit');
 
@@ -19,6 +21,8 @@ var helmet = require('helmet')
 var ipLookUp = new (require('./Services/iplookup'))();
 
 const app = express();
+
+app.use(compression())
 
 var limiter = new RateLimit({
   windowMs: 5*60*1000, // 15 minutes 
