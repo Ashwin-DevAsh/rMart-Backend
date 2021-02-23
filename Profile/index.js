@@ -18,7 +18,11 @@ var ipLookUp = new (require('./Services/iplookup'))();
 
 var helmet = require('helmet')
 
+const compression = require('compression')
+
 const app = express();
+
+app.use(compression())
 
 
 var limiter = new RateLimit({
