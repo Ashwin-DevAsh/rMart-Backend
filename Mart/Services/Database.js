@@ -182,7 +182,8 @@ module.exports = class Database {
   getOrderByQr = async (qrToken)=>{
     var postgres = await this.pool.connect();
     try {
-      var orders = (await postgres.query(`select * from orders where qrToken = $1 and to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') <= TIMESTAMP 'today'`,[qrToken])).rows;
+      var orders = (await postgres
+        .query(`select * from orders where qrToken = $1 and to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') <= TIMESTAMP 'today'`,[qrToken])).rows;
       console.log("Orders =", orders)
       postgres.release();
       return orders;
@@ -210,6 +211,12 @@ module.exports = class Database {
     var postgres = await this.pool.connect();
 
     try {
+      var postgres = await this.pool.connect();
+      var currentTime = new Date();
+      var currentOffset = currentTime.getTimezoneOffset();
+      var ISTOffset = 330; 
+      var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+      var deliveredAt = dateFormat(ISTTime, "mm-dd-yyyy hh:MM:ss");
       var orders = (
         await postgres.query(`select * from orders  where qrtoken = $1`, [id])
       ).rows[0];
@@ -220,8 +227,8 @@ module.exports = class Database {
       }
       if (orders.status == "pending") {
         await postgres.query(
-          `update orders set status = 'delivered' where qrtoken = $1`,
-          [id]
+          `update orders set status = 'delivered',deliveredAt = $2 where qrtoken = $1`,
+          [id,deliveredAt]
         );
         postgres.release();
         return "success";

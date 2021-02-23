@@ -31,7 +31,8 @@ create table orders(
   products json[],
   paymentMetadata json,
   qrToken varchar unique default gen_random_uuid(),
-  isPaymentSuccessful boolean default false
+  isPaymentSuccessful boolean default false,
+  deliveredAt varchar
 );
 
 
