@@ -129,6 +129,12 @@ module.exports = class OrdersController {
     res.send({ message: result });
   };
 
+  getDeliveredOrders = async (req, res) => {
+    var { id } = req.body;
+    var result = await this.databaseService.getDeliveredOrders(id);
+    res.send({ message: result });
+  };
+
   downloadAllPendingOrders = async (req, res) => {
     var result = await this.databaseService.getAllPendingOrders();
     var  ordersMap = {}

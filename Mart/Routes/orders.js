@@ -28,6 +28,8 @@ app.get("/getQrToken/:id", new Auth().isMerchantKeyAuth, ordersController.getOrd
 
 app.post("/makeDelivery", new Auth().isMerchantKeyAuth, ordersController.makeDelivery);
 
+app.get("/getDeliveredOrders", new Auth().isMerchantKeyAuth, ordersController.makeDelivery);
+
 app.get("/downloadAllPendingOrders", new Auth().isKeyAuth, json2xls.middleware , ordersController.downloadAllPendingOrders);
 
 module.exports = app;
