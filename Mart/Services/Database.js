@@ -210,8 +210,7 @@ module.exports = class Database {
   updateStatus = async (id) => {
     var postgres = await this.pool.connect();
 
-    try {
-      var postgres = await this.pool.connect();
+    try {      
       var currentTime = new Date();
       var currentOffset = currentTime.getTimezoneOffset();
       var ISTOffset = 330; 
