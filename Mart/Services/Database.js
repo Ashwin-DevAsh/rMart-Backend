@@ -183,7 +183,7 @@ module.exports = class Database {
     var postgres = await this.pool.connect();
     try {
       var orders = (await postgres
-        .query(`select * from orders where qrToken = $1 and to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') <= TIMESTAMP 'today'`,[qrToken])).rows;
+        .query(`select * from orders where qrToken = $1 and to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') < TIMESTAMP 'today'`,[qrToken])).rows;
       console.log("Orders =", orders)
       postgres.release();
       return orders;
