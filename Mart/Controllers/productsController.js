@@ -1,10 +1,17 @@
 const Database = require("../Services/Database");
+const client = require("../cache/redis")
 
 class ProductsController {
   databaseService = new Database();
 
   getAllProducts = async (req, res) => {
     console.log("getProducts");
+
+    var allProductsCache = await client.get("allProducts");
+
+    console.log("From cache = ",allProductsCache)
+
+
     var allProducts = await this.databaseService.getAllProducts();
     if (allProducts) {
       console.log('allProducts')

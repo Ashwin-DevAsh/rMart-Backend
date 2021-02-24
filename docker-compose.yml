@@ -6,6 +6,10 @@ services:
     volumes:
       - ./Database/data:/var/lib/postgresql/data
 
+  redis:
+      command: redis-server --requirepass rec@3214-initators|database|~reDiS|||cAchE
+      image: redis
+
   email:
     build: Email
     deploy:
@@ -24,22 +28,25 @@ services:
 
   profile:
     build: Profile
-    depends_on: [database,email]
+    depends_on: [database,email,redis]
     deploy:
       replicas: 5
     volumes:
       - ./env:/env
       - ./Database:/Database
+      - ./cache:/cache
       - ./profilePictures:/profilePictures
 
   mart:
     build: Mart
-    depends_on: [database,email]
+    depends_on: [database,email,redis]
     deploy:
       replicas: 5
     volumes:
       - ./env:/env
       - ./Database:/Database
+      - ./cache:/cache
+      
 
 
   reverse-proxy:

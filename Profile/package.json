@@ -24,6 +24,7 @@
     "ipware": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
     "moment-timezone": "^0.5.33",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "redis": "^3.0.2"
   }
 }
