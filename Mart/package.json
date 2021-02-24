@@ -9,6 +9,7 @@
   "author": "DevAsh",
   "license": "ISC",
   "dependencies": {
+    "async-redis": "^1.1.7",
     "aws-sdk": "^2.725.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
