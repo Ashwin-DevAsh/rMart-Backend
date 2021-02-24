@@ -9,7 +9,7 @@ class ProductsController {
 
     var allProductsCache = await client.get("allProducts");
     try{
-      await client.flush("allProducts");
+      await client.flushdb();
     }catch(e){
       console.error(e)
     }
