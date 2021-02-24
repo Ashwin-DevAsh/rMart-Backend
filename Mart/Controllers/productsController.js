@@ -14,7 +14,7 @@ class ProductsController {
 
     var allProducts = await this.databaseService.getAllProducts();
 
-    client.put("allProducts",JSON.stringify(allProducts))
+    client.set("allProducts",JSON.stringify(allProducts))
 
 
     if (allProducts) {
