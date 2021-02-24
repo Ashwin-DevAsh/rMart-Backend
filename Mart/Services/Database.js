@@ -250,6 +250,7 @@ module.exports = class Database {
         return orders.status;
       }
     } catch (e) {
+      console.error(e)
       postgres.release();
       return "failed";
     }
