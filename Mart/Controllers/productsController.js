@@ -13,6 +13,10 @@ class ProductsController {
 
 
     var allProducts = await this.databaseService.getAllProducts();
+
+    client.put("allProducts",JSON.stringify(allProducts))
+
+
     if (allProducts) {
       console.log('allProducts')
       res.send({ message: "success", allProducts });
