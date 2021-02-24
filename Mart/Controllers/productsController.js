@@ -9,13 +9,13 @@ class ProductsController {
 
     var allProductsCache = await client.get("allProducts");
 
-    console.log("From cache = ",allProductsCache)
-
-
-    var allProducts = await this.databaseService.getAllProducts();
-
-    client.set("allProducts",JSON.stringify(allProducts))
-
+    if (allProductsCache==null){
+       var allProducts = await this.databaseService.getAllProducts();
+       client.set("allProducts",JSON.stringify(allProducts))
+    }else{
+        console.log("cache hit")
+        var allProducts = JSON.parse(allProductsCache)
+    }
 
     if (allProducts) {
       console.log('allProducts')
