@@ -10,6 +10,7 @@ class ProductsController {
     var allProductsCache = await client.get("allProducts");
 
     if (allProductsCache==null){
+      console.log("cache miss")
        var allProducts = await this.databaseService.getAllProducts();
        client.set("allProducts",JSON.stringify(allProducts))
     }else{
