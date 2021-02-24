@@ -7,7 +7,7 @@ class ProductsController {
   getAllProducts = async (req, res) => {
     console.log("getProducts");
 
-    var allProductsCache = await client.get("allProducts");
+    var allProductsCache = await client.get("allProducts",console.log);
 
     console.log("From cache = ",allProductsCache)
 
