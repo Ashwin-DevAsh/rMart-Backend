@@ -8,7 +8,11 @@ class ProductsController {
     console.log("getProducts");
 
     var allProductsCache = await client.get("allProducts");
-    await client.flushall("allProducts");
+    try{
+      await client.flushall("allProducts");
+    }catch(e){
+      console.error(e)
+    }
 
     if (allProductsCache==null){
        var allProducts = await this.databaseService.getAllProducts();
