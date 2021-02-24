@@ -9,7 +9,7 @@ class ProductsController {
 
     var allProductsCache = await client.get("allProducts");
     try{
-      await client.flushall("allProducts");
+      await client.flushall("allProducts",console.log);
     }catch(e){
       console.error(e)
     }
