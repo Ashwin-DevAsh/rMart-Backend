@@ -8,11 +8,6 @@ class ProductsController {
     console.log("getProducts");
 
     var allProductsCache = await client.get("allProducts");
-    // try{
-    //   await client.flushdb();
-    // }catch(e){
-    //   console.error(e)
-    // }
 
     if (allProductsCache==null){
        var allProducts = await this.databaseService.getAllProducts();
@@ -38,6 +33,7 @@ class ProductsController {
     } else {
       var isDeleted = await this.databaseService.deleteProduct(productID);
       if (isDeleted) {
+        await client.set("allProducts",JSON.stringify(await this.databaseService.getAllProducts()))
         res.send({ message: "success" });
       } else {
         res.send({ message: "failed" });
@@ -83,6 +79,7 @@ class ProductsController {
         availableOn
       );
       if (isUpdated) {
+        await client.set("allProducts",JSON.stringify(await this.databaseService.getAllProducts()))
         res.send({ message: "success" });
       } else {
         res.send({ message: "failed" });
@@ -128,6 +125,7 @@ class ProductsController {
         availableOn
       );
       if (isAdded) {
+        await client.set("allProducts",JSON.stringify(await this.databaseService.getAllProducts()))
         res.send({ message: "success" });
       } else {
         res.send({ message: "failed" });
