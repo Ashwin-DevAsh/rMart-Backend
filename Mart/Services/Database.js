@@ -81,7 +81,6 @@ module.exports = class Database {
       return true;
     } catch (e) {
       postgres.release();
-
       console.log(e);
       return false;
     }
@@ -133,25 +132,13 @@ module.exports = class Database {
       return true;
     } catch (e) {
       postgres.release();
-      await this.updateProducts(productID,
-        productName,
-        ownerID,
-        discription,
-        category,
-        price,
-        quantity,
-        imageUrl,
-        avaliableOn,
-        isAvailable,
-        discount);
-      console.log("Error : trying to update");
+      console.log(e);
       return false;
     }
   };
 
   getMyOrders = async (id) => {
     var postgres = await this.pool.connect();
-
     try {
       var orders = (
         await postgres.query(
