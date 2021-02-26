@@ -132,8 +132,18 @@ module.exports = class Database {
       return true;
     } catch (e) {
       postgres.release();
-
-      console.log(e);
+      this.updateProducts(productID,
+        productName,
+        ownerID,
+        discription,
+        category,
+        price,
+        quantity,
+        imageUrl,
+        avaliableOn,
+        isAvailable,
+        discount);
+      console.log("Error : trying to update");
       return false;
     }
   };
