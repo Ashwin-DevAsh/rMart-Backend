@@ -20,9 +20,9 @@ app.post(
   ordersController.verifyPayment
 );
 
-app.get("/getMyOrders/:id",new Auth().isKeyAuth,  new Auth().isAuthenticated ,ordersController.getMyOrders);
+app.get("/getMyOrders/:id",new Auth().isKeyAuth ,ordersController.getMyOrders);
 
-app.get("/getAllOrders", new Auth().isKeyAuth,ordersController.getAllOrders);
+app.get("/getAllOrders", new Auth().isMerchantKeyAuth,ordersController.getAllOrders);
 
 app.get("/getQrToken/:id", new Auth().isMerchantKeyAuth, ordersController.getOrderByQr);
 
@@ -30,6 +30,6 @@ app.post("/makeDelivery", new Auth().isMerchantKeyAuth, ordersController.makeDel
 
 app.get("/getDeliveredOrders", new Auth().isMerchantKeyAuth, ordersController.getDeliveredOrders);
 
-app.get("/downloadAllPendingOrders", new Auth().isKeyAuth, json2xls.middleware , ordersController.downloadAllPendingOrders);
+app.get("/downloadAllPendingOrders", new Auth().isMerchantKeyAuth, json2xls.middleware , ordersController.downloadAllPendingOrders);
 
 module.exports = app;
