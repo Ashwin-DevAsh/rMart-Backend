@@ -27,6 +27,7 @@ module.exports = class Auth {
     try {
       var id = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY).id;
       var user = await databaseService.getUserWithID(id)
+      console.log("requested user = ",user)
       if(user.length==0){
         res.send({ message: "error" });
       }else{
