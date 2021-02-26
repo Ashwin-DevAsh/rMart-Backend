@@ -1,10 +1,17 @@
 const jwt = require("jsonwebtoken");
+const databaseService = new (require('../Services/DatabaseService'))();
 
 module.exports = class Auth {
   isAuthenticated = async (req, res, next) => {
     try {
       var id = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY).id;
-      next();
+      var user = await databaseService.getUserWithID(id)
+      console.log("requested user = ",user)
+      if(user.length==0){
+        res.send({ message: "error" });
+      }else{
+        next();
+      }
     } catch (e) {
       console.log(e);
       res.send({ message: "error" });

@@ -234,6 +234,23 @@ module.exports = class Database {
     }
   }
 
+  getUserWithID = async (id) => {
+    var postgres = await this.pool.connect();
+    try {
+      var user = await postgres.query(
+        "select * from users where id = $1",
+        [id]
+      );
+      postgres.release();
+      return user.rows;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  };
+
+
   updateStatus = async (id) => {
     var postgres = await this.pool.connect();
 
