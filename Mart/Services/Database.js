@@ -77,6 +77,7 @@ module.exports = class Database {
         ]
       );
       postgres.release();
+      console.log("Update successfully")
       return true;
     } catch (e) {
       postgres.release();
@@ -129,7 +130,6 @@ module.exports = class Database {
         ]
       );
       postgres.release();
-      console.log("Update successfully")
       return true;
     } catch (e) {
       postgres.release();
