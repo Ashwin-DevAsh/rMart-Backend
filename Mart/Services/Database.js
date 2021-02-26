@@ -133,7 +133,7 @@ module.exports = class Database {
       return true;
     } catch (e) {
       postgres.release();
-      this.updateProducts(productID,
+      await this.updateProducts(productID,
         productName,
         ownerID,
         discription,
