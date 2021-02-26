@@ -68,7 +68,7 @@ class ProductsController {
       !imageUrl ||
       !availableOn ||
       !isavailable ||
-      !discount
+      !discount!=undefined
     ) {
       res.send({ message: "invalid body" });
     } else {
@@ -120,7 +120,7 @@ class ProductsController {
       !imageUrl ||
       !availableOn ||
       !isavailable ||
-      !discount
+      !discount!=undefined
     ) {
       res.send({ message: "invalid body" });
     } else {
