@@ -123,9 +123,9 @@ module.exports = class Database {
           price,
           quantity,
           imageUrl,
-          avaliableOn,
           isAvailable,
-          discount
+          discount,
+          avaliableOn
         ]
       );
       postgres.release();
