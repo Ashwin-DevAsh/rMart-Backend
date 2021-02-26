@@ -53,6 +53,8 @@ class ProductsController {
       quantity,
       imageUrl,
       availableOn,
+      isAvailable,
+      discount
     } = req.body;
 
     if (
@@ -64,7 +66,9 @@ class ProductsController {
       !price ||
       !quantity ||
       !imageUrl ||
-      !availableOn
+      !availableOn ||
+      !isAvailable ||
+      !discount
     ) {
       res.send({ message: "error" });
     } else {
@@ -77,7 +81,9 @@ class ProductsController {
         price,
         quantity,
         imageUrl,
-        availableOn
+        availableOn,
+        isAvailable,
+        discount
       );
       if (isUpdated) {
         await client.set("allProducts",JSON.stringify(await this.databaseService.getAllProducts()))
@@ -99,6 +105,7 @@ class ProductsController {
       quantity,
       imageUrl,
       availableOn,
+      discount
     } = req.body;
 
     if (
@@ -110,7 +117,8 @@ class ProductsController {
       !price ||
       !quantity ||
       !imageUrl ||
-      !availableOn
+      !availableOn ||
+      !discount
     ) {
       res.send({ message: "error" });
     } else {
@@ -123,7 +131,8 @@ class ProductsController {
         price,
         quantity,
         imageUrl,
-        availableOn
+        availableOn,
+        discount
       );
       if (isAdded) {
         await client.set("allProducts",JSON.stringify(await this.databaseService.getAllProducts()))

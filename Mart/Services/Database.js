@@ -44,13 +44,14 @@ module.exports = class Database {
     price,
     quantity,
     imageUrl,
-    avaliableOn
+    avaliableOn,
+    isAvailable = true,
+    discount = 0
   ) => {
     var postgres = await this.pool.connect();
     try {
       postgres.query(
         `update products set
-                           
                            productName =$2,
                            ownerID = $3,
                            discription = $4,
@@ -58,7 +59,9 @@ module.exports = class Database {
                            price = $6,
                            quantity = $7,
                            imageUrl = $8,
-                           availableOn = $9 where productID = $1`,
+                           availableOn = $9,
+                           isavaliable = $10,
+                           discount = $11 where productID = $1`,
         [
           productID,
           productName,
@@ -69,6 +72,8 @@ module.exports = class Database {
           quantity,
           imageUrl,
           avaliableOn,
+          isAvailable,
+          discount
         ]
       );
       postgres.release();
@@ -90,7 +95,9 @@ module.exports = class Database {
     price,
     quantity,
     imageUrl,
-    avaliableOn
+    avaliableOn,
+    isAvailable = true,
+    discount = 0
   ) => {
     var postgres = await this.pool.connect();
     try {
@@ -104,7 +111,9 @@ module.exports = class Database {
                            price,
                            quantity,
                            imageUrl,
-                           availableOn) values($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+                           isavaliable,discount
+                           availableOn
+                          ) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
         [
           productID,
           productName,
@@ -115,6 +124,8 @@ module.exports = class Database {
           quantity,
           imageUrl,
           avaliableOn,
+          isAvailable,
+          discount
         ]
       );
       postgres.release();
