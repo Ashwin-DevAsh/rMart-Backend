@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const databaseService = new (require('../Services/DatabaseService'))();
+const databaseService = new (require('../Services/Database'))();
 
 module.exports = class Auth {
   isAuthenticated = async (req, res, next) => {
