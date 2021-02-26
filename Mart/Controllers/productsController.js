@@ -53,7 +53,7 @@ class ProductsController {
       quantity,
       imageUrl,
       availableOn,
-      isAvailable,
+      isavailable,
       discount
     } = req.body;
 
@@ -67,7 +67,7 @@ class ProductsController {
       !quantity ||
       !imageUrl ||
       !availableOn ||
-      !isAvailable ||
+      !isavailable ||
       !discount
     ) {
       res.send({ message: "error" });
@@ -82,7 +82,7 @@ class ProductsController {
         quantity,
         imageUrl,
         availableOn,
-        isAvailable,
+        isavailable,
         discount
       );
       if (isUpdated) {
@@ -105,6 +105,7 @@ class ProductsController {
       quantity,
       imageUrl,
       availableOn,
+      isavailable,
       discount
     } = req.body;
 
@@ -118,6 +119,7 @@ class ProductsController {
       !quantity ||
       !imageUrl ||
       !availableOn ||
+      !isavailable ||
       !discount
     ) {
       res.send({ message: "error" });
@@ -132,6 +134,7 @@ class ProductsController {
         quantity,
         imageUrl,
         availableOn,
+        isavailable,
         discount
       );
       if (isAdded) {
