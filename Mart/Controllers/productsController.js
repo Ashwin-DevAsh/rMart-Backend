@@ -70,7 +70,7 @@ class ProductsController {
       !isavailable ||
       !discount
     ) {
-      res.send({ message: "error" });
+      res.send({ message: "invalid body" });
     } else {
       var isUpdated = await this.databaseService.updateProduct(
         productID,
@@ -122,7 +122,7 @@ class ProductsController {
       !isavailable ||
       !discount
     ) {
-      res.send({ message: "error" });
+      res.send({ message: "invalid body" });
     } else {
       var isAdded = await this.databaseService.addProducts(
         productID,
