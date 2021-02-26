@@ -20,7 +20,7 @@ app.post(
   ordersController.verifyPayment
 );
 
-app.get("/getMyOrders/:id",new Auth().isKeyAuth ,ordersController.getMyOrders);
+app.get("/getMyOrders/:id",new Auth().isKeyAuth,  new Auth().isAuthenticated ,ordersController.getMyOrders);
 
 app.get("/getAllOrders", new Auth().isKeyAuth,ordersController.getAllOrders);
 
