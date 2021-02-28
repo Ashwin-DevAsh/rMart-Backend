@@ -138,20 +138,21 @@ module.exports = class OrderService {
   verifyProducts = async (products, amount) => {
     var amountFromDB = 0;
     var productIDS = [];
+    var idProductMap = {};
     var idCountMap = {};
     console.log(products);
     products.forEach((product) => {
       productIDS.push(product.product.productID);
       idCountMap[product.product.productID] = product.count;
+      idProductMap[product.product.productID] = product;
     });
-
-    console.log("product ids = ", productIDS);
 
     var databaseProduscts = await this.getProductsWithIDS(productIDS);
 
     console.log("db products = ", databaseProduscts);
 
     var isValidProduct = databaseProduscts.length == productIDS.length;
+
     if (!isValidProduct) {
       return "invalid product";
     }
@@ -160,8 +161,13 @@ module.exports = class OrderService {
 
     databaseProduscts.forEach((dbProduct) => {
       var amount = dbProduct.price;
+      var name = dbProduct.productname;
+      
       console.log(amount, idCountMap[dbProduct.productid]);
-      amountFromDB += amount * idCountMap[dbProduct.productid];
+      console.log(idProductMap[dbProduct.productid].productName,name)
+      if(idProductMap[dbProduct.productid].productName == name){
+         amountFromDB += amount * idCountMap[dbProduct.productid];
+      }
     });
 
     console.log(`actual amount = ${amount} amount from db = ${amountFromDB}`);
