@@ -164,7 +164,7 @@ module.exports = class OrderService {
       var name = dbProduct.productname;
       
       console.log(amount, idCountMap[dbProduct.productid]);
-      console.log(idProductMap[dbProduct.productid].productName,name)
+      console.log(idProductMap[dbProduct.productid],idProductMap[dbProduct.productid].productName,name)
       if(idProductMap[dbProduct.productid].productName == name){
          amountFromDB += amount * idCountMap[dbProduct.productid];
       }
