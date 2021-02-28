@@ -161,10 +161,8 @@ module.exports = class OrderService {
 
     databaseProduscts.forEach((dbProduct) => {
       var amount = dbProduct.price;
-      var name = dbProduct.productname;
-      
-      console.log(amount, idCountMap[dbProduct.productid]);
-      console.log(idProductMap[dbProduct.productid],idProductMap[dbProduct.productid].product.productName,name)
+      var name = dbProduct.productname;      
+      console.log(idProductMap[dbProduct.productid].product.productName,name,amount, idCountMap[dbProduct.productid])
       if(idProductMap[dbProduct.productid].product.productName == name){
          amountFromDB += amount * idCountMap[dbProduct.productid];
       }
