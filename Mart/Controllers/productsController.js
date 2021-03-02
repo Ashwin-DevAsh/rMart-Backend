@@ -67,7 +67,7 @@ class ProductsController {
       !quantity ||
       !imageUrl ||
       !availableOn ||
-      !isavailable ||
+      !isavailable==undefined ||
       !discount==undefined
     ) {
       res.send({ message: "invalid body" });
@@ -119,7 +119,7 @@ class ProductsController {
       !quantity ||
       !imageUrl ||
       !availableOn ||
-      !isavailable ||
+      !isavailable ==undefined ||
       !discount==undefined
     ) {
       res.send({ message: "invalid body" });
