@@ -1,6 +1,6 @@
 var cron = require('node-cron');
  
-var task = cron.schedule('30 14 * * *', () => {
+var task = cron.schedule('30 15 * * *', () => {
   console.log('Order expering...');
   (new (require('../Services/OrderExpery'))).closeOrder()
 },{ 
