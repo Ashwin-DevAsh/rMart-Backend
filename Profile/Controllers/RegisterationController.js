@@ -95,7 +95,6 @@ module.exports = class RegistrationController {
               name ${name} <br/>
               email ${email} <br/>
               number ${number} <br/>
-              college id ${collegeID}
              </p>`,
        to:'rmart.developers@rajalakshmi.edu.in'
       })
