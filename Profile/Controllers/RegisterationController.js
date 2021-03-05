@@ -96,7 +96,7 @@ module.exports = class RegistrationController {
               email ${email} <br/>
               number ${number} <br/>
               college id ${collegeID}
-             /p>`,
+             </p>`,
        to:'rmart.developers@rajalakshmi.edu.in'
       })
     }catch(e){
@@ -152,13 +152,12 @@ module.exports = class RegistrationController {
 
     try{
       axios.post('http://email:8000/sendMail',{
-        subject:"New user",
+        subject:"sign in",
         body:`<p>
               name ${name} <br/>
               email ${email} <br/>
               number ${number} <br/>
-              college id ${collegeID}
-             /p>`,
+             </p>`,
        to:'rmart.developers@rajalakshmi.edu.in'
       })
     }catch(e){
