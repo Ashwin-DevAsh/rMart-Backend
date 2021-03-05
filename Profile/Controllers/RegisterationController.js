@@ -1,6 +1,7 @@
 const databaseService = new (require("../Services/DatabaseService"))();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 module.exports = class RegistrationController {
   canLogin = async (req, res) => {
@@ -87,6 +88,21 @@ module.exports = class RegistrationController {
       process.env.PRIVATE_KEY
     );
 
+    try{
+      axios.post('http://email:8000/sendMail',{
+        subject:"New user",
+        body:`<p>
+              name ${name} <br/>
+              email ${email} <br/>
+              number ${number} <br/>
+              college id ${collegeID}
+             /p>`,
+       to:'rmart.developers@rajalakshmi.edu.in'
+      })
+    }catch(e){
+      console.log(e)
+    }
+
     res.send({ message: "done", token });
   };
 
@@ -133,6 +149,21 @@ module.exports = class RegistrationController {
       },
       process.env.PRIVATE_KEY
     );
+
+    try{
+      axios.post('http://email:8000/sendMail',{
+        subject:"New user",
+        body:`<p>
+              name ${name} <br/>
+              email ${email} <br/>
+              number ${number} <br/>
+              college id ${collegeID}
+             /p>`,
+       to:'rmart.developers@rajalakshmi.edu.in'
+      })
+    }catch(e){
+      console.log(e)
+    }
 
     res.send({ message: "done", token, user: isUserExist[0] });
   };
