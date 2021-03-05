@@ -1,7 +1,7 @@
 var cron = require('node-cron');
 var axios = require('axios');
 
-var task1 = cron.schedule('00 20 * * *', () => {
+var task1 = cron.schedule('00 22 * * *', () => {
     try{
 
       var currentTime = new Date();
@@ -16,7 +16,7 @@ var task1 = cron.schedule('00 20 * * *', () => {
          body:`<p>Hey!<br><br>
                The order requests for tomorrow's meal is closing in an hour! Don't miss tomorrow's special recipes from the restaurants at our campus! Grab your phone and order now from our rMart app right away!<br><br>
 
-               The sale will be open till 9:00 PM. Hurry up!<br>
+               The sale will be open till 11:00 PM. Hurry up!<br>
                 
                Feel free to drop your suggestions/queries /bug reports at rmart.support@rajalakshmi.edu.in<br><br>
                 
