@@ -22,7 +22,7 @@ var task1 = cron.schedule('00 20 * * *', () => {
                 
                Regards,<br>
                rMart Team</p>`,
-        to:'recfaculty@rajalakshmi.edu.in'
+        to:'mailtoall@rajalakshmi.edu.in'
        })
        console.log("sended email")
     }catch(e){
@@ -56,7 +56,7 @@ var task2 = cron.schedule('00 12 * * *', () => {
        
        Regards,<br>
        rMart Team</p>`,
-      to:'recfaculty@rajalakshmi.edu.in'
+      to:'mailtoall@rajalakshmi.edu.in'
      })
      console.log("sended email")
   }catch(e){
