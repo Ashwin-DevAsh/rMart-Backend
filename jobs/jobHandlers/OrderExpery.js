@@ -1,6 +1,6 @@
 var cron = require('node-cron');
  
-var task = cron.schedule('30 15 * * *', () => {
+var task = cron.schedule('30 16 * * *', () => {
   console.log('Order expering...');
   var currentTime = new Date();
   var currentOffset = currentTime.getTimezoneOffset();
@@ -11,6 +11,7 @@ var task = cron.schedule('30 15 * * *', () => {
   if(day!=0){
     (new (require('../Services/OrderExpery'))).closeOrder()
   }
+
 },{ 
     scheduled: true,
     timezone: "Asia/Kolkata"
