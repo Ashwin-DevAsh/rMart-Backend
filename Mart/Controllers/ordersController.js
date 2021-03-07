@@ -3,6 +3,7 @@ const clientDetails = require("../Database/ClientDetails");
 const OrderService = require("../Services/OrderService");
 const DatabaseService = require("../Services/Database");
 var json2xls = require('json2xls');
+const axios = require('axios');
 
 
 module.exports = class OrdersController {
@@ -99,6 +100,40 @@ module.exports = class OrdersController {
       console.log("unable to update");
       res.send({ message: "failed" });
       return;
+    }
+
+    try {
+       var {amount,orederid,orderdby:{name,number,email},products} = isOrderExist[0]
+       var productString = ``
+       for(var i in products){
+           productString += `<tr> 
+              <td>${i.product.productName}</td>
+              <td>${i.count}</td>
+              <td>${i.totalPrice}</td>
+           </tr>` 
+       }
+       
+       axios.post('http://email:8000/sendMail',{
+        subject:"New Order",
+        body:`<p>
+                order  ${orederid} <br/>
+                name       ${name} <br/>
+                email     ${email} <br/>
+                number   ${number} <br/>
+                amount   ${amount} <br/><br/><br/>
+                <table>
+                  <tr>
+                    <th>productName</th>
+                    <th>count</th>
+                    <th>amount</th>
+                  </tr>
+                  ${productString}
+                </table>
+             </p>`,
+       to:'rmart.developers@rajalakshmi.edu.in'
+      })
+    } catch (error) {
+      console.log(error)
     }
 
     res.send({ message: "success" });
