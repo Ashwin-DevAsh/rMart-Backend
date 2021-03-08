@@ -124,7 +124,7 @@ module.exports = class OrdersController {
                 email     ${email} <br/>
                 number   ${number} <br/>
                 amount   ${amount} Rs<br/><br/><br/>
-                <table style="width:100%;" >
+                <table>
                   <tr>
                     <th>product</th>
                     <th>count</th>
