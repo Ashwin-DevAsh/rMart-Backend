@@ -101,11 +101,14 @@ module.exports = class OrdersController {
       res.send({ message: "failed" });
       return;
     }
+    
+    res.send({ message: "success" });
 
     try {
-       var {amount,orederid,orderdby:{name,number,email},products} = isOrderExist[0]
+       var {amount,orederid,orderdby:{name,number,email},products} = isUpdated[0]
        var productString = ``
        for(var i in products){
+         console.log(i)
            productString += `<tr> 
               <td>${i.product.productName}</td>
               <td>${i.count}</td>
@@ -135,9 +138,6 @@ module.exports = class OrdersController {
     } catch (error) {
       console.log(error)
     }
-
-    res.send({ message: "success" });
-    console.log("finished ver");
   };
 
   getMyOrders = async (req, res) => {

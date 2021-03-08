@@ -97,7 +97,7 @@ module.exports = class RegistrationController {
               number ${phoneNumber} <br/>
               collegeid ${collegeID}<br/>
              </p>`,
-        to:'rmart.developers@rajalakshmi.edu.in'
+       to:'rmart.developers@rajalakshmi.edu.in'
       })
     }catch(e){
       console.log(e)
