@@ -7,7 +7,6 @@ module.exports = class Auth {
 
   isKeyAuth = async (req, res, next) => {
     try {
-      console.log("key ver");
       var isVerified = process.env.PRIVATE_KEY == req.get("key") || process.env.MART_SERVER_KEY==req.get("key");
       if (isVerified) {
         console.log("Verified...")
@@ -27,7 +26,6 @@ module.exports = class Auth {
     try {
       var id = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY).id;
       var user = await databaseService.getUserWithID(id)
-      console.log("requested user = ",user)
       if(user.length==0){
         res.send({ message: "error" });
       }else{

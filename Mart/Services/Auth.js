@@ -6,7 +6,6 @@ module.exports = class Auth {
     try {
       var id = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY).id;
       var user = await databaseService.getUserWithID(id)
-      console.log("requested user = ",user)
       if(user.length==0){
         res.send({ message: "error" });
       }else{
@@ -21,7 +20,6 @@ module.exports = class Auth {
 
   isTransAuth = async (req, res, next) => {
     try {
-      console.log("TransAuth");
       var decoded = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY);
       if (decoded.number != req.body.orderBy.number) {
         console.log(decoded.number, req.body.orderBy.number);
@@ -42,7 +40,6 @@ module.exports = class Auth {
       if (isVerified) {
         next();
       } else {
-        console.log("failed")
         res.send({ message: "failed" });
       }
     } catch (e) {
@@ -58,7 +55,6 @@ module.exports = class Auth {
       if (isVerified) {
         next();
       } else {
-        console.log("failed")
         res.send({ message: "failed" });
       }
     } catch (e) {
@@ -75,7 +71,6 @@ module.exports = class Auth {
     var ISTOffset = 330; 
     var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
 
-    console.log("Mart time = ",ISTTime.getHours()," ",ISTTime.getMinutes())
     var currentHour = ISTTime.getHours()
     if (currentHour >= 12 && currentHour < 23) {
       next();
