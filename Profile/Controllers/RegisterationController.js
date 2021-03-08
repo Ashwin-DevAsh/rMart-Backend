@@ -38,7 +38,6 @@ module.exports = class RegistrationController {
       phoneNumber
     );
 
-    console.log("existing User = ", isUserExist);
 
     if (isUserExist.length != 0) {
       res.send({ message: "user already exist" });
@@ -53,11 +52,9 @@ module.exports = class RegistrationController {
       return;
     }
 
-    console.log("otp = ", otp);
 
     databaseService.deleteOtp(phoneNumber, email);
 
-    console.log(password);
     var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
     var hashedPassword = await bcrypt.hash(password, salt);
 
@@ -120,7 +117,6 @@ module.exports = class RegistrationController {
       email
     );
 
-    console.log("user = ", isUserExist);
 
     if (isUserExist.length == 0) {
       res.send({ message: "user not exist" });

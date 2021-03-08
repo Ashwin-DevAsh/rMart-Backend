@@ -64,7 +64,6 @@ module.exports = class OrderService {
       return order;
     } catch (e) {
       postgres.release();
-
       console.log(e);
       return [];
     }
@@ -147,12 +146,10 @@ module.exports = class OrderService {
       return "invalid product";
     }
 
-    console.log(idCountMap);
 
     databaseProduscts.forEach((dbProduct) => {
       var amount = dbProduct.price;
       var name = dbProduct.productname;      
-      console.log(idProductMap[dbProduct.productid].product.productName,name,amount, idCountMap[dbProduct.productid])
       if(idProductMap[dbProduct.productid].product.productName == name){
          amountFromDB += amount * idCountMap[dbProduct.productid];
       }
