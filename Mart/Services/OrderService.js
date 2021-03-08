@@ -84,13 +84,6 @@ module.exports = class OrderService {
     var postgres = await this.pool.connect();
     try {
       var paymentDetails = await this.instance.payments.fetch(id);
-      console.log("Payment Details = ", paymentDetails);
-      console.log(
-        id,
-        paymentDetails.amount / 100,
-        amount / 1 + 0.02 * amount,
-        id
-      );
       console.log(paymentDetails);
       var isVerified =
         (paymentDetails.status == "authorized" ||
@@ -140,7 +133,6 @@ module.exports = class OrderService {
     var productIDS = [];
     var idProductMap = {};
     var idCountMap = {};
-    console.log(products);
     products.forEach((product) => {
       productIDS.push(product.product.productID);
       idCountMap[product.product.productID] = product.count;
@@ -148,8 +140,6 @@ module.exports = class OrderService {
     });
 
     var databaseProduscts = await this.getProductsWithIDS(productIDS);
-
-    console.log("db products = ", databaseProduscts);
 
     var isValidProduct = databaseProduscts.length == productIDS.length;
 
@@ -168,7 +158,6 @@ module.exports = class OrderService {
       }
     });
 
-    console.log(`actual amount = ${amount} amount from db = ${amountFromDB}`);
 
     var isValidAmount = amount == amountFromDB;
     if (!isValidAmount) {
