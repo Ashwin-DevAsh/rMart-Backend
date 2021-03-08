@@ -15,7 +15,6 @@ module.exports = class OrdersController {
     var { products, orderBy, amount } = req.body;
 
     if (!products || !orderBy || !amount) {
-      console.log("Invalid body");
       res.send({ message: "invalid body" });
       return;
     }
@@ -34,7 +33,6 @@ module.exports = class OrdersController {
     );
 
     if (!orderID) {
-      console.log("unable to place order");
       res.send({ message: "failed" });
       return;
     }
@@ -46,7 +44,6 @@ module.exports = class OrdersController {
       orderID
     );
 
-    console.log("isProductPlaced ", isOrderPlaced);
 
     if (isOrderPlaced.length == 0) {
       console.log("Not Placed");
@@ -54,7 +51,6 @@ module.exports = class OrdersController {
       return;
     }
 
-    console.log(("order id ", orderID));
 
     res.send({
       message: "done",
@@ -70,7 +66,6 @@ module.exports = class OrdersController {
   verifyPayment = async (req, res) => {
     var { orderID, paymentID } = req.body;
     if (!orderID || !paymentID) {
-      console.log("Invalid body");
       res.send({ message: "invalid body" });
       return;
     }
@@ -78,7 +73,6 @@ module.exports = class OrdersController {
     var isOrderExist = await this.orderservice.isOrderExist(orderID);
 
     if (isOrderExist.length == 0) {
-      res.send({ message: "order not exist" });
       return;
     }
 
@@ -90,54 +84,54 @@ module.exports = class OrdersController {
     );
 
     if (!isverifyRazorpayPayment) {
-      console.log("not verified in raz");
       res.send({ message: "failed" });
       return;
     }
 
     var isUpdated = await this.orderservice.makeOrderValid(orderID);
     if (isUpdated.length == 0) {
-      console.log("unable to update");
       res.send({ message: "failed" });
       return;
+    }
+
+    try {
+      var {amount,orederid,orderdby:{name,number,email},products} = isOrderExist[0]
+      var productString = ``
+      for(var i in products){
+        console.log(products[i])
+          productString += `<tr> 
+             <td>${products[i].product.productName}</td>
+             <td>${products[i].count}</td>
+             <td>${products[i].totalPrice} Rs</td>
+          </tr>` 
+      }
+      
+      axios.post('http://email:8000/sendMail',{
+       subject:"New Order",
+       body:`<p>
+               order  ${orederid} <br/>
+               name       ${name} <br/>
+               email     ${email} <br/>
+               number   ${number} <br/>
+               amount   ${amount} Rs<br/><br/><br/>
+               <table style="width:100%;" >
+                 <tr>
+                   <th>product</th>
+                   <th>count</th>
+                   <th>amount</th>
+                 </tr>
+                 ${productString}
+               </table>
+            </p>`,
+      to:'rmart.developers@rajalakshmi.edu.in'
+     })
+    } catch (error) {
+      console.log(error)
     }
     
     res.send({ message: "success" });
 
-    try {
-       var {amount,orederid,orderdby:{name,number,email},products} = isOrderExist[0]
-       var productString = ``
-       for(var i in products){
-         console.log(products[i])
-           productString += `<tr> 
-              <td>${products[i].product.productName}</td>
-              <td>${products[i].count}</td>
-              <td>${products[i].totalPrice} Rs</td>
-           </tr>` 
-       }
-       
-       axios.post('http://email:8000/sendMail',{
-        subject:"New Order",
-        body:`<p>
-                order  ${orederid} <br/>
-                name       ${name} <br/>
-                email     ${email} <br/>
-                number   ${number} <br/>
-                amount   ${amount} Rs<br/><br/><br/>
-                <table>
-                  <tr>
-                    <th>product</th>
-                    <th>count</th>
-                    <th>amount</th>
-                  </tr>
-                  ${productString}
-                </table>
-             </p>`,
-       to:'rmart.developers@rajalakshmi.edu.in'
-      })
-    } catch (error) {
-      console.log(error)
-    }
+   
   };
 
   getMyOrders = async (req, res) => {
