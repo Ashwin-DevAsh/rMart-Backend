@@ -105,14 +105,14 @@ module.exports = class OrdersController {
     res.send({ message: "success" });
 
     try {
-       var {amount,orederid,orderdby:{name,number,email},products} = isUpdated[0]
+       var {amount,orederid,orderdby:{name,number,email},products} = isOrderExist[0]
        var productString = ``
        for(var i in products){
-         console.log(i)
+         console.log(products[i])
            productString += `<tr> 
-              <td>${i.product.productName}</td>
-              <td>${i.count}</td>
-              <td>${i.totalPrice}</td>
+              <td>${products[i].product.productName}</td>
+              <td>${products[i].count}</td>
+              <td>${products[i].totalPrice}</td>
            </tr>` 
        }
        
