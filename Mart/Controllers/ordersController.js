@@ -112,7 +112,7 @@ module.exports = class OrdersController {
            productString += `<tr> 
               <td>${products[i].product.productName}</td>
               <td>${products[i].count}</td>
-              <td>${products[i].totalPrice}</td>
+              <td>${products[i].totalPrice} Rs</td>
            </tr>` 
        }
        
@@ -123,10 +123,10 @@ module.exports = class OrdersController {
                 name       ${name} <br/>
                 email     ${email} <br/>
                 number   ${number} <br/>
-                amount   ${amount} <br/><br/><br/>
-                <table>
+                amount   ${amount} Rs<br/><br/><br/>
+                <table style="width:100%;" >
                   <tr>
-                    <th>productName</th>
+                    <th>product</th>
                     <th>count</th>
                     <th>amount</th>
                   </tr>
