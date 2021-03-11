@@ -19,10 +19,13 @@ var task1 = cron.schedule('00 22 * * *', () => {
                The sale will be open till 11:00 PM. Hurry up!<br>
                 
                Feel free to drop your suggestions/queries /bug reports at rmart.support@rajalakshmi.edu.in<br><br>
-                
+
+               Download app from https://play.google.com/store/apps/details?id=com.DevAsh.RMart <br><br>
+
+  
                Regards,<br>
                rMart Team</p>`,
-        to:'mailtoall@rajalakshmi.edu.in'
+        to:'students@rajalakshmi.edu.in'
        })
        console.log("sended email")
     }catch(e){
@@ -52,13 +55,15 @@ var task2 = cron.schedule('00 12 * * *', () => {
        body:`<p>Hey!<br><br>
        The sale for tomorrow's meal is open now! Order safe and hygiene meals  from restaurants at our campus.<br><br>
        
-       The sale will be open till 9:00 PM tonight.<br><br>
+       The sale will be open till 11:00 PM tonight.<br><br>
        
        Feel free to drop your suggestion/queries /bug report @ rmart.support@rajalakshmi.edu.in<br><br>
+
+       Download app from https://play.google.com/store/apps/details?id=com.DevAsh.RMart <br><br>
        
        Regards,<br>
        rMart Team</p>`,
-      to:'mailtoall@rajalakshmi.edu.in'
+      to:'students@rajalakshmi.edu.in'
      })
      console.log("sended email")
   }catch(e){
@@ -90,10 +95,13 @@ var task3 = cron.schedule('00 17 * * *', () => {
              The sale will be open till 11:00 PM today. Hurry up!<br>
               
              Feel free to drop your suggestions/queries /bug reports at rmart.support@rajalakshmi.edu.in<br><br>
+
+             Download app from https://play.google.com/store/apps/details?id=com.DevAsh.RMart <br><br>
+
               
              Regards,<br>
              rMart Team</p>`,
-      to:'mailtoall@rajalakshmi.edu.in'
+      to:'students@rajalakshmi.edu.in'
      })
      console.log("sended email")
   }catch(e){
