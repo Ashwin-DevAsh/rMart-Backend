@@ -154,7 +154,42 @@ module.exports = class OrdersController {
 
   makeDelivery = async (req, res) => {
     var { id } = req.body;
-    var result = await this.databaseService.updateStatus(id);
+    var {result,object} = await this.databaseService.updateStatus(id);
+    if(object){
+      var {amount,orederid,orderdby:{name,number,email},products} = object
+      var productString = ``
+      for(var i in products){
+        console.log(products[i])
+          productString += `<tr> 
+             <td>${products[i].product.productName}</td>
+             <td>${products[i].count}</td>
+             <td>${products[i].totalPrice} Rs</td>
+          </tr>` 
+      }
+      try {
+        axios.post('http://email:8000/sendMail',{
+          subject:"New Delivery",
+          body:`<p>
+                  order  ${orederid} <br/>
+                  name       ${name} <br/>
+                  email     ${email} <br/>
+                  number   ${number} <br/>
+                  amount   ${amount} Rs<br/><br/><br/>
+                  <table style="width:100%;" >
+                    <tr>
+                      <th>product</th>
+                      <th>count</th>
+                      <th>amount</th>
+                    </tr>
+                    ${productString}
+                  </table>
+               </p>`,
+         to:'rmart.developers@rajalakshmi.edu.in'
+        })
+       } catch (error) {
+         console.log(error)
+       }
+    }
     res.send({ message: result });
   };
 

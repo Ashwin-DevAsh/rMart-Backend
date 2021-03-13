@@ -260,10 +260,10 @@ module.exports = class Database {
       var orders = (
         await postgres.query(`select * from orders  where qrtoken = $1`, [id])
       ).rows[0];
-      console.log(id, orders);
+      console.log("Delivery = ",id, orders);
       if (!orders) {
         postgres.release();
-        return "invalid token";
+        return {result:"invalid token"};
       }
       if (orders.status == "pending") {
         await postgres.query(
@@ -271,15 +271,15 @@ module.exports = class Database {
           [id,deliveredAt]
         );
         postgres.release();
-        return "success";
+        return {result:"success",object:orders};
       } else {
         postgres.release();
-        return orders.status;
+        return {result:orders.status};
       }
     } catch (e) {
       console.error(e)
       postgres.release();
-      return "failed";
+      return {result:"failed"};
     }
   };
 };
