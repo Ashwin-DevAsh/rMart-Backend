@@ -184,7 +184,8 @@ module.exports = class OrdersController {
                     ${productString}
                   </table>
                </p>`,
-         to:'rmart.developers@rajalakshmi.edu.in'
+        //  to:'rmart.developers@rajalakshmi.edu.in'
+        to:'2017ashwin@gmail.com'
         })
        } catch (error) {
          console.log(error)
