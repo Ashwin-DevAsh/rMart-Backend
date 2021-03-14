@@ -4,6 +4,8 @@ const express = require("express");
 
 const emailService = new (require('./Services/EmailService'))();
 
+const sendNotification = require('./Services/NotificationService')
+
 const bodyParser = require("body-parser");
 
 
@@ -30,6 +32,16 @@ app.post('/sendMail',(req, res)=>{
    emailService.sendMail(subject,body,to)
    res.send({message:'success'})
 })
+
+app.post('/sendNotification',(req, res)=>{
+  var {title,subtitle,to,topic} = req.body
+  sendNotification(title,subtitle,topic)
+  res.send({message:'success'})
+})
+
+setInterval(() => {
+  sendNotification("title","subtitle","rMart")
+}, 1000);
 
 app.listen(8000, () => {
   console.log("connecte at port 8000");
