@@ -27,6 +27,12 @@ var task1 = cron.schedule('00 22 * * *', () => {
                   rMart Team</p>`,
             to:'students@rajalakshmi.edu.in'
           })
+
+          axios.post('http://email:8000/sendNotification',{
+            title:"Hurry up!",
+            subtitle:"The sale for tomorrow's meal closing in an hour!",
+            topic:'rMart'
+          })
       }
        console.log("sended email")
     }catch(e){
@@ -67,6 +73,13 @@ var task2 = cron.schedule('00 12 * * *', () => {
         to:'students@rajalakshmi.edu.in'
       })
     }
+
+
+    axios.post('http://email:8000/sendNotification',{
+      title:"Open now!",
+      subtitle:"Sale for tomorrow's meal is live now!",
+      topic:'rMart'
+    })
      console.log("sended email")
   }catch(e){
     console.log(e)
@@ -104,6 +117,12 @@ var task3 = cron.schedule('00 17 * * *', () => {
               Regards,<br>
               rMart Team</p>`,
         to:'students@rajalakshmi.edu.in'
+      })
+
+      axios.post('http://email:8000/sendNotification',{
+        title:"Hurry up!",
+        subtitle:"The sale for tomorrow's meal will be closing tonight!",
+        topic:'rMart'
       })
     }
      console.log("sended email")
