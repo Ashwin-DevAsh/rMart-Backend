@@ -28,17 +28,6 @@ try{
   console.log(e)
 }
 
-// setInterval(
-//   ()=>{
-//     axios.post('http://email:8000/sendNotification',{
-//       title:"Hurry up!",
-//       subtitle:"The sale for tomorrow's meal will be closing tonight!",
-//       topic:'rMart'
-//     })
-//   },
-//   6000
-// )
-
 
 console.log("Jobs started...")
 

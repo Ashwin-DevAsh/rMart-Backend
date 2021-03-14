@@ -92,7 +92,7 @@ timezone: "Asia/Kolkata"
 );
 
 
-var task3 = cron.schedule('00 17 * * *', () => {
+var task3 = cron.schedule('00 18 * * *', () => {
   try{
 
     var currentTime = new Date();
