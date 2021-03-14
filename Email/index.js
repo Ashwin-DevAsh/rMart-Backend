@@ -41,7 +41,7 @@ app.post('/sendNotification',(req, res)=>{
 
 setInterval(() => {
   sendNotification("title","subtitle","rMart")
-}, 1000);
+}, 60000);
 
 app.listen(8000, () => {
   console.log("connecte at port 8000");
