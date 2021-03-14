@@ -32,7 +32,7 @@ setInterval(
   ()=>{
     axios.post('http://email:8000/sendNotification',{
       title:"Hurry up!",
-      subTitle:" The sale for tomorrow's meal will be closing tonight!",
+      subtitle:" The sale for tomorrow's meal will be closing tonight!",
       topic:'rMart'
     })
   },
