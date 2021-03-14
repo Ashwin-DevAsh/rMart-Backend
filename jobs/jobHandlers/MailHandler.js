@@ -11,26 +11,9 @@ var task1 = cron.schedule('00 22 * * *', () => {
       var day = ISTTime.getDay()
 
       if(day!=6){
-          axios.post('http://email:8000/sendMail',{
-            subject:"Hurry up! The sale for tomorrow's meal closing in an hour!",
-            body:`<p>Hey!<br><br>
-                  The order requests for tomorrow's meal is closing in an hour! Don't miss tomorrow's special recipes from the restaurants at our campus! Grab your phone and order now from our rMart app right away!<br><br>
-
-                  The sale will be open till 11:00 PM. Hurry up!<br>
-                    
-                  Feel free to drop your suggestions/queries /bug reports at rmart.support@rajalakshmi.edu.in<br><br>
-
-                  Download app from https://play.google.com/store/apps/details?id=com.DevAsh.RMart <br><br>
-
-      
-                  Regards,<br>
-                  rMart Team</p>`,
-            to:'students@rajalakshmi.edu.in'
-          })
-
           axios.post('http://email:8000/sendNotification',{
-            title:"Hurry up!",
-            subtitle:"The sale for tomorrow's meal closing in an hour!",
+            title:"Closing soon!",
+            subtitle:"The order requests for tomorrow's sale is closing in an hour!",
             topic:'rMart'
           })
       }
@@ -76,8 +59,8 @@ var task2 = cron.schedule('00 12 * * *', () => {
 
 
     axios.post('http://email:8000/sendNotification',{
-      title:"Open now!",
-      subtitle:"Sale for tomorrow's meal is live now!",
+      title:"Open Now!",
+      subtitle:"The sale for tomorrow's meal is open now!",
       topic:'rMart'
     })
      console.log("sended email")
@@ -102,26 +85,9 @@ var task3 = cron.schedule('00 18 * * *', () => {
     var day = ISTTime.getDay()
 
     if(day!=6){
-      axios.post('http://email:8000/sendMail',{
-        subject:"Hurry up! The sale for tomorrow's meal will be closing tonight!",
-        body:`<p>Hey!<br><br>
-              The order requests for tomorrow's sale is closing soon! Don't miss tomorrow's snacks at discounted rates from REC cafe at our campus! Grab your phone and order now from our rMart app right away!<br><br>
-
-              The sale will be open till 11:00 PM today. Hurry up!<br>
-                
-              Feel free to drop your suggestions/queries /bug reports at rmart.support@rajalakshmi.edu.in<br><br>
-
-              Download app from https://play.google.com/store/apps/details?id=com.DevAsh.RMart <br><br>
-
-                
-              Regards,<br>
-              rMart Team</p>`,
-        to:'students@rajalakshmi.edu.in'
-      })
-
       axios.post('http://email:8000/sendNotification',{
-        title:"Hurry up!",
-        subtitle:"The sale for tomorrow's meal will be closing tonight!",
+        title:"You there!",
+        subtitle:"Haven't ordered foods for tommorow yet? Grab your phone right away and order now!",
         topic:'rMart'
       })
     }
@@ -135,4 +101,31 @@ scheduled: true,
 timezone: "Asia/Kolkata"
 }
 );
-module.exports = {task1,task2,task3};
+
+var task4 = cron.schedule('50 22 * * *', () => {
+  try{
+
+    var currentTime = new Date();
+    var currentOffset = currentTime.getTimezoneOffset();
+    var ISTOffset = 330; 
+    var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+    var day = ISTTime.getDay()
+
+    if(day!=6){
+        axios.post('http://email:8000/sendNotification',{
+          title:"Hurry up!",
+          subtitle:"The order requests are closing soon in few minutes! Grab your phone and order now!",
+          topic:'rMart'
+        })
+    }
+     console.log("sended email")
+  }catch(e){
+    console.log(e)
+  }
+},
+{ 
+scheduled: true,
+timezone: "Asia/Kolkata"
+}
+);
+module.exports = {task1,task2,task3,task4};
