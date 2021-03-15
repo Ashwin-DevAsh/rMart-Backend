@@ -7,6 +7,9 @@ const axios = require('axios');
 const fs = require("fs")
 const QRCode = require("qrcode-svg");
 
+var qr = require('qr-image');
+
+
 
 module.exports = class OrdersController {
   orderservice = new OrderService();
@@ -96,6 +99,9 @@ module.exports = class OrdersController {
       return;
     }
 
+    res.send({ message: "success" });
+
+
     try {
       var {amount,orederid,orderdby:{name,number,email},products,qrtoken} = isOrderExist[0]
       var productString = ``
@@ -106,22 +112,7 @@ module.exports = class OrdersController {
              <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].count}</td>
              <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].totalPrice} Rs</td>
           </tr>` 
-      }
-
-      var qrcode = new QRCode({
-        content: qrtoken,
-        padding: 4,
-        width: 256,
-        height: 256,
-        color: "#000000",
-        background: "#ffffff",
-        ecl: "M",
-      });
-      qrcode.save(`../QrImages/${qrtoken}.svg`, function(error) {
-        console.log(error)
-        console.log("Done!");
-      });
-      
+      } 
       
       axios.post('http://email:8000/sendMail',{
        subject:"New Order",
@@ -143,12 +134,15 @@ module.exports = class OrdersController {
       to:'rmart.developers@rajalakshmi.edu.in'
      })
 
-     axios.post('http://email:8000/sendMail',{
+     var qrcode = qr.image(qrtoken, { type: 'png' });
+     qrcode.pipe(fs.createWriteStream(`../QrImages/${qrtoken}.png`));
+
+     axios.post('http://email:8000/sendMailWithImage',{
       subject:"New Order",
       body:`<p>
               Hey ${name},<br/><br/>
 
-              Your order has been successfully placed ! The Auto-generated QR for collecting your order at the delivery point is,<br/><br/><br/>
+              Your order has been successfully placed ! The Auto-generated QR for collecting your order at the delivery point is attached below.<br/><br/><br/>
            
               <table style="width:100%;" >
                 <tr>
@@ -162,14 +156,14 @@ module.exports = class OrdersController {
               Note:<br/>
               Kindly show this QR code at the delivery point if you face any difficulties in opening the "My Orders" section in the app due to weak network connectivity.
            </p>`,
-     to:email
+     to:email,
+     imageName:`${qrtoken}.png`
     })
 
     } catch (error) {
       console.log(error)
     }
     
-    res.send({ message: "success" });
 
    
   };
