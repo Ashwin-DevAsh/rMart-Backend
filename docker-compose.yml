@@ -46,7 +46,7 @@ services:
       - ./env:/env
       - ./Database:/Database
       - ./cache:/cache
-      - ./QrImages:/QrImages
+      - ./Mart/QrImages:/QrImages
 
       
 
