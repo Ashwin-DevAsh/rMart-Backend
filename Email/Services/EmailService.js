@@ -30,6 +30,30 @@ module.exports = class EmailService{
           return false;
         }
       }
+
+      async sendMailWithImage(subject, text, toEmail,imagePath) {
+        var mailOptions = {
+          from: `rMart <${this.myEmail}>`,
+          to:   toEmail,
+          subject: subject,
+          html: text,
+          attachments:[
+            {   // file on disk as an attachment
+              filename: 'QrCode',
+              path: `../QrImages/${imagePath}` 
+             },
+          ]
+        };
+      
+        try {
+          var result = await this.transporter.sendMail(mailOptions);
+          console.log(result);
+          return true;
+        } catch (e) {
+          console.log(e);
+          return false;
+        }
+      }
       
 
 }

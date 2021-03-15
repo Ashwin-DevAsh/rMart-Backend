@@ -33,6 +33,13 @@ app.post('/sendMail',(req, res)=>{
    res.send({message:'success'})
 })
 
+app.post('/sendMailWithImage',(req, res)=>{
+  var {subject,body,to,imageName} = req.body
+  console.log(subject,body,to,imageName)
+  emailService.sendMailWithImage(subject,body,to,imageName)
+  res.send({message:'success'})
+})
+
 app.post('/sendNotification',(req, res)=>{
   var {title,subtitle,to,topic} = req.body
   sendNotification(title,subtitle,topic)

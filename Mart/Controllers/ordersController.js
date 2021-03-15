@@ -138,7 +138,7 @@ module.exports = class OrdersController {
      qrcode.pipe(fs.createWriteStream(`../QrImages/${qrtoken}.png`));
 
      axios.post('http://email:8000/sendMailWithImage',{
-      subject:"New Order",
+      subject:"Order placed successfully!",
       body:`<p>
               Hey ${name},<br/><br/>
 
