@@ -16,7 +16,7 @@ services:
       replicas: 1
     volumes:
       - ./env:/env
-      - ./Mart/QrImages:/QrImages
+      - ./QrImages:/QrImages
 
   jobs:
     build: jobs
@@ -47,7 +47,7 @@ services:
       - ./env:/env
       - ./Database:/Database
       - ./cache:/cache
-      - ./Mart/QrImages:/QrImages
+      - ./QrImages:/QrImages
 
       
 
