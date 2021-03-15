@@ -103,6 +103,11 @@ module.exports = class OrdersController {
 
 
     try {
+
+
+      var qrcode = qr.image(qrtoken, { type: 'png' });
+      qrcode.pipe(fs.createWriteStream(`../QrImages/${qrtoken}.png`));
+
       var {amount,orederid,orderdby:{name,number,email},products,qrtoken} = isOrderExist[0]
       var productString = ``
       for(var i in products){
@@ -114,7 +119,7 @@ module.exports = class OrdersController {
           </tr>` 
       } 
       
-      axios.post('http://email:8000/sendMail',{
+      axios.post('http://email:8000/sendMailWithImage',{
        subject:"New Order",
        body:`<p>
                Order  ${orederid} <br/>
@@ -131,11 +136,11 @@ module.exports = class OrdersController {
                  ${productString}
                </table>
             </p>`,
-      to:'rmart.developers@rajalakshmi.edu.in'
+      to:'rmart.developers@rajalakshmi.edu.in',
+      imageName:`${qrtoken}.png`
      })
 
-     var qrcode = qr.image(qrtoken, { type: 'png' });
-     qrcode.pipe(fs.createWriteStream(`../QrImages/${qrtoken}.png`));
+    
 
      axios.post('http://email:8000/sendMailWithImage',{
       subject:"Order placed successfully!",

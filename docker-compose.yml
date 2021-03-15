@@ -49,8 +49,6 @@ services:
       - ./cache:/cache
       - ./Mart/QrImages:/QrImages
 
-      
-
 
   reverse-proxy:
     build: nginx
