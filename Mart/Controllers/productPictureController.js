@@ -22,7 +22,7 @@ module.exports = class ProductsPictureController {
 
   getQrImages = (req, res) => {
     var imageName = req.params.imageName;
-    res.sendFile("../QrImages/" + imageName);
+    res.sendFile( imageName,{root:"../QrImages/"});
   };
 
   addProductPicture = (req, res) => {
