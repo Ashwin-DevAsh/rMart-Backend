@@ -66,18 +66,16 @@ module.exports = class Auth {
 
   isMartOpen = async (req, res, next) => {
 
-    next();
+    var currentTime = new Date();
+    var currentOffset = currentTime.getTimezoneOffset();
+    var ISTOffset = 330; 
+    var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
 
-    // var currentTime = new Date();
-    // var currentOffset = currentTime.getTimezoneOffset();
-    // var ISTOffset = 330; 
-    // var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
-
-    // var currentHour = ISTTime.getHours()
-    // if (currentHour >= 12 && currentHour < 23) {
-    //   next();
-    // } else {
-    //   res.send({ message: "closed" });
-    // }
+    var currentHour = ISTTime.getHours()
+    if (currentHour >= 12 && currentHour < 23) {
+      next();
+    } else {
+      res.send({ message: "closed" });
+    }
   };
 };
