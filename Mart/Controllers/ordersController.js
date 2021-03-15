@@ -118,7 +118,7 @@ module.exports = class OrdersController {
         ecl: "M",
       });
       qrcode.save(`../QrImages/${qrtoken}.svg`, function(error) {
-        if (error) throw error;
+        console.log(error)
         console.log("Done!");
       });
       
