@@ -100,9 +100,9 @@ module.exports = class OrdersController {
       for(var i in products){
         console.log(products[i])
           productString += `<tr> 
-             <td>${products[i].product.productName}</td>
-             <td>${products[i].count}</td>
-             <td>${products[i].totalPrice} Rs</td>
+             <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].product.productName}</td>
+             <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].count}</td>
+             <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].totalPrice} Rs</td>
           </tr>` 
       }
       
@@ -116,15 +116,37 @@ module.exports = class OrdersController {
                amount   ${amount} Rs<br/><br/><br/>
                <table style="width:100%;" >
                  <tr>
-                   <th>product</th>
-                   <th>count</th>
-                   <th>amount</th>
+                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >product</th>
+                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;">count</th>
+                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >amount</th>
                  </tr>
                  ${productString}
                </table>
             </p>`,
       to:'rmart.developers@rajalakshmi.edu.in'
      })
+
+     axios.post('http://email:8000/sendMail',{
+      subject:"New Order",
+      body:`<p>
+              Hey ${name},<br/><br/>
+
+              Your order has been successfully placed ! The Auto-generated QR for collecting your order at the delivery point is,<br/><br/><br/>
+           
+              <table style="width:100%;" >
+                <tr>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >product</th>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;">count</th>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >amount</th>
+                </tr>
+                ${productString}
+              </table><br/><br/><br/>
+
+              Note:<br/>
+              Kindly show this QR code at the delivery point if you face any difficulties in opening the "My Orders" section in the app due to weak network connectivity.
+           </p>`,
+     to:email
+    })
     } catch (error) {
       console.log(error)
     }
