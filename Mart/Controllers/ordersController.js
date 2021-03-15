@@ -117,7 +117,7 @@ module.exports = class OrdersController {
         background: "#ffffff",
         ecl: "M",
       });
-      qrcode.save(`../QrImages/${qrtoken}.svg`, function(error) {
+      qrcode.save(`rMart-Backend/Mart/QrImages/${qrtoken}.svg`, function(error) {
         console.log(error)
         console.log("Done!");
       });
