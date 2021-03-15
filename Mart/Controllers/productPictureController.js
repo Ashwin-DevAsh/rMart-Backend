@@ -20,6 +20,11 @@ module.exports = class ProductsPictureController {
     res.download("../productPictures/" + imageName);
   };
 
+  getQrImages = (req, res) => {
+    var imageName = req.params.imageName;
+    res.download("../QrImages/" + imageName);
+  };
+
   addProductPicture = (req, res) => {
     upload(req, res, (err, result) => {
       if (err) {

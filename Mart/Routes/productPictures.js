@@ -11,4 +11,10 @@ app.get(
   productsPictureController.getProductPicture
 );
 
+app.get(
+  "/getQrImages/:imageName",
+  productsPictureController.getQrImages
+);
+
+
 module.exports = app;

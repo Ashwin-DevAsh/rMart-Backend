@@ -2,8 +2,10 @@ const { Pool } = require("pg");
 const clientDetails = require("../Database/ClientDetails");
 const OrderService = require("../Services/OrderService");
 const DatabaseService = require("../Services/Database");
-var json2xls = require('json2xls');
+const json2xls = require('json2xls');
 const axios = require('axios');
+const fs = require("fs")
+const QRCode = require("qrcode-svg");
 
 
 module.exports = class OrdersController {
@@ -95,7 +97,7 @@ module.exports = class OrdersController {
     }
 
     try {
-      var {amount,orederid,orderdby:{name,number,email},products} = isOrderExist[0]
+      var {amount,orederid,orderdby:{name,number,email},products,qrtoken} = isOrderExist[0]
       var productString = ``
       for(var i in products){
         console.log(products[i])
@@ -105,20 +107,35 @@ module.exports = class OrdersController {
              <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].totalPrice} Rs</td>
           </tr>` 
       }
+
+      var qrcode = new QRCode({
+        content: qrtoken,
+        padding: 4,
+        width: 256,
+        height: 256,
+        color: "#000000",
+        background: "#ffffff",
+        ecl: "M",
+      });
+      qrcode.save(`../QrImages/${qrtoken}.svg`, function(error) {
+        if (error) throw error;
+        console.log("Done!");
+      });
+      
       
       axios.post('http://email:8000/sendMail',{
        subject:"New Order",
        body:`<p>
-               order  ${orederid} <br/>
-               name       ${name} <br/>
-               email     ${email} <br/>
-               number   ${number} <br/>
-               amount   ${amount} Rs<br/><br/><br/>
+               Order  ${orederid} <br/>
+               Name       ${name} <br/>
+               Email     ${email} <br/>
+               Number   ${number} <br/>
+               Amount   ${amount} Rs<br/><br/><br/>
                <table style="width:100%;" >
                  <tr>
-                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >product</th>
-                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;">count</th>
-                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >amount</th>
+                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Product</th>
+                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;">Count</th>
+                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Amount</th>
                  </tr>
                  ${productString}
                </table>
@@ -135,9 +152,9 @@ module.exports = class OrdersController {
            
               <table style="width:100%;" >
                 <tr>
-                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >product</th>
-                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;">count</th>
-                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >amount</th>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Product</th>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;">Count</th>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Amount</th>
                 </tr>
                 ${productString}
               </table><br/><br/><br/>
@@ -147,6 +164,7 @@ module.exports = class OrdersController {
            </p>`,
      to:email
     })
+
     } catch (error) {
       console.log(error)
     }
