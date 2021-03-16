@@ -104,11 +104,11 @@ module.exports = class OrdersController {
 
     try {
 
+      var {amount,orederid,orderdby:{name,number,email},products,qrtoken} = isOrderExist[0]
 
       var qrcode = qr.image(qrtoken, { type: 'png' });
       qrcode.pipe(fs.createWriteStream(`../QrImages/${qrtoken}.png`));
 
-      var {amount,orederid,orderdby:{name,number,email},products,qrtoken} = isOrderExist[0]
       var productString = ``
       for(var i in products){
         console.log(products[i])

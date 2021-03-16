@@ -32,6 +32,7 @@ module.exports = class EmailService{
       }
 
       async sendMailWithImage(subject, text, toEmail,imagePath) {
+        console.log(imagePath)
         var mailOptions = {
           from: `rMart <${this.myEmail}>`,
           to:   toEmail,
