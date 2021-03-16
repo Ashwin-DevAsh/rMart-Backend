@@ -40,7 +40,7 @@ module.exports = class EmailService{
           html: text,
           attachments:[
             {   // file on disk as an attachment
-              filename: 'QrCode',
+              filename: 'QrCode.png',
               path: `../QrImages/${imagePath}` 
              },
           ]
