@@ -194,7 +194,7 @@ module.exports = class Database {
     try {
       await postgres.query(`set timezone TO 'Asia/Kolkata'`);
       var orders = (await postgres
-        .query(`select * from orders where qrToken = $1 and to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') < TIMESTAMP 'today'`,[qrToken])).rows;
+        .query(`select * from orders where qrToken = $1`,[qrToken])).rows;
       console.log("Orders =", orders)
       postgres.release();
       return orders;
