@@ -43,8 +43,8 @@ var task2 = cron.schedule('00 12 * * *', () => {
 
     if(day!=0){
       axios.post('http://email:8000/sendNotification',{
-        title:"Feeling Hungry!",
-        subtitle:"Order Delicious snacks from rMart app at discounted rates! What are you waiting for?  Order right away !",
+        title:"No pre-ordering required!!!",
+        subtitle:"What are you waiting for? Order delicious snacks at discounted rate and grab your snacks right away!",
         topic:'rMart'
       })
     }
