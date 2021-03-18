@@ -116,9 +116,9 @@ var task3 = cron.schedule('00 19 * * *', async() => {
     axios.post('http://email:8000/sendMail',{
       subject:"New Order",
       body:`<p>
-              No of Orders Placed  ${totalOrders} <br/>
-              Pending Orders       ${pendingOredrs} <br/>
-              Delivered Orders     ${deliveredOrders} <br/><br/><br/>
+              No of Orders Placed :  ${totalOrders} <br/>
+              Delivered Orders :    ${deliveredOrders} <br/>
+              Pending Orders :      ${pendingOredrs} <br/><br/><br/>
               <table style="width:100%;" >
                 <tr>
                   <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Product</th>
