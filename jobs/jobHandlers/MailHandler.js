@@ -59,7 +59,7 @@ timezone: "Asia/Kolkata"
 );
 
 
-var task3 = cron.schedule('50 18 * * *', async() => {
+var task3 = cron.schedule('00 19 * * *', async() => {
   console.log('task 3 executing...')
   try{
 
@@ -116,7 +116,7 @@ var task3 = cron.schedule('50 18 * * *', async() => {
     axios.post('http://email:8000/sendMail',{
       subject:"New Order",
       body:`<p>
-              Total Orders         ${totalOrders} <br/>
+              No of Orders Placed  ${totalOrders} <br/>
               Pending Orders       ${pendingOredrs} <br/>
               Delivered Orders     ${deliveredOrders} <br/><br/><br/>
               <table style="width:100%;" >
@@ -128,7 +128,7 @@ var task3 = cron.schedule('50 18 * * *', async() => {
                 ${productString}
               </table>
            </p>`,
-     to:'2017ashwin@gmail.com',
+           to:'rmart.developers@rajalakshmi.edu.in',
     })
 
      console.log("sended email")
