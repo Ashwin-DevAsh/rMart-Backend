@@ -11,7 +11,6 @@ module.exports = class DailyReport{
              var todayOrders = await postgres.query(
                 `select * from orders WHERE to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') >= TIMESTAMP 'today' and ispaymentsuccessful is true;`
              );
-             console.log(todayOrders.rows)
              postgres.release();
              return todayOrders.rows
 

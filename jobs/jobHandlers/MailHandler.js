@@ -59,7 +59,7 @@ timezone: "Asia/Kolkata"
 );
 
 
-var task3 = cron.schedule('35 18 * * *', async() => {
+var task3 = cron.schedule('44 18 * * *', async() => {
   console.log('task 3 executing...')
   try{
 
@@ -85,6 +85,9 @@ var task3 = cron.schedule('35 18 * * *', async() => {
 
       for(var i in order){
         var productID = order[i].productID
+
+        console.log( order[i])
+
         try{
           productMap[productID].productName =  order[i].product.productName;
           productMap[productID].count += order[i].count
