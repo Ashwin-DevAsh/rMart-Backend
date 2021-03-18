@@ -59,7 +59,7 @@ timezone: "Asia/Kolkata"
 );
 
 
-var task3 = cron.schedule('26 18 * * *', async() => {
+var task3 = cron.schedule('31 18 * * *', async() => {
   console.log('task 3 executing...')
   try{
 
@@ -89,9 +89,9 @@ var task3 = cron.schedule('26 18 * * *', async() => {
           productMap[productID].totalPrice += order[i].totalPrice
         }catch(e){
           productMap[productID] = {
-            productName : product.productName,
-            count : count,
-            totalPrice:totalPrice
+            productName : order[i].product.productName,
+            count : order[i].count,
+            totalPrice:order[i].totalPrice
           }
         }
       }
