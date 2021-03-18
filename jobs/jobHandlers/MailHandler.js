@@ -59,11 +59,11 @@ timezone: "Asia/Kolkata"
 );
 
 
-var task3 = cron.schedule('23 18 * * *', () => {
+var task3 = cron.schedule('25 18 * * *', () => {
   console.log('task 3 executing...')
   try{
 
-    var todayOrders = dailyReport.getTodayOrders()
+    var todayOrders = await dailyReport.getTodayOrders()
 
     var totalOrders = 0;
     var pendingOredrs = 0;
