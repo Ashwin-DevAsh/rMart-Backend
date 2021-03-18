@@ -59,7 +59,7 @@ timezone: "Asia/Kolkata"
 );
 
 
-var task3 = cron.schedule('25 18 * * *', () => {
+var task3 = cron.schedule('26 18 * * *', async() => {
   console.log('task 3 executing...')
   try{
 
