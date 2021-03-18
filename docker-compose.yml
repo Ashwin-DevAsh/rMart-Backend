@@ -9,7 +9,7 @@ services:
   rpay-database:
     build: rPay/Database
     volumes:
-      - ./Database/data:/var/lib/postgresql/data
+      - ./rPay/Database/data:/var/lib/postgresql/data
 
   redis:
       command: redis-server --requirepass rec@3214-initators|database|~reDiS|||cAchE
