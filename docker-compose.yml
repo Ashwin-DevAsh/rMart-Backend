@@ -64,6 +64,13 @@ services:
     volumes:
       - ./env:/env
       - ./rPay/Database:/Database
+  
+  
+  sync:
+    build: Sync
+    volumes:
+      - ./env:/env
+      - ./rPay/Database:/Database
 
   mart:
     build: Mart
@@ -79,7 +86,7 @@ services:
 
   reverse-proxy:
     build: nginx
-    depends_on: [profile,mart,rpay-profile,transaction]
+    depends_on: [profile,mart,rpay-profile,transaction,sync]
     ports:
       - 80:80
       - 443:443
