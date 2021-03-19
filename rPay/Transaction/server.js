@@ -10,7 +10,7 @@ const status = require("./Routes/status");
 const message = require("./Routes/message");
 
 process.env.TZ = "Asia/Kolkata";
-
+//
 var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
