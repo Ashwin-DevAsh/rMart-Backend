@@ -115,6 +115,7 @@ var addUser = async (postgres, req, res) => {
         res.json([{ message: "done", token }]);
         postgres.query(`delete from otp where number=$1`, [user.number]);
       } else {
+        console.log('failed')
         res.json([{ message: "failed" }]);
       }
     } catch (err) {

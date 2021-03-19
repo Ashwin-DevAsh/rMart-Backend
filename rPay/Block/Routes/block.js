@@ -40,10 +40,15 @@ app.post("/addWithdrawBlock", async (req, res) => {
 });
 
 app.post("/addUserBlock", async (req, res) => {
-  var postgres = await pool.connect();
+  try{
+    var postgres = await pool.connect();
 
-  await addBlock(postgres, res, req.body.id, req.body, "New User");
-  (await postgres).release();
+    await addBlock(postgres, res, req.body.id, req.body, "New User");
+    (await postgres).release();
+  }catch(e){
+    console.log(e)
+  }
+
 });
 
 const addBlock = async (postgres, res, refID, data, type) => {
