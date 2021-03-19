@@ -58,7 +58,7 @@ services:
       - ./rPay/Database:/Database
       - ./rPay/profilePictures:/profilePictures
   
-   admin:
+  admin:
     build: rPay/Admin
     ports:
       - 4500:4500
