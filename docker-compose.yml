@@ -94,7 +94,7 @@ services:
 
   reverse-proxy:
     build: nginx
-    depends_on: [profile,mart,rpay-profile,transaction,sync]
+    depends_on: [profile,mart,rpay-profile,transaction,sync,admin]
     ports:
       - 80:80
       - 443:443
