@@ -30,6 +30,10 @@ app.get("/", (req, res) => {
   res.status(200).json({ Message: "Welcome to rec wallet" });
 });
 
+setInterval(() => {
+  console.log("cors")
+}, 1000);
+
 app.use(userEndPoint);
 app.use(authEndPoint);
 app.use(merchantEndPoint);
@@ -41,3 +45,4 @@ app.use(init);
 app.listen(8000, () => {
   console.log("connecte at port 8000");
 });
+
