@@ -44,14 +44,14 @@ services:
       - ./profilePictures:/profilePictures
   
   block:
-    build: Block
+    build: rPay/Block
     depends_on: [rpay-database]
     volumes:
       - ./env:/env
       - ./rPay/Database:/Database
 
   rpay-profile:
-    build: Profile
+    build: rPay/Profile
     depends_on: [block,rpay-database]
     volumes:
       - ./env:/env
@@ -59,7 +59,7 @@ services:
       - ./rPay/profilePictures:/profilePictures
   
   transaction:
-    build: Transaction
+    build: rPay/Transaction
     depends_on: [block,rpay-database]
     volumes:
       - ./env:/env
