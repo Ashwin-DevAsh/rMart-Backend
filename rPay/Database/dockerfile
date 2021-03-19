@@ -1,7 +1,7 @@
 FROM postgres
 
 ENV POSTGRES_USER postgres
-ENV POSTGRES_PASSWORD ec@3214-initators~|database|~rPaYDaTabAsE
+ENV POSTGRES_PASSWORD rec@3214-initators~|database|~rPaYDaTabAsE
 ENV POSTGRES_DB rPay
 
 ADD ./createDB.sql /docker-entrypoint-initdb.d/
