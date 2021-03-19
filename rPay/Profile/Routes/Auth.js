@@ -7,7 +7,7 @@ const axios = require("axios");
 var pool = new Pool(clientDetails);
 
 app.get("/getOtp", async (req, res) => {
-  console.log("getting otp....",clientDetails)
+  console.log("getting otp......",clientDetails)
   var postgres = await pool.connect();
   await sendOtp(postgres, req, res, "Otp", "TqUmly4458C");
   (await postgres).release();
