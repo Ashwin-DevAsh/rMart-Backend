@@ -13,7 +13,7 @@ app.get("/init/:id", async (req, res) => {
 
 var init = async (postgres, req, res) => {
   try {
-    var decoded = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY);
+      await jwt.verify(req.get("token"), process.env.PRIVATE_KEY);
   } catch (e) {
     console.log(e);
     res.send({ message: "failed" });
