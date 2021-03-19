@@ -8,6 +8,7 @@ var pool = new Pool(clientDetails);
 
 app.get("/getOtp", async (req, res) => {
   console.log("getting otp....")
+  //
   var postgres = await pool.connect();
   await sendOtp(postgres, req, res, "Otp", "TqUmly4458C");
   (await postgres).release();
