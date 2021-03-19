@@ -67,7 +67,7 @@ services:
   
   
   sync:
-    build: Sync
+    build: rPay/Sync
     volumes:
       - ./env:/env
       - ./rPay/Database:/Database
