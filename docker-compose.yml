@@ -42,6 +42,28 @@ services:
       - ./Database:/Database
       - ./cache:/cache
       - ./profilePictures:/profilePictures
+  
+  block:
+    build: Block
+    depends_on: [rpay-database]
+    volumes:
+      - ./env:/env
+      - ./rPay/Database:/Database
+
+  rpay-profile:
+    build: Profile
+    depends_on: [block,rpay-database]
+    volumes:
+      - ./env:/env
+      - ./rPay/Database:/Database
+      - ./rPay/profilePictures:/profilePictures
+  
+  transaction:
+    build: Transaction
+    depends_on: [block,rpay-database]
+    volumes:
+      - ./env:/env
+      - ./rPay/Database:/Database
 
   mart:
     build: Mart

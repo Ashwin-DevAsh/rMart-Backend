@@ -96,24 +96,11 @@ var sendOtp = async (postgres, req, res, otpTable, appId) => {
   var otpNumber = Math.floor(1000 + Math.random() * 9000);
   var apiKey = "49c888fc-671a-11eb-8153-0200cd936042";
 
-  // smsMessage.from = "Rpay";
-  // smsMessage.to = `+${number}`;
   var smsbody = `<#> Rpay never calls you asking for otp. Sharing it with
                      anyone gives them full access to your Rpay wallet.
                      Your Login OTP is ${otpNumber} . ID: ${appId}`;
 
   console.log(smsbody);
-  // console.log({
-  //   number,
-  //   otpNumber,
-  // });
-
-  // var smsApi = new api.SMSApi(
-  //   process.env.OTP_USERNAME,
-  //   process.env.OTP_API_KEY
-  // );
-  // var smsCollection = new api.SmsMessageCollection();
-  // smsCollection.messages = [smsMessage];
 
   try {
     var response = (
