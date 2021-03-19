@@ -58,6 +58,14 @@ services:
       - ./rPay/Database:/Database
       - ./rPay/profilePictures:/profilePictures
   
+   admin:
+    build: rPay/Admin
+    ports:
+      - 4500:4500
+    volumes:
+      - ./env:/env
+      - ./rPay/Database:/Database
+  
   transaction:
     build: rPay/Transaction
     depends_on: [block,rpay-database]
