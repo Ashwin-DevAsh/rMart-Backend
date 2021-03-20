@@ -13,6 +13,15 @@ create table users(
   balance bigint
 );
 
+create table admins(
+  id varchar primary key,
+  name varchar,
+  number varchar,
+  email varchar,
+  password varchar,
+  permissions json[]
+);
+
 -- otp
 
 create table otp(
