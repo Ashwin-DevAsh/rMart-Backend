@@ -81,7 +81,7 @@ services:
       - ./rPay/Database:/Database
 
   console:
-    build: Console
+    build: rPay/Console
 
   mart:
     build: Mart
