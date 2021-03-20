@@ -80,6 +80,9 @@ services:
       - ./env:/env
       - ./rPay/Database:/Database
 
+  console:
+    build: Console
+
   mart:
     build: Mart
     depends_on: [database,email,redis]
@@ -94,7 +97,7 @@ services:
 
   reverse-proxy:
     build: nginx
-    depends_on: [profile,mart,rpay-profile,transaction,sync,admin]
+    depends_on: [profile,mart,rpay-profile,transaction,sync,admin,console]
     ports:
       - 80:80
       - 443:443
