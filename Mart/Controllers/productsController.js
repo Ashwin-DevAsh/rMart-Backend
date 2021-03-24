@@ -52,6 +52,8 @@ class ProductsController {
       discount
     } = req.body;
 
+    console.log(req.body)
+
     if (
       !productID ||
       !productName ||
@@ -61,10 +63,11 @@ class ProductsController {
       !price ||
       !quantity ||
       !imageUrl ||
-      !availableOn ||
+      !availableOn==undefined ||
       !isavailable==undefined ||
       !discount==undefined
     ) {
+      
       res.send({ message: "invalid body" });
     } else {
       var isUpdated = await this.databaseService.updateProduct(
