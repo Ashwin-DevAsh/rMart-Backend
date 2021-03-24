@@ -59,9 +59,8 @@ module.exports = class Database {
                            price = $6,
                            quantity = $7,
                            imageUrl = $8,
-                           availableOn = $9,
-                           isavaliable = $10,
-                           discount = $11 where productID = $1`,
+                           isavaliable = $9,
+                           discount = $10 where productID = $1`,
         [
           productID,
           productName,
@@ -71,7 +70,6 @@ module.exports = class Database {
           price,
           quantity,
           imageUrl,
-          avaliableOn,
           isAvailable,
           discount
         ]
