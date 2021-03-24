@@ -12,4 +12,7 @@ app.post("/deleteProduct",new Auth().isMerchantKeyAuth,productsController.delete
 
 app.get("/getAllProducts",new Auth().isKeyAuth,productsController.getAllProducts);
 
+app.get("/getMyProducts",new Auth().isKeyAuth,productsController.getMyProducts);
+
+
 module.exports = app;

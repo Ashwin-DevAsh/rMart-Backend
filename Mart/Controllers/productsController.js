@@ -22,6 +22,19 @@ class ProductsController {
     }
   };
 
+  getMyProducts = async (req, res) => {
+
+
+    var allProducts = await this.databaseService.getMyProducts();
+    
+
+    if (allProducts) {
+      res.send({ message: "success", allProducts });
+    } else {
+      res.send({ message: "failed" });
+    }
+  };
+
   deleteProduct = async (req, res) => {
     var { productID } = req.body;
     if (!productID) {

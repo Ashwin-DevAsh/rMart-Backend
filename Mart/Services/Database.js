@@ -21,6 +21,22 @@ module.exports = class Database {
     }
   };
 
+
+  getMyProducts = async () => {
+    var postgres = await this.pool.connect();
+    try {
+      var products = await postgres.query(
+        "select * from products order by productName"
+      );
+      postgres.release();
+      return products.rows;
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  };
+
   deleteProduct = async (productID) => {
     var postgres = await this.pool.connect();
     try {
