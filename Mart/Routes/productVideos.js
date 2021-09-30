@@ -7,8 +7,8 @@ var productsPictureController = new ProductsPictureController();
 
 
 app.get(
-  "/getProductVideos/:imageName",
-  productsPictureController.getProductPicture
+  "/getProductVideos/:videoName",
+  productsPictureController.getProductVideos
 );
 
 
