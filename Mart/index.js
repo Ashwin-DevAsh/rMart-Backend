@@ -6,6 +6,8 @@ const orders = require("./Routes/orders");
 
 const bodyParser = require("body-parser");
 const uploadPictures = require("./Routes/productPictures");
+const productVideos = require("./Routes/productVideos");
+
 
 const compression = require('compression')
 
@@ -51,6 +53,7 @@ app.use(bodyParser.json());
 
 app.use(products);
 app.use(uploadPictures);
+app.use(productVideos)
 
 app.use(orders);
 
