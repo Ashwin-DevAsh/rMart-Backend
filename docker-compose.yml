@@ -12,8 +12,8 @@ services:
       - ./rPay/Database/data:/var/lib/postgresql/data
 
   redis:
-      command: redis-server --requirepass rec@3214-initators|database|~reDiS|||cAchE
-      image: redis
+    command: redis-server --requirepass rec@3214-initators|database|~reDiS|||cAchE
+    image: redis
 
   email:
     build: Email
@@ -25,7 +25,7 @@ services:
 
   jobs:
     build: jobs
-    depends_on: [database,email]
+    depends_on: [database, email]
     deploy:
       replicas: 1
     volumes:
@@ -34,7 +34,7 @@ services:
 
   profile:
     build: Profile
-    depends_on: [database,email,redis]
+    depends_on: [database, email, redis]
     deploy:
       replicas: 5
     volumes:
@@ -42,7 +42,7 @@ services:
       - ./Database:/Database
       - ./cache:/cache
       - ./profilePictures:/profilePictures
-  
+
   block:
     build: rPay/Block
     depends_on: [rpay-database]
@@ -52,12 +52,12 @@ services:
 
   rpay-profile:
     build: rPay/Profile
-    depends_on: [block,rpay-database]
+    depends_on: [block, rpay-database]
     volumes:
       - ./env:/env
       - ./rPay/Database:/Database
       - ./rPay/profilePictures:/profilePictures
-  
+
   admin:
     build: rPay/Admin
     ports:
@@ -65,15 +65,14 @@ services:
     volumes:
       - ./env:/env
       - ./rPay/Database:/Database
-  
+
   transaction:
     build: rPay/Transaction
-    depends_on: [block,rpay-database]
+    depends_on: [block, rpay-database]
     volumes:
       - ./env:/env
       - ./rPay/Database:/Database
-  
-  
+
   sync:
     build: rPay/Sync
     volumes:
@@ -85,7 +84,7 @@ services:
 
   mart:
     build: Mart
-    depends_on: [database,email,redis]
+    depends_on: [database, email, redis]
     deploy:
       replicas: 5
     volumes:
@@ -94,10 +93,9 @@ services:
       - ./cache:/cache
       - ./Mart/QrImages:/QrImages
 
-
   reverse-proxy:
     build: nginx
-    depends_on: [profile,mart,rpay-profile,transaction,sync,admin,console]
+    depends_on: [profile, mart, rpay-profile, transaction, sync, admin, console]
     ports:
       - 80:80
       - 443:443
@@ -105,7 +103,6 @@ services:
     volumes:
       - ./certbot/conf:/etc/nginx/ssl
       - ./certbot/data:/var/www/certbot
-  
 
   certbot:
     image: certbot/certbot:latest
