@@ -9,7 +9,7 @@ module.exports = class ProfileController {
         res.send({ message: "invalid body" });
         return;
       }
-      var balance = await this.databaseService.getBalance(id)
+      var balance = (await this.databaseService.getBalance(id))["balance"]
       console.log(balance)
       res.send({"message":"done",balance})
   }
