@@ -12,6 +12,8 @@ const recovery = require("./Routes/recovery");
 
 const merchants = require("./Routes/merchants");
 
+const profile = require("./Routes/profile")
+
 var RateLimit = require('express-rate-limit');
 
 var ipLookUp = new (require('./Services/iplookup'))();
@@ -57,6 +59,7 @@ app.use(regiseration);
 app.use(otp);
 app.use(recovery);
 app.use(merchants);
+app.use(profile)
 
 app.listen(8000, () => {
   console.log("connecte at port 8000");
