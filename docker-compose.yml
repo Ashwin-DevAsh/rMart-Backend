@@ -112,3 +112,4 @@ services:
   #     - ./certbot/conf:/etc/letsencrypt
   #     - ./certbot/logs:/var/log/letsencrypt
   #     - ./certbot/data:/var/www/certbot
+# sudo docker-compose --compatibility up --build -d
