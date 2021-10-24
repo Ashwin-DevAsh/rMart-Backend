@@ -11,6 +11,6 @@ module.exports = class ProfileController {
       }
       var balance = this.databaseService.getBalance(id)
       console.log(balance)
-      res.send(balance)
+      res.send({"message":"done",balance})
   }
 } 

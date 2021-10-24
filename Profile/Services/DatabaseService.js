@@ -84,6 +84,7 @@ module.exports = class Database {
           [id]
         );
         postgres.release();
+        console.log(user)
         return user.rows[0];
       } catch (e) {
         postgres.release();
