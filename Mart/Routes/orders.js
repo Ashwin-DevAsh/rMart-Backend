@@ -18,7 +18,7 @@ app.post(
   new Auth().isKeyAuth,
   new Auth().isTransAuth,
   new Auth().isMartOpen,
-  ordersController.makeOrder
+  ordersController.placeOrderUsingWallet
 );
 
 app.post(
