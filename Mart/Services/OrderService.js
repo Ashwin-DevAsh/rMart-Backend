@@ -18,7 +18,7 @@ module.exports = class OrderService {
     var ISTOffset = 330; 
     var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
     var transactionTime = dateFormat(ISTTime, "mm-dd-yyyy hh:MM:ss");
-    paymentMetadata = {id:orderID,paidby:'rMart Wallet'}
+    paymentMetadata = {id:paymentMetadata,paidby:'rMart Wallet'}
     try {
       await postgres.query("begin");
       var user = (

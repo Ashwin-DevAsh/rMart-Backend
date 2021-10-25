@@ -39,7 +39,7 @@ module.exports = class OrdersController {
       products,
       orderBy,
       amount,
-       orderID
+      orderID
     );
 
 
