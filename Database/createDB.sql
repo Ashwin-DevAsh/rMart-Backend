@@ -6,7 +6,8 @@ create table users(
   id varchar primary key,
   status varchar,
   collegeID varchar unique,
-  fcmToken varchar
+  fcmToken varchar,
+  balance bigint
 );
 
 create table products(

@@ -6,7 +6,7 @@ const json2xls = require('json2xls');
 const axios = require('axios');
 const fs = require("fs")
 const QRCode = require("qrcode-svg");
-
+const { v4: uuidv4 } = require('uuid');
 var qr = require('qr-image');
 
 
@@ -15,6 +15,49 @@ module.exports = class OrdersController {
   orderservice = new OrderService();
   databaseService = new DatabaseService();
   pool = new Pool(clientDetails);
+
+
+  placeOrderUsingWallet = async (req, res) => {
+    var { products, orderBy, amount } = req.body;
+
+    if (!products || !orderBy || !amount) {
+      res.send({ message: "invalid body" });
+      return;
+    }
+
+    var isValidProduct = await this.orderservice.verifyProducts(
+      products,
+      amount
+    );
+    if (isValidProduct != "veified") {
+      res.send({ message: isValidProduct });
+      return;
+    }
+    var orderID = uuidv4()
+
+    var isOrderPlaced = await this.orderservice.placeOrderUsingWallet(
+      products,
+      orderBy,
+      amount,
+       orderID
+    );
+
+
+    if (isOrderPlaced.length == 0) {
+      console.log("Not Placed");
+      res.send({ message: "failed" });
+      return;
+    }
+
+
+    res.send({
+      message: "success",
+      orderID: orderID,
+    });
+    console.log("finished");
+    return;
+  };
+
 
   makeOrder = async (req, res) => {
     var { products, orderBy, amount } = req.body;

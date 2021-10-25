@@ -11,6 +11,64 @@ module.exports = class OrderService {
     key_secret: process.env.key_secret,
   });
 
+  placeOrderUsingWallet = async (products, orderdBy, amount, paymentMetadata) => {
+    var postgres = await this.pool.connect();
+    var currentTime = new Date();
+    var currentOffset = currentTime.getTimezoneOffset();
+    var ISTOffset = 330; 
+    var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+    var transactionTime = dateFormat(ISTTime, "mm-dd-yyyy hh:MM:ss");
+    paymentMetadata = {id:orderID,paidby:'rMart Wallet'}
+    try {
+      await postgres.query("begin");
+      var user = (
+        await postgres.query("select * from users where id=$1 for update", [orderdBy.id])
+      ).rows[0];  
+      console.log("user = ",user)
+      if(!user){
+        throw Error("Invalid User")
+      }
+      const balance = user.balance
+      if(parseInt(balance)<parseInt(amount)){
+        throw Error("insufficient balance")
+      }
+      await postgres.query(
+        "update users set balance = balance - $1 where id = $2",
+        [amount, orderdBy.id]
+      );
+      var orderData = (
+        await postgres.query(
+          `insert into orders(
+                        status,
+                        amount,
+                        orderdBy ,
+                        timestamp ,
+                        products ,
+                        paymentMetadata,
+                        isPaymentSuccessful)
+                        values($1,$2,$3,$4,$5,$6,$7) returning *`,
+          [
+            "pending",
+            amount,
+            orderdBy,
+            transactionTime,
+            products,
+            paymentMetadata,
+            true,
+          ]
+        )
+      ).rows;
+      await postgres.query("commit");
+      postgres.release();
+      return orderData;
+    } catch (e) {
+      await postgres.query("rollback");
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  };
+
   placeOrder = async (products, orderdBy, amount, paymentMetadata) => {
     var postgres = await this.pool.connect();
     var currentTime = new Date();
