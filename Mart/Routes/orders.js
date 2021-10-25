@@ -31,6 +31,8 @@ app.post(
 app.get("/getMyOrders/:id",new Auth().isKeyAuth ,ordersController.getMyOrders);
 
 app.get("/getAllOrders", new Auth().isMerchantKeyAuth,ordersController.getAllOrders);
+app.get("v2/getAllOrders/:status", new Auth().isMerchantKeyAuth,ordersController.getAllOrders);
+
 
 app.get("/getQrToken/:id", new Auth().isMerchantKeyAuth, ordersController.getOrderByQr);
 
