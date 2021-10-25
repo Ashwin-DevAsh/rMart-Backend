@@ -122,6 +122,8 @@ module.exports = class OrdersController {
 
     var isOrderExist = await this.orderservice.isOrderExist(orderID);
 
+    console.log(isOrderExist)
+
     if (isOrderExist.length == 0) {
       return;
     }
@@ -133,13 +135,18 @@ module.exports = class OrdersController {
       amount
     );
 
+    console.log(isverifyRazorpayPayment);
+
     if (!isverifyRazorpayPayment) {
+      console.log("failed")
       res.send({ message: "failed" });
       return;
     }
 
     var isUpdated = await this.orderservice.makeOrderValid(orderID);
+    console.log(isUpdated);
     if (isUpdated.length == 0) {
+      console.log("failed")
       res.send({ message: "failed" });
       return;
     }
