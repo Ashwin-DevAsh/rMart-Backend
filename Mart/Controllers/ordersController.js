@@ -55,6 +55,8 @@ module.exports = class OrdersController {
       orderID: orderID,
     });
     console.log("finished");
+    this.sendMailReport(isOrderPlaced)
+    console.log(isOrderPlaced)
     return;
   };
 
@@ -144,7 +146,10 @@ module.exports = class OrdersController {
 
     res.send({ message: "success" });
 
+    this.sendMailReport(isOrderExist)
+  };
 
+  sendMailReport = async(isOrderExist)=>{
     try {
 
       var {amount,orederid,orderdby:{name,number,email},products,qrtoken} = isOrderExist[0]
@@ -212,10 +217,7 @@ module.exports = class OrdersController {
     } catch (error) {
       console.log(error)
     }
-    
-
-   
-  };
+  }
 
   getMyOrders = async (req, res) => {
     var { id, status } = req.params;
