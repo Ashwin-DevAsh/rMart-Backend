@@ -151,15 +151,25 @@ module.exports = class Database {
     }
   };
 
-  getMyOrders = async (id) => {
+  getMyOrders = async (id,status) => {
     var postgres = await this.pool.connect();
     try {
-      var orders = (
-        await postgres.query(
-          `select * from orders where cast(orderdby->>'id' as varchar) = $1 and isPaymentSuccessful=true order by orederId desc`,
-          [id]
-        )
-      ).rows;
+      if(!status || status=="all"){
+        var orders = (
+          await postgres.query(
+            `select * from orders where cast(orderdby->>'id' as varchar) = $1 and isPaymentSuccessful=true order by orederId desc`,
+            [id]
+          )
+        ).rows;
+      }else if(status){
+        var orders = (
+          await postgres.query(
+            `select * from orders where cast(orderdby->>'id' as varchar) = $1 and isPaymentSuccessful=true and status = $2 order by orederId desc`,
+            [id,status]
+          )
+        ).rows;
+      }
+  
       postgres.release();
       return orders;
     } catch (e) {
