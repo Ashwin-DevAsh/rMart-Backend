@@ -5,9 +5,13 @@ module.exports = class ProfileController {
 
   getBalance = async (req,res)=>{
       var {id} = req.body;
+      var {headerID} = req.headers
       if(!id){
         res.send({ message: "invalid body" });
         return;
+      }
+      if(id !== headerID){
+        res.send({ message: "Okay you hacked rMart" });
       }
       var balance = (await this.databaseService.getBalance(id))["balance"]
       console.log(balance)
