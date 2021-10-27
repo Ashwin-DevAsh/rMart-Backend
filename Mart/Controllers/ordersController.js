@@ -62,7 +62,11 @@ module.exports = class OrdersController {
 
 
   makeOrder = async (req, res) => {
-    var { products, orderBy, amount } = req.body;
+    var { products, orderBy, amount, walletAmount } = req.body;
+
+    if(!walletAmount){
+      walletAmount = 0;
+    }
 
     if (!products || !orderBy || !amount) {
       res.send({ message: "invalid body" });
@@ -77,8 +81,17 @@ module.exports = class OrdersController {
       res.send({ message: isValidProduct });
       return;
     }
+
+    var accountBalance = await this.orderservice.getBalance(orderBy.id)
+
+    if(accountBalance <= walletAmount){
+       console.log("not enough balance")
+       res.send({ message: "failed",message:"not enough balance" });
+       return
+    }
+
     var orderID = await this.orderservice.getOrderID(
-      parseInt(amount),
+      parseInt(amount) - parseInt(walletAmount),
       orderBy.id
     );
 
@@ -91,6 +104,7 @@ module.exports = class OrdersController {
       products,
       orderBy,
       amount,
+      walletAmount,
       orderID
     );
 
@@ -128,11 +142,11 @@ module.exports = class OrdersController {
       return;
     }
 
-    var { amount } = isOrderExist[0];
+    var { amount,walletamount,orderdby:{id} } = isOrderExist[0];
     var isverifyRazorpayPayment = await this.orderservice.verifyRazorpayPayment(
       orderID,
       paymentID,
-      amount
+      amount-walletamount
     );
 
     console.log(isverifyRazorpayPayment);
@@ -143,7 +157,7 @@ module.exports = class OrdersController {
       return;
     }
 
-    var isUpdated = await this.orderservice.makeOrderValid(orderID);
+    var isUpdated = await this.orderservice.makeOrderValid(orderID,walletamount,id);
     console.log(isUpdated);
     if (isUpdated.length == 0) {
       console.log("failed")

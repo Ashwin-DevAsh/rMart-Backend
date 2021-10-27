@@ -72,7 +72,7 @@ module.exports = class OrderService {
     }
   };
 
-  placeOrder = async (products, orderdBy, amount, paymentMetadata) => {
+  placeOrder = async (products, orderdBy, amount,walletAmount,paymentMetadata) => {
     var postgres = await this.pool.connect();
     var currentTime = new Date();
     var currentOffset = currentTime.getTimezoneOffset();
@@ -88,15 +88,17 @@ module.exports = class OrderService {
                         orderdBy ,
                         timestamp ,
                         products ,
+                        walletAmount,
                         paymentMetadata,
                         isPaymentSuccessful)
-                        values($1,$2,$3,$4,$5,$6,$7) returning *`,
+                        values($1,$2,$3,$4,$5,$6,$7,$8) returning *`,
           [
             "pending",
             amount,
             orderdBy,
             transactionTime,
             products,
+            walletAmount,
             paymentMetadata,
             false,
           ]
@@ -169,20 +171,37 @@ module.exports = class OrderService {
     }
   };
 
-  makeOrderValid = async (orderID) => {
+  makeOrderValid = async (orderID,walletAmount,id) => {
     var postgres = await this.pool.connect();
     try {
+      await postgres.query("begin");
+      var user = (
+        await postgres.query("select * from users where id=$1 for update", [id])
+      ).rows[0];  
+      console.log("user = ",user)
+      if(!user){
+        throw Error("Invalid User")
+      }
+      const balance = user.balance
+      if(parseInt(balance)<parseInt(walletAmount)){
+        throw Error("insufficient balance")
+      }
+      await postgres.query(
+        "update users set balance = balance - $1 where id = $2",
+        [walletAmount, id]
+      );
       var order = (
         await postgres.query(
           `update orders set isPaymentSuccessful = true where cast(paymentmetadata->>'order_id' as varchar) = $1 returning *`,
           [orderID]
         )
       ).rows;
+      await postgres.query("commit");
       postgres.release();
       return order;
     } catch (e) {
+      await postgres.query("rollback");
       postgres.release();
-
       console.log(e);
       return [];
     }
@@ -242,4 +261,24 @@ module.exports = class OrderService {
       return [];
     }
   };
+
+ 
+  getBalance = async(id)=>{
+    var postgres = await this.pool.connect();
+    try {
+      var user = await postgres.query(
+        "select balance from users where id = $1",
+        [id]
+      );
+      postgres.release();
+      console.log(user)
+      return user.rows[0];
+    } catch (e) {
+      postgres.release();
+      console.log(e);
+      return [];
+    }
+  }
+
+
 };
