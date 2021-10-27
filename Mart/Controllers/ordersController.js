@@ -8,8 +8,6 @@ const fs = require("fs")
 const QRCode = require("qrcode-svg");
 const { v4: uuidv4 } = require('uuid');
 var qr = require('qr-image');
-const jwt = require("jsonwebtoken");
-
 
 
 
@@ -21,11 +19,9 @@ module.exports = class OrdersController {
 
   placeOrderUsingWallet = async (req, res) => {
     var { products, orderBy, amount } = req.body;
+    
 
-    if(orderBy.id !== jwt.verify(req.get("token"), process.env.PRIVATE_KEY)){
-      res.send({ message: "Okay u hacked rMart" })
-    }
-
+    
     if (!products || !orderBy || !amount) {
       res.send({ message: "invalid body" });
       return;
