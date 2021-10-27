@@ -19,9 +19,10 @@ module.exports = class OrdersController {
 
   placeOrderUsingWallet = async (req, res) => {
     var { products, orderBy, amount } = req.body;
+    var {id} = req
     
 
-    if(req.id !== orderBy.id){
+    if(id !== orderBy.id){
       req.send({ message: "Failed" })
     }
 
