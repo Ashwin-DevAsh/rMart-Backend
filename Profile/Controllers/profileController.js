@@ -1,4 +1,5 @@
 const DatabaseService = require("../Services/DatabaseService");
+const jwt = require("jsonwebtoken");
 
 module.exports = class ProfileController {
   databaseService = new DatabaseService();
@@ -10,8 +11,8 @@ module.exports = class ProfileController {
         res.send({ message: "invalid body" });
         return;
       }
-      if(id !== req.id){
-        res.send({ message: "Okay you hacked rMart" });
+      if(id !== jwt.verify(req.get("token"), process.env.PRIVATE_KEY)){
+        res.send({ message: "Okay u hacked rMart" })
       }
       var balance = (await this.databaseService.getBalance(id))["balance"]
       console.log(balance)
