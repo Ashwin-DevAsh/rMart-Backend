@@ -14,6 +14,14 @@ app.post(
 );
 
 app.post(
+  "/makeOrderUsingWalletAndRazorpay",
+  new Auth().isKeyAuth,
+  new Auth().isTransAuth,
+  new Auth().isMartOpen,
+  ordersController.makeOrder
+);
+
+app.post(
   "/placeOrderUsingWallet",
   new Auth().isKeyAuth,
   new Auth().isTransAuth,

@@ -45,8 +45,10 @@ module.exports = class OrderService {
                         timestamp ,
                         products ,
                         paymentMetadata,
-                        isPaymentSuccessful)
-                        values($1,$2,$3,$4,$5,$6,$7) returning *`,
+                        walletAmount,
+                        isPaymentSuccessful
+                        )
+                        values($1,$2,$3,$4,$5,$6,$7,$8) returning *`,
           [
             "pending",
             amount,
@@ -54,6 +56,7 @@ module.exports = class OrderService {
             transactionTime,
             products,
             paymentMetadata,
+            amount,
             true,
           ]
         )
@@ -143,26 +146,26 @@ module.exports = class OrderService {
       var paymentDetails = await this.instance.payments.fetch(id);
       console.log(paymentDetails);
       var isVerified =
-        (paymentDetails.status == "authorized" ||
-          paymentDetails.status == "captured") &&
-        paymentDetails.amount / 100 == amount / 1;
+        (paymentDetails.status == "authorized" || paymentDetails.status == "captured") //&& paymentDetails.amount / 100 == amount / 1;
       if (isVerified) {
         var data = await postgres.query(
           `update orders set paymentMetadata = $2 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
           [orderID, paymentDetails]
         );
         postgres.release();
-        return isVerified && data.rows.length > 0;
+        if(data.rows.length > 0){
+          return paymentDetails.amount / 100
+        }else{
+          return 0
+        }
       } else {
         postgres.release();
-
-        return false;
+        return 0;
       }
     } catch (error) {
       postgres.release();
-
       console.log(error);
-      return false;
+      return 0;
     }
   };
 

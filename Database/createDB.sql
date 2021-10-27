@@ -7,7 +7,7 @@ create table users(
   status varchar,
   collegeID varchar unique,
   fcmToken varchar,
-  balance bigint
+  balance bigint default 0
 );
 
 create table products(
@@ -33,6 +33,7 @@ create table orders(
   paymentMetadata json,
   qrToken varchar unique default gen_random_uuid(),
   isPaymentSuccessful boolean default false,
+  walletAmount bigint default 0,
   deliveredAt varchar
 );
 
