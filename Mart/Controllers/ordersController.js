@@ -19,9 +19,8 @@ module.exports = class OrdersController {
 
   placeOrderUsingWallet = async (req, res) => {
     var { products, orderBy, amount } = req.body;
-    var {headerID} = req.headers
 
-    if(orderBy.id !== headerID){
+    if(orderBy.id !== req.id){
       res.send({ message: "Okay you hacked rMart" });
     }
 

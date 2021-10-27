@@ -5,12 +5,12 @@ module.exports = class ProfileController {
 
   getBalance = async (req,res)=>{
       var {id} = req.body;
-      var {headerID} = req.headers
+   
       if(!id){
         res.send({ message: "invalid body" });
         return;
       }
-      if(id !== headerID){
+      if(id !== req.id){
         res.send({ message: "Okay you hacked rMart" });
       }
       console.log(headerID)
