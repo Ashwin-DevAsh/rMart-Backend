@@ -21,8 +21,8 @@ module.exports = class Auth {
   isTransAuth = async (req, res, next) => {
     try {
       var decoded = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY);
-      if (decoded.number != req.body.orderBy.number) {
-        console.log(decoded.number, req.body.orderBy.number);
+      if (decoded.id != req.body.orderBy.id) {
+        console.log(decoded.id, req.body.orderBy.id);
         res.send({ message: "failed" });
         return;
       }
