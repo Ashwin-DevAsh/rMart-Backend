@@ -84,7 +84,7 @@ module.exports = class OrdersController {
 
     var accountBalance = await this.orderservice.getBalance(orderBy.id)
 
-    if(accountBalance <= walletAmount){
+    if(accountBalance < walletAmount){
        console.log("not enough balance")
        res.send({ message: "failed",message:"not enough balance" });
        return
