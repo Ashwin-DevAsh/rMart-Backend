@@ -21,6 +21,10 @@ module.exports = class OrdersController {
     var { products, orderBy, amount } = req.body;
     
 
+    if(req.id !== orderBy.id){
+      req.send({ message: "Failed" })
+    }
+
     if (!products || !orderBy || !amount) {
       res.send({ message: "invalid body" });
       return;
