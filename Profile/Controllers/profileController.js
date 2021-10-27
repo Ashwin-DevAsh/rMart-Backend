@@ -13,7 +13,6 @@ module.exports = class ProfileController {
       if(id !== req.id){
         res.send({ message: "Okay you hacked rMart" });
       }
-      console.log(headerID)
       var balance = (await this.databaseService.getBalance(id))["balance"]
       console.log(balance)
       res.send({"message":"done",balance})
