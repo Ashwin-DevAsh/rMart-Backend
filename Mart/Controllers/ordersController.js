@@ -82,7 +82,7 @@ module.exports = class OrdersController {
       return;
     }
 
-    var accountBalance = await this.orderservice.getBalance(orderBy.id)
+    var accountBalance = await this.orderservice.getBalance(orderBy.id)['balance']
     console.log(accountBalance)
     console.log(walletAmount)
 
