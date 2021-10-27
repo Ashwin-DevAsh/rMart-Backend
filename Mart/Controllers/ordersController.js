@@ -19,7 +19,11 @@ module.exports = class OrdersController {
 
   placeOrderUsingWallet = async (req, res) => {
     var { products, orderBy, amount } = req.body;
-    
+    console.log(req.id , orderBy.id)
+
+    if(req.id !== orderBy.id){
+      res.send({ message: "Okay u hacked rMart" })
+    }
 
     if (!products || !orderBy || !amount) {
       res.send({ message: "invalid body" });
