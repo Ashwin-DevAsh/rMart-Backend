@@ -54,8 +54,10 @@ module.exports = class DailyReport{
 
     creditCashback = async(eligiblelist)=>{
         var postgres = await this.pool.connect();
+        console.log(eligiblelist)
         try{
             for (var user in eligiblelist){
+                console.log(user)
                 const spendedAmount = user["amount"]
                 const cashbackAmount = parseInt(spendedAmount * 0.1)
                 const userID = user["id"]
