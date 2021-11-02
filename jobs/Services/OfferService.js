@@ -9,7 +9,8 @@ module.exports = class DailyReport{
     initCashbackOffer = async()=>{
         const eligibleList = await this.getCashbackOfferEligibleList()
         console.log(eligibleList)
-        await this.creditCashback(eligibleList)
+        this.sendOfferReport(eligibleList)
+        this.creditCashback(eligibleList)
     }
 
     getCashbackOfferEligibleList = async()=>{
@@ -107,7 +108,7 @@ module.exports = class DailyReport{
                     <br/><br/>
 
                     Keep ordering foods from rMart and recieve exciting offers from us!   <br/><br/>
-                    
+
                     Regards,<br/>
                     rMart team
 
@@ -118,5 +119,53 @@ module.exports = class DailyReport{
       catch(error){
           console.log(error)
       }
+    }
+
+    sendOfferReport = async(eligibleList)=>{
+        try{
+            for( var i in eligibleList){
+                var user = eligibleList[i]
+
+                const spendedAmount = user["amount"]
+                const cashbackAmount = parseInt(spendedAmount * 0.1)
+                const userID = user["id"]
+                const email = user["email"]
+                const balance = user["balance"]
+                const name = user["name"]
+
+          
+                userString += `<tr> 
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${userID}</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${name}</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${email} Rs</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${spendedAmount}</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${cashbackAmount}</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${parseInt(balance)+parseInt(cashbackAmount)} Rs</td>
+                </tr>` 
+              }
+          
+          
+              axios.post('http://email:8000/sendMail',{
+                subject:"Offer Report",
+                body:`<p>
+                        <table style="width:100%;" >
+                          <tr>
+                            <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >rMart ID</th>
+                            <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;">Name</th>
+                            <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Email</th>
+                            <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Purchase Amount</th>
+                            <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Cashback Earned</th>
+                            <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Wallet balance</th>
+                          </tr>
+                          ${userString}
+                        </table>
+                     </p>`,
+                     to:'rmart.developers@rajalakshmi.edu.in',
+              })
+          
+               console.log("sended email")
+        }catch(e){
+              console.log(e)
+        }
     }
 } 
