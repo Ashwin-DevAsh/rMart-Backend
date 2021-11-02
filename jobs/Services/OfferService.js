@@ -85,7 +85,7 @@ module.exports = class DailyReport{
                 subject:"Congratulations!",
                 body:`<p>
                         You have done it! Based on your purchase history of last week, 
-                        a cashback of ₹${cashbackAmount} has been successful credited to your rMart wallet Balance. 
+                        a cashback of ₹${cashbackAmount}/- has been successful credited to your rMart wallet Balance. 
                         Now enjoy ordering food from rMart for free using you wallet balance. 
                         You can check you wallet balance in the accounts section of the app.
 
@@ -100,7 +100,7 @@ module.exports = class DailyReport{
                         </tr>
                         <tr>
                         <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Current wallet balance</td>
-                        <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${balance+spendedAmount}</td>
+                        <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${ parseInt(balance)+parseInt(spendedAmount)}</td>
                         </tr>
                     </table>
 
