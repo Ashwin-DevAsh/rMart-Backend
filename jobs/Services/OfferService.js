@@ -57,7 +57,7 @@ module.exports = class DailyReport{
         try{
             for (var user in eligiblelist){
                 const spendedAmount = user["amount"]
-                const cashbackAmount = Math.floor(spendedAmount * 0.1)
+                const cashbackAmount = parseInt(spendedAmount * 0.1)
                 const userID = user["id"]
                 const email = user["email"]
                 const balance = user["balance"]
