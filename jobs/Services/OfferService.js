@@ -61,6 +61,7 @@ module.exports = class DailyReport{
                 const userID = user["id"]
                 const email = user["email"]
                 const balance = user["balance"]
+                console.log(spendedAmount,cashbackAmount,userID,email,balance)
                 await postgres.query(
                     `update users set balance = balance + $1 where id = $2`,
                     [cashbackAmount, userID]
