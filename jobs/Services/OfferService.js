@@ -100,7 +100,7 @@ module.exports = class DailyReport{
                         </tr>
                         <tr>
                         <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >Current wallet balance</td>
-                        <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${ parseInt(balance)+parseInt(spendedAmount)}</td>
+                        <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${ parseInt(balance)+parseInt(cashbackAmount)}</td>
                         </tr>
                     </table>
 
