@@ -138,10 +138,10 @@ module.exports = class DailyReport{
                 userString += `<tr> 
                   <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${userID}</td>
                   <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${name}</td>
-                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${email} Rs</td>
-                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${spendedAmount}</td>
-                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${cashbackAmount}</td>
-                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${parseInt(balance)+parseInt(cashbackAmount)} Rs</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${email}</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >₹${spendedAmount}</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >₹${cashbackAmount}</td>
+                  <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >₹${parseInt(balance)+parseInt(cashbackAmount)}</td>
                 </tr>` 
               }
           
