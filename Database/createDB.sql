@@ -51,3 +51,6 @@ create table recoveryOtp(
     otp varchar,
     isVerified Boolean
 );
+
+select sum(amount),cast(orderdby->>'id' as varchar) from orders where to_timestamp(timestamp, 'MM-DD-YYYY HH24:MI:SS') >= current_date - 7 and ispaymentsuccessful is
+True group by cast(orderdby->>'id' as varchar);
