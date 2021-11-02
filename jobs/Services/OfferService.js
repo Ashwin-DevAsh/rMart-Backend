@@ -123,6 +123,7 @@ module.exports = class DailyReport{
 
     sendOfferReport = async(eligibleList)=>{
         try{
+            var userString= ``
             for( var i in eligibleList){
                 var user = eligibleList[i]
 
