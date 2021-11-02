@@ -58,11 +58,11 @@ module.exports = class DailyReport{
         try{
             for (var user in eligiblelist){
                 console.log(user)
-                const spendedAmount = user["amount"]
+                const spendedAmount = eligiblelist[user]["amount"]
                 const cashbackAmount = parseInt(spendedAmount * 0.1)
-                const userID = user["id"]
-                const email = user["email"]
-                const balance = user["balance"]
+                const userID = eligiblelist[user]["id"]
+                const email = eligiblelist[user]["email"]
+                const balance = eligiblelist[user]["balance"]
                 console.log(spendedAmount,cashbackAmount,userID,email,balance)
                 await postgres.query(
                     `update users set balance = balance + $1 where id = $2`,
