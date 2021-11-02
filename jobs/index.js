@@ -3,8 +3,7 @@ const OrderExpery = require('./jobHandlers/OrderExpery')
 require('./jobHandlers/HandelFailedOrders')
 const MailHandler = require('./jobHandlers/MailHandler')
 const HandelFailedAtClose = require('./jobHandlers/HandelFailedAtClose')
-var axios = require('axios');
-
+const WeeklyCashbackOffer = require('./jobHandlers/WeeklyCashbackOffer')
 
 process.env.TZ = "Asia/Kolkata";
 
@@ -16,6 +15,12 @@ try {
 
 try{
   OrderExpery.start()
+}catch(e){
+  console.log(e)
+}
+
+try{
+  WeeklyCashbackOffer.start()
 }catch(e){
   console.log(e)
 }
