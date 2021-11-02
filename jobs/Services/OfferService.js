@@ -1,5 +1,7 @@
 const { Pool } = require("pg");
 const clientDetails = require("../Database/ClientDetails");
+var axios = require('axios');
+
 
 module.exports = class DailyReport{
     pool = new Pool(clientDetails);
