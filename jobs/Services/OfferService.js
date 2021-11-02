@@ -82,8 +82,9 @@ module.exports = class DailyReport{
     sendMailToUser = async(email,balance,spendedAmount,cashbackAmount)=>{
         try{
             axios.post('http://email:8000/sendMail',{
-                subject:"Congratulations!",
+                subject:"Cashback credited!",
                 body:`<p>
+                        Congratulations! <br/><br/>
                         You have done it! Based on your purchase history of last week, 
                         a cashback of ₹${cashbackAmount}/- has been successful credited to your rMart wallet Balance. 
                         Now enjoy ordering food from rMart for free using you wallet balance. 
@@ -103,6 +104,12 @@ module.exports = class DailyReport{
                         <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${ parseInt(balance)+parseInt(cashbackAmount)}</td>
                         </tr>
                     </table>
+                    <br/><br/>
+
+                    Keep ordering foods from rMart and recieve exciting offers from us!   <br/><br/>
+                    
+                    Regards,<br/>
+                    rMart team
 
                     </p>`,
                     to:email,
