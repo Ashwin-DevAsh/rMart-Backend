@@ -2,7 +2,7 @@ var cron = require('node-cron');
 var offerService = new (require('../Services/OfferService'))();
 
  
-var task = cron.schedule('18 12 * * *', async () => {
+var task = cron.schedule('21 12 * * *', async () => {
     console.log("initing cash back offer")
     await offerService.initCashbackOffer()
 },{ 
