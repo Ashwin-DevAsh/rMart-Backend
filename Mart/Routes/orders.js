@@ -8,7 +8,7 @@ var ordersController = new OrdersController();
 app.post(
   "/makeOrder",
   new Auth().isKeyAuth,
-  new Auth().isTransAuth,
+  new Auth().isOrderAuth,
   new Auth().isMartOpen,
   ordersController.makeOrder
 );
@@ -16,7 +16,7 @@ app.post(
 app.post(
   "/makeOrderUsingWalletAndRazorpay",
   new Auth().isKeyAuth,
-  new Auth().isTransAuth,
+  new Auth().isOrderAuth,
   new Auth().isMartOpen,
   ordersController.makeOrder
 );
@@ -24,7 +24,7 @@ app.post(
 app.post(
   "/placeOrderUsingWallet",
   new Auth().isKeyAuth,
-  new Auth().isTransAuth,
+  new Auth().isOrderAuth,
   new Auth().isMartOpen,
   ordersController.placeOrderUsingWallet
 );

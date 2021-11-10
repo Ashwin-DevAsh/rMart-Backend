@@ -2,10 +2,8 @@ const { Pool } = require("pg");
 const clientDetails = require("../Database/ClientDetails");
 const OrderService = require("../Services/OrderService");
 const DatabaseService = require("../Services/Database");
-const json2xls = require('json2xls');
 const axios = require('axios');
 const fs = require("fs")
-const QRCode = require("qrcode-svg");
 const { v4: uuidv4 } = require('uuid');
 var qr = require('qr-image');
 

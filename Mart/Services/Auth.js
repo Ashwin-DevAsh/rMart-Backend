@@ -18,10 +18,26 @@ module.exports = class Auth {
     }
   };
 
-  isTransAuth = async (req, res, next) => {
+  isOrderAuth = async (req, res, next) => {
     try {
       var decoded = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY);
       if (decoded.id != req.body.orderBy.id) {
+        console.log(decoded.id, req.body.orderBy.id);
+        res.send({ message: "failed" });
+        return;
+      }
+    } catch (e) {
+      console.log(e);
+      res.send({ message: "failed" });
+      return;
+    }
+    next();
+  };
+
+  isAddMoneyAuth = async (req, res, next) => {
+    try {
+      var decoded = await jwt.verify(req.get("token"), process.env.PRIVATE_KEY);
+      if (decoded.id != req.body.toMetadata.id) {
         console.log(decoded.id, req.body.orderBy.id);
         res.send({ message: "failed" });
         return;
@@ -65,19 +81,6 @@ module.exports = class Auth {
   };
 
   isMartOpen = async (req, res, next) => {
-
     next()
-
-    // var currentTime = new Date();
-    // var currentOffset = currentTime.getTimezoneOffset();
-    // var ISTOffset = 330; 
-    // var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
-
-    // var currentHour = ISTTime.getHours()
-    // if (currentHour >= 12 && currentHour < 23) {
-    //   next();
-    // } else {
-    //   res.send({ message: "closed" });
-    // }
   };
 };
