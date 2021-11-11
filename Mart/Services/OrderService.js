@@ -121,7 +121,7 @@ module.exports = class OrderService {
             products,
             walletAmount,
             paymentMetadata,
-            false,
+            true,
           ]
         )
       ).rows;
@@ -235,7 +235,7 @@ module.exports = class OrderService {
             "id":order[0].orederid
           },
           transactionTime,
-          false,
+          true,
         ]
       )
       await postgres.query("commit");
