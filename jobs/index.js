@@ -1,11 +1,28 @@
 require("dotenv").config({ path: "./env/.env" });
 const OrderExpery = require('./jobHandlers/OrderExpery')
-require('./jobHandlers/HandelFailedOrders')
+const handelFailedOrders = require('./jobHandlers/HandelFailedOrders')
 const MailHandler = require('./jobHandlers/MailHandler')
 const HandelFailedAtClose = require('./jobHandlers/HandelFailedAtClose')
 const WeeklyCashbackOffer = require('./jobHandlers/WeeklyCashbackOffer')
+const handelFailedTransactions = require('./jobHandlers/HandelFailedTransactions')
+
+
+
 
 process.env.TZ = "Asia/Kolkata";
+
+try {
+  handelFailedTransactions.start()  
+}catch(e){
+  console.log(e);
+}
+
+
+try {
+  handelFailedOrders.start()  
+}catch(e){
+  console.log(e);
+}
 
 try {
   HandelFailedAtClose.start()  

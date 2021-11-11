@@ -100,7 +100,7 @@ module.exports = class TransactionController {
   
       res.send({ message: "success" });
   
-      this.sendMailReport(isOrderExist)
+      // this.sendMailReport(isOrderExist)
     };
   
   
