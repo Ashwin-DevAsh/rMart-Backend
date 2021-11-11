@@ -79,7 +79,7 @@ module.exports = class OrderService {
             "id":orderData[0].orederid
           },
           transactionTime,
-          false,
+          true,
         ]
       )
       await postgres.query("commit");
@@ -121,7 +121,7 @@ module.exports = class OrderService {
             products,
             walletAmount,
             paymentMetadata,
-            true,
+            false,
           ]
         )
       ).rows;
