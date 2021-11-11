@@ -92,6 +92,7 @@ module.exports = class HandelFailedOrderService{
             )
             console.log("Updated = ",data.rows)
             postgres.release();
+            await postgres.query("commit");
             return isVerified && data.rows.length > 0;
           } else {
             console.log("Updated = Not verified")
