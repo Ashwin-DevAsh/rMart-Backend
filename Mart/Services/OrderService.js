@@ -148,7 +148,7 @@ module.exports = class OrderService {
       var paymentDetails = await this.instance.payments.fetch(id);
       console.log(paymentDetails);
       var isVerified =
-        (paymentDetails.status == "authorized" || paymentDetails.status == "captured") //&& paymentDetails.amount / 100 == amount / 1;
+        (paymentDetails.status == "authorized" || paymentDetails.status == "captured") && paymentDetails.amount / 100 == amount / 1;
       if (isVerified) {
         var data = await postgres.query(
           `update orders set paymentMetadata = $2 where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,

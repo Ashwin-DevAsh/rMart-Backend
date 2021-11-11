@@ -12,4 +12,10 @@ app.post(
   transactionController.createAddMoneyOrder
 );
 
+app.post(
+  "/addMoney",
+  new Auth().isKeyAuth,
+  transactionController.addMoney
+);
+
 module.exports = app
