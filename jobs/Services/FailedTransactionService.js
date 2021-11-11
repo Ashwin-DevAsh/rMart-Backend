@@ -48,7 +48,7 @@ module.exports = class HandelFailedOrderService{
           console.log("Payment Details = ", ordersDetails);
     
           var isVerified = (ordersDetails.status == "authorized" || ordersDetails.status == "captured") && parseInt(ordersDetails.amount/100) == parseInt(amount);
-          console.log( parseInt(ordersDetails.amount/100) , parseInt(amount))
+          console.log( orderID,parseInt(ordersDetails.amount/100) , parseInt(amount))
          
           if (isVerified) {
             var data = await postgres.query(
