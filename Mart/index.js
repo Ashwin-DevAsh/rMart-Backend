@@ -1,24 +1,22 @@
 require("dotenv").config({ path: "./env/.env" });
 
 const express = require("express");
+const bodyParser = require("body-parser");
+const compression = require('compression')
+var RateLimit = require('express-rate-limit');
+const cors = require("cors");
+var helmet = require('helmet')
+
+
 const products = require("./Routes/products");
 const orders = require("./Routes/orders");
-
-const bodyParser = require("body-parser");
 const uploadPictures = require("./Routes/productPictures");
 const productVideos = require("./Routes/productVideos");
-
-
-const compression = require('compression')
-
-
-var RateLimit = require('express-rate-limit');
-
-const cors = require("cors");
+const transactions = require("./Routes/transactions");
 
 
 
-var helmet = require('helmet')
+
 
 var ipLookUp = new (require('./Services/iplookup'))();
 
@@ -54,6 +52,7 @@ app.use(bodyParser.json());
 app.use(products);
 app.use(uploadPictures);
 app.use(productVideos)
+app.use(transactions)
 
 app.use(orders);
 
