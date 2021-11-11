@@ -51,6 +51,7 @@ module.exports = class HandelFailedOrderService{
           var isVerified = (ordersDetails.status == "authorized" || ordersDetails.status == "captured") && parseInt(ordersDetails.amount/100) == parseInt(amount);
            
           if (isVerified) {
+            
             var user = (
               await postgres.query("select * from users where id=$1 for update", [id])
             ).rows[0];  
@@ -59,6 +60,7 @@ module.exports = class HandelFailedOrderService{
             }
             const balance = user.balance
             if(parseInt(balance)<parseInt(walletAmount)){
+              this.instance.payments.refund(ordersDetails.id, {amount:ordersDetails.amount})
               throw Error("insufficient balance")
             }
             await postgres.query(
@@ -69,27 +71,29 @@ module.exports = class HandelFailedOrderService{
               `update orders set paymentMetadata = $2, isPaymentSuccessful=true where cast(paymentmetadata->>'id' as varchar) = $1 returning *`,
               [orderID, ordersDetails]
             );
-            await postgres.query(
-              `insert into transactions(
-                            transactionType,
-                            amount,
-                            fromMetadata ,
-                            toMetadata,
-                            timestamp,
-                            isPaymentSuccessful
-                            )
-                            values($1,$2,$3,$4,$5,$6) returning *`,
-              [
-                "PAYING_RMART",
-                walletAmount,
-                data.rows[0].orderdby,
-                {
-                  "id":data.rows[0].orederid
-                },
-                data.rows[0].transactiontime,
-                true,
-              ]
-            )
+            if(walletAmount>0){
+                  await postgres.query(
+                    `insert into transactions(
+                                  transactionType,
+                                  amount,
+                                  fromMetadata ,
+                                  toMetadata,
+                                  timestamp,
+                                  isPaymentSuccessful
+                                  )
+                                  values($1,$2,$3,$4,$5,$6) returning *`,
+                    [
+                      "PAYING_RMART",
+                      walletAmount,
+                      data.rows[0].orderdby,
+                      {
+                        "id":data.rows[0].orederid
+                      },
+                      data.rows[0].transactiontime,
+                      true,
+                    ]
+                  )
+            }
             console.log("Updated = ",data.rows)
             await postgres.query("commit");
             postgres.release();
