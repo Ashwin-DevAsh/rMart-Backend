@@ -75,7 +75,7 @@ module.exports = class TransactionController {
         return;
       }
   
-      var { amount,toMetadata:{id} } = isOrderExist[0];
+      var { amount,tometadata:{id} } = isOrderExist[0];
       var isverifyRazorpayPayment = await this.transactionService.verifyRazorpayPayment(
         orderID,
         paymentID,
