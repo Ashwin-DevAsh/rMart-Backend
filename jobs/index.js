@@ -5,6 +5,8 @@ const MailHandler = require('./jobHandlers/MailHandler')
 const HandelFailedAtClose = require('./jobHandlers/HandelFailedAtClose')
 const WeeklyCashbackOffer = require('./jobHandlers/WeeklyCashbackOffer')
 const handelFailedTransactions = require('./jobHandlers/HandelFailedTransactions')
+const deleteUnwantedData = require('./jobHandlers/DeleteUnwantedData')
+
 
 
 
@@ -13,6 +15,12 @@ process.env.TZ = "Asia/Kolkata";
 
 try {
   handelFailedTransactions.start()  
+}catch(e){
+  console.log(e);
+}
+
+try {
+  deleteUnwantedData.start()  
 }catch(e){
   console.log(e);
 }
