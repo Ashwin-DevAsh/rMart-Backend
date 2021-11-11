@@ -6,7 +6,7 @@ var json2xls = require('json2xls');
 var transactionController = new TransactionController();
 
 app.post(
-  "/makeOrder",
+  "/createAddMoneyOrder",
   new Auth().isKeyAuth,
   new Auth().isAddMoneyAuth,
   transactionController.createAddMoneyOrder
