@@ -14,7 +14,7 @@ module.exports = class HandelFailedOrderService{
     handleFailedAddMoneyOrders=async()=>{
         var incompletePayments = await this.getIncompleteAddMoneyOrders()
         incompletePayments.forEach((order)=>{
-            var {frommetadata:{id,amount},tometadata} = order
+            var {frommetadata:{id},amount,tometadata} = order
             this.verifyRazorpayPayment(id,amount,tometadata.id);
         })
     }
@@ -47,7 +47,7 @@ module.exports = class HandelFailedOrderService{
           var ordersDetails = (await this.instance.orders.fetchPayments(orderID)).items[0];
           console.log("Payment Details = ", ordersDetails);
     
-          var isVerified = (ordersDetails.status == "authorized" || ordersDetails.status == "captured") && ordersDetails.amount / 100 == amount / 100;
+          var isVerified = (ordersDetails.status == "authorized" || ordersDetails.status == "captured") && parseInt(ordersDetails.amount/100) == parseInt(amount);
          
           if (isVerified) {
             var data = await postgres.query(
@@ -56,7 +56,7 @@ module.exports = class HandelFailedOrderService{
             );
             await postgres.query(
                 "update users set balance = balance + $1 where id = $2",
-                [ parseInt(amount/100), id]
+                [ amount, id]
             );
             console.log("Updated = ",data.rows)
             await postgres.query("commit");

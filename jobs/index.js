@@ -9,8 +9,6 @@ const deleteUnwantedData = require('./jobHandlers/DeleteUnwantedData')
 
 
 
-
-
 process.env.TZ = "Asia/Kolkata";
 
 try {
