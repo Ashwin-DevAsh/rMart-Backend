@@ -61,6 +61,27 @@ module.exports = class OrderService {
           ]
         )
       ).rows;
+      await postgres.query(
+        `insert into transactions(
+                      transactionType,
+                      amount,
+                      fromMetadata ,
+                      toMetadata,
+                      timestamp,
+                      isPaymentSuccessful
+                      )
+                      values($1,$2,$3,$4,$5,$6) returning *`,
+        [
+          "PAYING_RMART",
+          amount,
+          orderdBy,
+          {
+            "id":orderData[0].orederid
+          },
+          transactionTime,
+          false,
+        ]
+      )
       await postgres.query("commit");
       postgres.release();
       return orderData;
@@ -196,6 +217,27 @@ module.exports = class OrderService {
           [orderID]
         )
       ).rows;
+      await postgres.query(
+        `insert into transactions(
+                      transactionType,
+                      amount,
+                      fromMetadata ,
+                      toMetadata,
+                      timestamp,
+                      isPaymentSuccessful
+                      )
+                      values($1,$2,$3,$4,$5,$6) returning *`,
+        [
+          "PAYING_RMART",
+          walletAmount,
+          order[0].orderdby,
+          {
+            "id":order[0].orederid
+          },
+          transactionTime,
+          false,
+        ]
+      )
       await postgres.query("commit");
       postgres.release();
       return order;

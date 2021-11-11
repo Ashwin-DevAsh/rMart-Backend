@@ -47,7 +47,6 @@ module.exports = class HandelFailedOrderService{
           var ordersDetails = (await this.instance.orders.fetchPayments(orderID)).items[0];
           console.log("Payment Details = ", ordersDetails);
     
-          console.log(ordersDetails);
           var isVerified = (ordersDetails.status == "authorized" || ordersDetails.status == "captured") && ordersDetails.amount / 100 == amount / 100;
          
           if (isVerified) {

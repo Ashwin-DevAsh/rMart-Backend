@@ -37,6 +37,8 @@ create table orders(
   deliveredAt varchar
 );
 
+create index orders_status_ispaymentsuccessful_index on orders(status,ispaymentsuccessful);
+
 create table transactions(
     transactionID bigserial,
     transactionType varchar,
