@@ -11,3 +11,5 @@ app.post(
   new Auth().isAddMoneyAuth,
   transactionController.createAddMoneyOrder
 );
+
+module.exports = app
