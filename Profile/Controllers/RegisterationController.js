@@ -78,8 +78,7 @@ module.exports = class RegistrationController {
         name: name,
         number: phoneNumber,
         email: email,
-        id: userID,
-        collegeID,
+        id: userID
       },
       process.env.PRIVATE_KEY
     );
