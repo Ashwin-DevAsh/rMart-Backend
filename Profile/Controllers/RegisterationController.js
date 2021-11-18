@@ -25,8 +25,8 @@ module.exports = class RegistrationController {
   };
 
   signup = async (req, res) => {
-    var { name, email, password, phoneNumber, otp, collegeID } = req.body;
-    if (!name || !email || !password || !phoneNumber || !otp || !collegeID) {
+    var { name, email, password, phoneNumber, otp } = req.body;
+    if (!name || !email || !password || !phoneNumber || !otp) {
       res.send({ message: "invalid body" });
       return;
     }
@@ -65,8 +65,7 @@ module.exports = class RegistrationController {
       email,
       phoneNumber,
       userID,
-      hashedPassword,
-      collegeID
+      hashedPassword
     );
 
     if (!isUserInserted) {
@@ -92,7 +91,6 @@ module.exports = class RegistrationController {
               name ${name} <br/>
               email ${email} <br/>
               number ${phoneNumber} <br/>
-              collegeid ${collegeID}<br/>
              </p>`,
        to:'rmart.developers@rajalakshmi.edu.in'
       })
