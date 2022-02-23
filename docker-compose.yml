@@ -113,23 +113,23 @@ services:
   #     - ./certbot/logs:/var/log/letsencrypt
   #     - ./certbot/data:/var/www/certbot
   
-  certbot:
-    image: certbot/certbot:latest
-    command: certonly --force-renewal --webroot  --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d rajalakshmimart.com -d rajalakshmimart.com
-
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/logs:/var/log/letsencrypt
-      - ./certbot/data:/var/www/certbot
-
-  # certbot_mart:
+  # certbot:
   #   image: certbot/certbot:latest
-  #   command: certonly --force-renewal --webroot  --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d mart.rajalakshmimart.com -d mart.rajalakshmimart.com
+  #   command: certonly --force-renewal --webroot  --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d rajalakshmimart.com -d rajalakshmimart.com
 
   #   volumes:
   #     - ./certbot/conf:/etc/letsencrypt
   #     - ./certbot/logs:/var/log/letsencrypt
   #     - ./certbot/data:/var/www/certbot
+
+  certbot_mart:
+    image: certbot/certbot:latest
+    command: certonly --force-renewal --webroot  --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d mart.rajalakshmimart.com -d mart.rajalakshmimart.com
+
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./certbot/data:/var/www/certbot
       
   # certbot_jenkins:
   #   image: certbot/certbot:latest
