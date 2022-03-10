@@ -102,6 +102,10 @@ module.exports = class OrdersController {
       return;
     }
 
+    for(i in products){
+      products[i].product.isDelivered = false;
+    }
+
     var isOrderPlaced = await this.orderservice.placeOrder(
       products,
       orderBy,
