@@ -306,4 +306,39 @@ module.exports = class Database {
       return {result:"failed"};
     }
   };
+
+
+  updateOrderProductStatus = async (id,products) => {
+    var postgres = await this.pool.connect();
+
+    try {      
+      var currentTime = new Date();
+      var currentOffset = currentTime.getTimezoneOffset();
+      var ISTOffset = 330; 
+      var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+      var orders = (
+        await postgres.query(`select * from orders  where qrtoken = $1`, [id])
+      ).rows[0];
+      console.log("Delivery = ",id, orders);
+      if (!orders) {
+        postgres.release();
+        return {result:"invalid token"};
+      }
+      if (orders.status == "pending") {
+        await postgres.query(
+          `update orders set products = $2 where qrtoken = $1`,
+          [id,products]
+        );
+        postgres.release();
+        return {result:"success",object:orders};
+      } else {
+        postgres.release();
+        return {result:orders.status};
+      }
+    } catch (e) {
+      console.error(e)
+      postgres.release();
+      return {result:"failed"};
+    }
+  };
 };

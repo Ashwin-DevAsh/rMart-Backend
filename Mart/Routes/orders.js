@@ -46,6 +46,8 @@ app.get("/getQrToken/:id", new Auth().isMerchantKeyAuth, ordersController.getOrd
 
 app.post("/makeDelivery", new Auth().isMerchantKeyAuth, ordersController.makeDelivery);
 
+app.post("/makePartialDelivery", new Auth().isMerchantKeyAuth, ordersController.makePartialDelivery);
+
 app.get("/getDeliveredOrders", new Auth().isMerchantKeyAuth, ordersController.getDeliveredOrders);
 
 app.get("/downloadAllPendingOrders", new Auth().isMerchantKeyAuth, json2xls.middleware , ordersController.downloadAllPendingOrders);

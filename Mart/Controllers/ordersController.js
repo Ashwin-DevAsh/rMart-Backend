@@ -264,43 +264,86 @@ module.exports = class OrdersController {
     var { id } = req.body;
     var {result,object} = await this.databaseService.updateStatus(id);
     if(object){
-      var {amount,orederid,orderdby:{name,number,email},products} = object
-      var productString = ``
-      for(var i in products){
-        console.log(products[i])
-          productString += `<tr> 
-          <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].product.productName}</td>
-          <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].count}</td>
-          <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].totalPrice} Rs</td>
-          </tr>` 
-      }
-      try {
-        axios.post('http://email:8000/sendMail',{
-          subject:"New Delivery",
-          body:`<p>
-                  Order  ${orederid} <br/>
-                  Name       ${name} <br/>
-                  Email     ${email} <br/>
-                  Number   ${number} <br/>
-                  Amount   ${amount} Rs<br/><br/><br/>
-                  <table style="width:100%;">
-                    <tr>
-                    <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >product</th>
-                    <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >count</th>
-                    <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >amount</th>
-                    </tr>
-                    ${productString}
-                  </table>
-               </p>`,
-         to:'rmart.developers@rajalakshmi.edu.in'
-        // to:'2017ashwin@gmail.com'
-        })
-       } catch (error) {
-         console.log(error)
-       }
+       this.sendDeliveryEmail(object)
     }
     res.send({ message: result });
   };
+
+  makePartialDelivery = async (req, res) => {
+    var { id , products } = req.body;
+    var {result,object} = await this.databaseService.updateStatus(id);
+    var {products} = object
+
+    var isPendingOrderExist = false;
+
+    for(var i in products){
+       if(products[i].product.productID in [id]){
+          products[i].product.isDelivered = true
+       }
+
+       if(!products[i].product.isDelivered){
+          isPendingOrderExist = true
+       }
+    }
+
+    if(!isPendingOrderExist){
+      this.sendDeliveryEmail(object)
+    }
+
+    var {result,object} = await this.databaseService.updateOrderProductStatus(id,products);
+
+    if(object){
+      await this.databaseService.updateStatus(id);
+    }
+
+    res.send({ message: result });
+  };
+
+  makeDelivery = async (req, res) => {
+    var { id } = req.body;
+    var {result,object} = await this.databaseService.updateStatus(id);
+    if(object){
+       this.sendDeliveryEmail(object)
+    }
+    res.send({ message: result });
+  };
+
+  sendDeliveryEmail = async (object) => {
+
+    var {amount,orederid,orderdby:{name,number,email},products} = object
+    var productString = ``
+    for(var i in products){
+      console.log(products[i])
+        productString += `<tr> 
+        <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].product.productName}</td>
+        <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].count}</td>
+        <td style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >${products[i].totalPrice} Rs</td>
+        </tr>` 
+    }
+    try {
+      axios.post('http://email:8000/sendMail',{
+        subject:"New Delivery",
+        body:`<p>
+                Order  ${orederid} <br/>
+                Name       ${name} <br/>
+                Email     ${email} <br/>
+                Number   ${number} <br/>
+                Amount   ${amount} Rs<br/><br/><br/>
+                <table style="width:100%;">
+                  <tr>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >product</th>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >count</th>
+                  <th style=" border: 1px solid #dddddd; padding: 8px;text-align: left;" >amount</th>
+                  </tr>
+                  ${productString}
+                </table>
+             </p>`,
+       to:'rmart.developers@rajalakshmi.edu.in'
+      })
+     } catch (error) {
+       console.log(error)
+     }
+  }
 
   getDeliveredOrders = async (req, res) => {
     var { id } = req.body;
