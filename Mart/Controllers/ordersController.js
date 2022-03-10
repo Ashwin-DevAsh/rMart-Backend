@@ -276,7 +276,9 @@ module.exports = class OrdersController {
     var isPendingOrderExist = false;
 
     for(var i in products){
+       console.log('product id = ',i)
        if(products[i].product.productID in [id]){
+          console.log('product id = ',i,"yup")
           products[i].product.isDelivered = true
        }
 
