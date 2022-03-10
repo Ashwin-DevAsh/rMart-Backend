@@ -270,14 +270,14 @@ module.exports = class OrdersController {
   };
 
   makePartialDelivery = async (req, res) => {
-    var { id , products } = req.body;
+    var { id , productIds } = req.body;
     var result = (await this.databaseService.getOrderByQr(id))[0];
     var {products} = result
     var isPendingOrderExist = false;
 
     for(var i in products){
        console.log('product id = ',i)
-       if(products[i].product.productID in [id]){
+       if(products[i].product.productID in productIds){
           console.log('product id = ',i,"yup")
           products[i].product.isDelivered = true
        }
