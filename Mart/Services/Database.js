@@ -219,7 +219,6 @@ module.exports = class Database {
       await postgres.query(`set timezone TO 'Asia/Kolkata'`);
       var orders = (await postgres
         .query(`select * from orders where qrToken = $1`,[qrToken])).rows;
-      console.log("Orders =", orders)
       postgres.release();
       return orders;
     } catch (e) {
@@ -319,7 +318,7 @@ module.exports = class Database {
       var orders = (
         await postgres.query(`select * from orders  where qrtoken = $1`, [id])
       ).rows[0];
-      console.log("Delivery = ",id, orders);
+      console.log("Delivery = ",id);
       if (!orders) {
         postgres.release();
         return {result:"invalid token"};

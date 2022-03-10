@@ -296,11 +296,7 @@ module.exports = class OrdersController {
       console.log("All items are delivered")
       await this.databaseService.updateStatus(id);
     }
-
-    if(object){
-        his.sendDeliveryEmail(object)
-    }
-
+    this.sendDeliveryEmail(object)
     res.send({ message: result });
   };
 
