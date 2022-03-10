@@ -272,7 +272,7 @@ module.exports = class OrdersController {
   makePartialDelivery = async (req, res) => {
     var { id , products } = req.body;
     var result = (await this.databaseService.getOrderByQr(id))[0];
-    var {products} = object
+    var {products} = result
     var isPendingOrderExist = false;
 
     for(var i in products){
@@ -285,14 +285,15 @@ module.exports = class OrdersController {
        }
     }
 
+
+    var {result,object} = await this.databaseService.updateOrderProductStatus(id,products);
+    
     if(!isPendingOrderExist){
       this.sendDeliveryEmail(object)
     }
 
-    var {result,object} = await this.databaseService.updateOrderProductStatus(id,products);
-
     if(object){
-      await this.databaseService.updateStatus(id);
+             this.sendDeliveryEmail(object)
     }
 
     res.send({ message: result });
