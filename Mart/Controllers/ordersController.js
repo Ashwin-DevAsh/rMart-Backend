@@ -279,7 +279,7 @@ module.exports = class OrdersController {
 
     for(var i in products){
        console.log('product id = ',products[i].product.productID)
-       if(products[i].product.productID in productIds){
+       if(productIds.indexOf(products[i].product.productID) > -1){
           console.log('product id = ',products[i].product.productID,"yup")
           products[i].product.isDelivered = true
        }
