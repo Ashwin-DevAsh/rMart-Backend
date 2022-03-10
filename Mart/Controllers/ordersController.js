@@ -293,11 +293,12 @@ module.exports = class OrdersController {
     var {result,object} = await this.databaseService.updateOrderProductStatus(id,products);
     
     if(!isPendingOrderExist){
-      this.sendDeliveryEmail(object)
+      console.log("All items are delivered")
+      await this.databaseService.updateStatus(id);
     }
 
     if(object){
-             this.sendDeliveryEmail(object)
+        his.sendDeliveryEmail(object)
     }
 
     res.send({ message: result });
