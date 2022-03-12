@@ -35,6 +35,10 @@ module.exports = class OrdersController {
     }
     var orderID = uuidv4()
 
+    for(var i in products){
+      products[i].product.isDelivered = false;
+    }
+
     var isOrderPlaced = await this.orderservice.placeOrderUsingWallet(
       products,
       orderBy,
@@ -102,7 +106,7 @@ module.exports = class OrdersController {
       return;
     }
 
-    for(i in products){
+    for(var i in products){
       products[i].product.isDelivered = false;
     }
 
