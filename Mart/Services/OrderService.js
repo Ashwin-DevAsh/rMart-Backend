@@ -194,6 +194,11 @@ module.exports = class OrderService {
 
   makeOrderValid = async (orderID,walletAmount,id) => {
     var postgres = await this.pool.connect();
+    var currentTime = new Date();
+    var currentOffset = currentTime.getTimezoneOffset();
+    var ISTOffset = 330; 
+    var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+    var transactionTime = dateFormat(ISTTime, "mm-dd-yyyy hh:MM:ss");
     try {
       await postgres.query("begin");
       var user = (
