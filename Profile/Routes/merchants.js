@@ -5,9 +5,9 @@ app.get("/getMerchants", new Auth().isKeyAuth ,(req, res) => {
   res.send([
     {
       ownername: "Admin",
-      number: "919840573702",
-      email: "kumar@rajalakshmi.edu.in",
-      id: "rbusiness@919840573702",
+      number: "919704755328",
+      email: "nagesh@rajalakshmi.edu.in",
+      id: "rbusiness@919704755328",
       accountname: "REC CAFE",
     }
   ]);
