@@ -10,6 +10,13 @@ app.get("/getMerchants", new Auth().isKeyAuth ,(req, res) => {
       id: "rbusiness@919840573702",
       accountname: "REC CAFE",
     },
+    {
+      ownername: "Admin",
+      number: "919551574355",
+      email: "ashwin@rajalakshmi.edu.in",
+      id: "rbusiness@919551574355",
+      accountname: "ASH CAFE",
+    },
   ]);
 });
 
