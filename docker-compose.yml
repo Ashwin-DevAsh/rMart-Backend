@@ -47,14 +47,14 @@ services:
     build: rPay/Block
     depends_on: [rpay-database]
     volumes:
-      - ./rPay/env:/env
+      - ./env:/env
       - ./rPay/Database:/Database
 
   rpay-profile:
     build: rPay/Profile
     depends_on: [block, rpay-database]
     volumes:
-      - ../rPay/env:/env
+      - ./env:/env
       - ./rPay/Database:/Database
       - ./rPay/profilePictures:/profilePictures
 
@@ -70,13 +70,13 @@ services:
     build: rPay/Transaction
     depends_on: [block, rpay-database]
     volumes:
-      - ./rPay/env:/env
+      - ./env:/env
       - ./rPay/Database:/Database
 
   sync:
     build: rPay/Sync
     volumes:
-      - ./rPay/env:/env
+      - ./env:/env
       - ./rPay/Database:/Database
 
   console:

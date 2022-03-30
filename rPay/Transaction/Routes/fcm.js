@@ -17,7 +17,7 @@ module.exports = async function sendNotificationToAll(userID, data) {
   console.log("serverkey = ", serverKey);
   console.log("fcmtoken = ", fcmToken);
   var message = {
-    to: fcmToken,
+    to: `AAAAscgPzWY:APA91bGkRC3q7im6zEGNbDJSKHA2XTRXDW84VhFUNPAdW4U_9FOxGvghXAndZ7uzNZYroq04X2iBwsx3Agn34LT_zh1xJsQTguAHbjI1KnqmH0cHIrvF8hTed0_0oFgATWKxcxmqOfgx`,
     data: {
       type: data,
     },
