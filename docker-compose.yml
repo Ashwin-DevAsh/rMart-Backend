@@ -88,7 +88,7 @@ services:
     deploy:
       replicas: 5
     volumes:
-      - ./rPay/env:/env
+      - ./env:/env
       - ./Database:/Database
       - ./cache:/cache
       - ./Mart/QrImages:/QrImages
