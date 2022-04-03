@@ -71,10 +71,11 @@ module.exports = class Auth {
       if (isVerified) {
         next();
       } else {
+        console.log("invalid auth",req.get("key"))
         res.send({ message: "failed" });
       }
     } catch (e) {
-      console.log(e);
+      console.log(e,req.get("key"));
       res.send({ message: "failed" });
       return;
     }
