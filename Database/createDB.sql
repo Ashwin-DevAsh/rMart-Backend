@@ -20,7 +20,7 @@ create table products(
    category varchar,
    imageUrl varchar,
    availableOn varchar[],
-   isAvaliable boolean boolean default true
+   isAvaliable boolean default true
 );
 
 create table orders(  
