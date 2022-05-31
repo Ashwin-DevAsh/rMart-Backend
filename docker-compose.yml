@@ -93,16 +93,16 @@ services:
       - ./cache:/cache
       - ./Mart/QrImages:/QrImages
 
-  # reverse-proxy:
-  #   build: nginx
-  #   depends_on: [profile, mart, rpay-profile, transaction, sync, admin, console]
-  #   ports:
-  #     - 80:80
-  #     - 443:443
+  reverse-proxy:
+    build: nginx
+    depends_on: [profile, mart, rpay-profile, transaction, sync, admin, console]
+    ports:
+      - 80:80
+      - 443:443
 
-  #   volumes:
-  #     - ./certbot/conf:/etc/nginx/ssl
-  #     - ./certbot/data:/var/www/certbot
+    volumes:
+      - ./certbot/conf:/etc/nginx/ssl
+      - ./certbot/data:/var/www/certbot
 
   # certbot_profile:
   #   image: certbot/certbot:latest
