@@ -9,13 +9,14 @@ module.exports = class Database {
     email,
     phoneNumber,
     id,
-    hashedPassword
+    hashedPassword,
+    balance
   ) => {
     var postgres = await this.pool.connect();
     try {
       await postgres.query(
-        "insert into users(name,email,number,id,password,collegeID) values($1,$2,$3,$4,$5,$6)",
-        [name, email, phoneNumber, id, hashedPassword, null]
+        "insert into users(name,email,number,id,password,collegeID,balance) values($1,$2,$3,$4,$5,$6)",
+        [name, email, phoneNumber, id, hashedPassword, null,balance]
       );
       postgres.release();
       return true;
