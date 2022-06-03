@@ -9,18 +9,6 @@ def uploadProduct(product):
        json=product
     )
     print(response.json())
-
-uploadProduct({
-        "productID": 1,
-        "productName": "Pongal",
-        "ownerID": "rbusiness@919704755328",
-        "discription": "from REC Cafe",
-        "category": "breakfast",
-        "price": 20,
-        "discount": 0,
-        "isavailable": true,
-        "quantity": 50,
-        "imageUrl": "pongal.png",
-        "availableOn": ["monday,tuesday,wednesday,thursday,friday,saturday"]
-    })
+for product in products :
+    uploadProduct(product)
 
