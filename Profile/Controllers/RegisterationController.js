@@ -25,7 +25,7 @@ module.exports = class RegistrationController {
   };
 
   signup = async (req, res) => {
-    var { name, email, password, phoneNumber, otp, balance } = req.body;
+    var { name, email, password, phoneNumber, otp } = req.body;
     if (!name || !email || !password || !phoneNumber || !otp) {
       res.send({ message: "invalid body" });
       return;
@@ -44,16 +44,16 @@ module.exports = class RegistrationController {
       return;
     }
 
-    // var isOtpExist = await databaseService.getOtp(phoneNumber, email, otp);
+    var isOtpExist = await databaseService.getOtp(phoneNumber, email, otp);
 
-    // console.log(isOtpExist);
-    // if (isOtpExist.length == 0) {
-    //   res.send({ message: "otp not verified" });
-    //   return;
-    // }
+    console.log(isOtpExist);
+    if (isOtpExist.length == 0) {
+      res.send({ message: "otp not verified" });
+      return;
+    }
 
 
-    // databaseService.deleteOtp(phoneNumber, email);
+    databaseService.deleteOtp(phoneNumber, email);
 
     var salt = await bcrypt.genSalt(parseInt(process.env.SALTROUNDS));
     var hashedPassword = await bcrypt.hash(password, salt);
@@ -65,8 +65,7 @@ module.exports = class RegistrationController {
       email,
       phoneNumber,
       userID,
-      hashedPassword,
-      balance
+      hashedPassword
     );
 
     if (!isUserInserted) {
