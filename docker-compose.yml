@@ -104,14 +104,14 @@ services:
       - ./certbot/conf:/etc/nginx/ssl
       - ./certbot/data:/var/www/certbot
 
-  # certbot_profile:
-  #   image: certbot/certbot:latest
-  #   command: certonly --force-renewal --webroot  --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d profile.rajalakshmimart.com -d profile.rajalakshmimart.com
+  certbot_profile:
+    image: certbot/certbot:latest
+    command: certonly --force-renewal --webroot  --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d profile.rajalakshmimart.com -d profile.rajalakshmimart.com
 
-  #   volumes:
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/logs:/var/log/letsencrypt
-  #     - ./certbot/data:/var/www/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./certbot/data:/var/www/certbot
   
   # certbot:
   #   image: certbot/certbot:latest
@@ -131,12 +131,12 @@ services:
   #     - ./certbot/logs:/var/log/letsencrypt
   #     - ./certbot/data:/var/www/certbot
       
-  certbot_jenkins:
-    image: certbot/certbot:latest
-    command: certonly --force-renewal --webroot  --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d profile.rajalakshmimart.com -d profile.rajalakshmimart.com
+  # certbot_jenkins:
+  #   image: certbot/certbot:latest
+  #   command: certonly --force-renewal --webroot  --webroot-path=/var/www/certbot --email 2017ashwin@gmail.com --agree-tos --no-eff-email -d profile.rajalakshmimart.com -d profile.rajalakshmimart.com
 
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/logs:/var/log/letsencrypt
-      - ./certbot/data:/var/www/certbot
+  #   volumes:
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/logs:/var/log/letsencrypt
+  #     - ./certbot/data:/var/www/certbot
 # sudo docker-compose --compatibility up --build -d
