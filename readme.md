@@ -13,7 +13,7 @@ This repository contains the microservice backend for the rMart app, a food orde
 
 The microservice architecture offers flexibility, scalability, and independent development and deployment of services.
 
-[![rpay-arch.png](https://i.postimg.cc/d0TZhw7s/rpay-arch.png)](https://postimg.cc/94CQS3tK)
+[![diagram-export-12-31-2023-8-51-36-PM.png](https://i.postimg.cc/tT0hND8H/diagram-export-12-31-2023-8-51-36-PM.png)](https://postimg.cc/qtLhkckm)
 
 ## Technologies Used
 
