@@ -25,21 +25,22 @@ The microservice architecture offers flexibility, scalability, and independent d
 ## Getting Started
 
 1. Prerequisites:
-
   - Docker and Docker Compose installed.
   - Node.js and npm (or yarn) installed.
 
 2. Clone the repository:
 ```bash
-# Clone the Repository
 git clone https://github.com/Ashwin-DevAsh/rMart-Backend.git
 cd rMart-Backend
+```
 
-# Install Dependencies
-cd rMart-Backend
+3. Install Dependencies
+```bash
 npm install
+```
 
-# Run the Application
+4. Run the Application
+```bash
 docker-compose up -d
 ```
 
