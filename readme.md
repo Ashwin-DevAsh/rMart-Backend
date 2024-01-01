@@ -43,11 +43,3 @@ npm install
 ```bash
 docker-compose up -d
 ```
-
-## Services
-
-- **Mart Service**: http://localhost:8000 (or the port specified in docker-compose.yml)
-- **Profile Service**: http://localhost:8080
-- **Email Service**: http://localhost:8888
-- **Job Service**: http://localhost:9000
-- **Database**: http://localhost:5432
